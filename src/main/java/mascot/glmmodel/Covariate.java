@@ -28,6 +28,10 @@ public class Covariate extends BEASTObject  {
 		this.values = new Double[values.length];
 		System.arraycopy(values, 0, this.values, 0, values.length);
 		this.ID = id;
+		// Also populate valuesInput so initAndValidate() and XML serialization work correctly
+		for (Double v : values) {
+			valuesInput.get().add(v);
+		}
 	}
 	
 	public Covariate(List<String> rawValues, String id) {
