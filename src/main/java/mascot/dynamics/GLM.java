@@ -117,7 +117,7 @@ public class GLM extends Dynamics implements Loggable {
     public double[] getCoalescentRate(int i){
 		int intervalNr;
     	if (i >= rateShiftsInput.get().getDimension()-firstlargerzero-1)
-    		intervalNr = rateShiftsInput.get().getDimension()-2;
+    		intervalNr = rateShiftsInput.get().getDimension()-firstlargerzero-1;
     	else
     		intervalNr = i + firstlargerzero;
     	
@@ -212,7 +212,7 @@ public class GLM extends Dynamics implements Loggable {
     public double getNe(int state, int i){
 		int intervalNr;
     	if (i >= rateShiftsInput.get().getDimension()-firstlargerzero-1)
-    		intervalNr = rateShiftsInput.get().getDimension()-2;
+    		intervalNr = rateShiftsInput.get().getDimension()-firstlargerzero-1;
     	else
     		intervalNr = i + firstlargerzero;
     	
@@ -224,7 +224,7 @@ public class GLM extends Dynamics implements Loggable {
     public double getMig(int source, int sink, int i){
 		int intervalNr;
     	if (i >= rateShiftsInput.get().getDimension()-firstlargerzero-1)
-    		intervalNr = rateShiftsInput.get().getDimension()-2;
+    		intervalNr = rateShiftsInput.get().getDimension()-firstlargerzero-1;
     	else
     		intervalNr = i + firstlargerzero;
     	
