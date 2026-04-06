@@ -75,8 +75,8 @@
               </dynamics>
             </plugin>
 
-            <param id="NeConstant.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="1.0" lower="0.0" estimate="true"/>
-            <param id="migrationConstant.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="1.0" lower="0.0" estimate="true"/>
+            <param id="NeConstant.t:$(n)" spec="RealVectorParam" domain="NonNegativeReal" value="1.0" estimate="true"/>
+            <param id="migrationConstant.t:$(n)" spec="RealVectorParam" domain="NonNegativeReal" value="1.0" estimate="true"/>
 
             <logger id="typedTreelogger.t:$(n)" fileName="$(filebase).$(tree).trees" logEvery="1000" mode="tree">
                 <log id="structuredTreelog.t:$(n)" spec="mascot.logger.StructuredTreeLogger" mascot="@Mascot.t:$(n)"/>

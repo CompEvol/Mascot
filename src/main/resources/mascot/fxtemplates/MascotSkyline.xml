@@ -14,7 +14,7 @@
              <![CDATA[
              <prior id='$(thisparam)SkylinePrior.t:$(n)' x='@$(thisparam)Skyline.t:$(n)'>
                 <distr spec="beast.base.inference.distribution.Exponential">
-                    <parameter spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                    <parameter spec="RealScalarParam" domain="PositiveReal" estimate="false" name="mean">1.0</parameter>
                 </distr>
              </prior>
              
@@ -88,8 +88,8 @@
                 </typeTrait>
             </dynamics>
 
-          <param id="migrationRatesSkyline.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="1.0" lower="0.0" estimate="true"/>
-          <param id="indicatorsSkyline.t:$(n)" spec="beast.base.inference.parameter.BooleanParameter" value="true" estimate="false"/>
+          <param id="migrationRatesSkyline.t:$(n)" spec="RealVectorParam" domain="NonNegativeReal" value="1.0" estimate="true"/>
+          <param id="indicatorsSkyline.t:$(n)" spec="BoolVectorParam" value="true" estimate="false"/>
 
           <prior id="nonZeroRatePrior.t:$(n)">
             <x id="sumNonZeroRates.t:$(n)" spec="beast.base.evolution.Sum">

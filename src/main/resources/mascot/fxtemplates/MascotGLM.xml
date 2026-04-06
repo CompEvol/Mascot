@@ -134,16 +134,16 @@
                 </typeTrait>
             </dynamics>
 
-          <param id="transformMigrationCovariates.t:$(n)" spec="beast.base.inference.parameter.BooleanParameter" value="false" estimate="false"/>
-          <param id="transformNeCovariates.t:$(n)" spec="beast.base.inference.parameter.BooleanParameter" value="false" estimate="false"/>
+          <param id="transformMigrationCovariates.t:$(n)" spec="BoolVectorParam" value="false" estimate="false"/>
+          <param id="transformNeCovariates.t:$(n)" spec="BoolVectorParam" value="false" estimate="false"/>
 
-          <param id="migrationScalerGLM.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="0.0" estimate="true"/>
-          <param id="migrationClockGLM.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="1.0" lower="0.0" estimate="true"/>
-          <param id="migrationIndicatorGLM.t:$(n)" spec="beast.base.inference.parameter.BooleanParameter" value="true" estimate="true"/>
+          <param id="migrationScalerGLM.t:$(n)" spec="RealVectorParam" domain="Real" value="0.0" estimate="true"/>
+          <param id="migrationClockGLM.t:$(n)" spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="true"/>
+          <param id="migrationIndicatorGLM.t:$(n)" spec="BoolVectorParam" value="true" estimate="true"/>
 
-          <param id="NeScalerGLM.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="0.0" estimate="true"/>
-          <param id="NeClockGLM.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="1.0" lower="0.0" estimate="true"/>
-          <param id="NeIndicatorGLM.t:$(n)" spec="beast.base.inference.parameter.BooleanParameter" value="true" estimate="true"/>
+          <param id="NeScalerGLM.t:$(n)" spec="RealVectorParam" domain="Real" value="0.0" estimate="true"/>
+          <param id="NeClockGLM.t:$(n)" spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="true"/>
+          <param id="NeIndicatorGLM.t:$(n)" spec="BoolVectorParam" value="true" estimate="true"/>
 
           <plugin id='GLMRatesLogger.t:$(n)' spec='mascot.util.GLMLogger' glm='@GLM.t:$(n)'/>
       ]]>

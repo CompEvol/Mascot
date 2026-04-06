@@ -56,12 +56,12 @@
                 </typeTrait>
             </dynamics>
 
-          <param id="NeConstantBSSVS.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="1.0" lower="0.0" estimate="true"/>
-          <param id="relativeMigrationRatesConstantBSSVS.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="1.0" lower="0.0" estimate="true"/>
-          <param id="migrationClockConstantBSSVS.t:$(n)" spec="beast.base.inference.parameter.RealParameter" value="1.0" lower="0.0" estimate="true"/>
+          <param id="NeConstantBSSVS.t:$(n)" spec="RealVectorParam" domain="NonNegativeReal" value="1.0" estimate="true"/>
+          <param id="relativeMigrationRatesConstantBSSVS.t:$(n)" spec="RealVectorParam" domain="NonNegativeReal" value="1.0" estimate="true"/>
+          <param id="migrationClockConstantBSSVS.t:$(n)" spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="true"/>
 
 
-          <param id="indicatorsConstantBSSVS.t:$(n)" spec="beast.base.inference.parameter.BooleanParameter" value="true" estimate="true"/>
+          <param id="indicatorsConstantBSSVS.t:$(n)" spec="BoolVectorParam" value="true" estimate="true"/>
 
 
           <prior id="nonZeroRatePrior.t:$(n)">
