@@ -4,8 +4,8 @@ import beast.base.core.Description;
 import beast.base.core.Input;
 import beast.base.inference.parameter.RealParameter;
 import mascot.dynamics.RateShifts;
-import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
-import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
+import org.apache.commons.math4.legacy.analysis.interpolation.SplineInterpolator;
+import org.apache.commons.math4.legacy.analysis.polynomials.PolynomialSplineFunction;
 
 
 /**

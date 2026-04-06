@@ -14,9 +14,9 @@ import beast.base.inference.parameter.BooleanParameter;
 import mascot.distribution.Mascot;
 import mascot.ode.Euler2ndOrderTransitions;
 import mascot.ode.MascotODEUpDown;
-import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
-import org.apache.commons.math3.ode.FirstOrderIntegrator;
-import org.apache.commons.math3.ode.nonstiff.ClassicalRungeKuttaIntegrator;
+import org.apache.commons.math4.legacy.ode.FirstOrderDifferentialEquations;
+import org.apache.commons.math4.legacy.ode.FirstOrderIntegrator;
+import org.apache.commons.math4.legacy.ode.nonstiff.ClassicalRungeKuttaIntegrator;
 
 import java.io.PrintStream;
 import java.math.RoundingMode;

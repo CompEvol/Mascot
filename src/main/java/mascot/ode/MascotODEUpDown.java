@@ -1,6 +1,6 @@
 package mascot.ode;
 
-import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
+import org.apache.commons.math4.legacy.ode.FirstOrderDifferentialEquations;
 
 /**
  * @author Nicola Felix Mueller

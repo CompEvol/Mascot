@@ -2,7 +2,7 @@ package mascot.ode;
 
 
 import beast.base.core.Description;
-import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
+import org.apache.commons.math4.legacy.ode.FirstOrderDifferentialEquations;
 
 
 /**
