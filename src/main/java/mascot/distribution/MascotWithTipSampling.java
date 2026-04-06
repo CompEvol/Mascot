@@ -9,7 +9,8 @@ import beast.base.evolution.tree.IntervalType;
 import beast.base.evolution.tree.Node;
 import beast.base.evolution.tree.TreeInterface;
 import beast.base.inference.CalculationNode;
-import beast.base.inference.parameter.IntegerParameter;
+import beast.base.spec.domain.Int;
+import beast.base.spec.inference.parameter.IntVectorParam;
 import mascot.dynamics.Dynamics;
 import mascot.ode.*;
 
@@ -36,7 +37,7 @@ public class MascotWithTipSampling extends StructuredTreeDistribution {
 	public Input<MascotImplementation> implementationInput = new Input<>("implementation", "implementation, one of " + MascotImplementation.values().toString(),
 			MascotImplementation.allnative, MascotImplementation.values());
 
-	public Input<List<IntegerParameter>> tipStatesInput = new Input<>("tipStates", "state of tip nodes", new ArrayList<>(), Input.Validate.REQUIRED);
+	public Input<List<IntVectorParam<? extends Int>>> tipStatesInput = new Input<>("tipStates", "state of tip nodes", new ArrayList<>(), Input.Validate.REQUIRED);
     
 	public int samples;
 	public int nrSamples;
@@ -146,7 +147,7 @@ public class MascotWithTipSampling extends StructuredTreeDistribution {
     	linProbsNew = new double[MAX_SIZE];
 
 		List<String> tipsToSample = new ArrayList<>();
-		for (IntegerParameter ip : tipStatesInput.get()) {
+		for (IntVectorParam<? extends Int> ip : tipStatesInput.get()) {
 			tipsToSample.add(ip.getID().replace(".sampledState", ""));
 		}
 		int totTipsFound=0;
@@ -550,7 +551,7 @@ public class MascotWithTipSampling extends StructuredTreeDistribution {
 //					System.exit(1);
 				}
 				if (sampleState<0)
-					sampleState = tipStatesInput.get().get(-1-sampleState).getValue();
+					sampleState = tipStatesInput.get().get(-1-sampleState).get(0);
 				
 				for (int i = 0; i < states; i++){
 					if (i == sampleState){

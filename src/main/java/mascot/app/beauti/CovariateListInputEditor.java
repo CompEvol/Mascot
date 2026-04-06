@@ -2,7 +2,7 @@ package mascot.app.beauti;
 
 import beast.base.core.BEASTInterface;
 import beast.base.core.Input;
-import beast.base.inference.parameter.BooleanParameter;
+import beast.base.spec.inference.parameter.BoolVectorParam;
 import beastfx.app.inputeditor.BeautiDoc;
 import beastfx.app.inputeditor.InputEditor;
 import beastfx.app.util.FXUtils;
@@ -221,11 +221,11 @@ public class CovariateListInputEditor extends InputEditor.Base {
 
 	private void addTransfVector(CovariateList covariateList) {
 		// add a transformation vector
-		Boolean[] transform = new Boolean[covariateList.covariatesInput.get().size()];
+		boolean[] transform = new boolean[covariateList.covariatesInput.get().size()];
 		for (int i = 0; i < transform.length; i++)
 			transform[i] = covariateList.covariatesInput.get().get(i).transformed;
 
-		covariateList.transformInput.set(new BooleanParameter(transform));
+		covariateList.transformInput.set(new BoolVectorParam(transform));
 	}
 
 	// push covariateList.covariatesInput into Table

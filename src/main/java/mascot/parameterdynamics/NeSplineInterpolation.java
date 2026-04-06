@@ -2,7 +2,8 @@ package mascot.parameterdynamics;
 
 import beast.base.core.Description;
 import beast.base.core.Input;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.dynamics.RateShifts;
 import org.apache.commons.math4.legacy.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math4.legacy.analysis.polynomials.PolynomialSplineFunction;
@@ -14,7 +15,7 @@ import org.apache.commons.math4.legacy.analysis.polynomials.PolynomialSplineFunc
 @Description("Populaiton function with values at certain time points that are interpolated in between. Parameter has to be in log space")
 public class NeSplineInterpolation extends NeDynamics {
 	
-    final public Input<RealParameter> NeInput = new Input<>("logNe",
+    final public Input<RealVectorParam<? extends Real>> NeInput = new Input<>("logNe",
             "Nes over time in log space", Input.Validate.REQUIRED);
     final public Input<RateShifts> rateShiftsInput = new Input<>("rateShifts",
             "When to switch between elements of Ne", Input.Validate.REQUIRED);
@@ -22,7 +23,7 @@ public class NeSplineInterpolation extends NeDynamics {
     //
     // Public stuff
     //
-    RealParameter Ne;
+    RealVectorParam<? extends Real> Ne;
     RateShifts rateShifts;
     
     boolean NesKnown = false;
@@ -50,7 +51,7 @@ public class NeSplineInterpolation extends NeDynamics {
 
 		int intervalnr = getIntervalNr(t);
 		if (intervalnr>=rateShifts.getDimension()) {
-			return Math.exp(Ne.getArrayValue(Ne.getDimension()-1));
+			return Math.exp(Ne.get(Ne.size()-1));
 		}
 		double timediff = t;
 		if (intervalnr>0)
@@ -74,7 +75,7 @@ public class NeSplineInterpolation extends NeDynamics {
 	
 	// computes the Ne's at the break points
 	private void recalculateNe() {
-		double[] nes = Ne.getDoubleValues();
+		double[] nes = Ne.getValues();
 		double[] rates = new double[nes.length];
 		for (int i = 0; i < rates.length; i++) {
 			rates[i] = rateShifts.rateShifts[i];

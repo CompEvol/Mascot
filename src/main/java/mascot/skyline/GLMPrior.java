@@ -4,8 +4,9 @@ import beast.base.core.Input;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
 import beast.base.inference.distribution.ParametricDistribution;
-import beast.base.inference.parameter.BooleanParameter;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.inference.parameter.BoolVectorParam;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.dynamics.RateShifts;
 import mascot.glmmodel.CovariateList;
 import mascot.parameterdynamics.NeDynamics;
@@ -18,8 +19,8 @@ import java.util.Random;
 public class GLMPrior extends Distribution {
 
     public Input<CovariateList> covariateListInput = new Input<>("covariateList", "input of covariates", Input.Validate.REQUIRED);
-    public Input<RealParameter> scalerInput = new Input<>("scaler", "input of covariates scaler", Input.Validate.REQUIRED);
-    public Input<BooleanParameter> indicatorInput = new Input<>("indicator", "input of covariates scaler", Input.Validate.REQUIRED);
+    public Input<RealVectorParam<? extends Real>> scalerInput = new Input<>("scaler", "input of covariates scaler", Input.Validate.REQUIRED);
+    public Input<BoolVectorParam> indicatorInput = new Input<>("indicator", "input of covariates scaler", Input.Validate.REQUIRED);
 
     public Input<RateShifts> rateShiftsInput = new Input<>(
             "rateShifts", "input of timings of rate shifts relative to the most recent sample", Input.Validate.OPTIONAL);
@@ -138,8 +139,8 @@ public class GLMPrior extends Distribution {
     private double getRates(int i, int k) {
         double lograte = 0;
         for (int j = 0; j < covariateListInput.get().size(); j++) {
-            if (indicatorInput.get().getArrayValue(j) > 0.0) {
-                lograte += scalerInput.get().getArrayValue(j)
+            if (indicatorInput.get().get(j)) {
+                lograte += scalerInput.get().get(j)
                         * covariateListInput.get().get(j).getArrayValue(verticalEntries * i + k);
             }
         }

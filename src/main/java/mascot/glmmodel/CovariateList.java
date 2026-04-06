@@ -3,7 +3,7 @@ package mascot.glmmodel;
 import beast.base.core.BEASTObject;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
-import beast.base.inference.parameter.BooleanParameter;
+import beast.base.spec.inference.parameter.BoolVectorParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.List;
 public class CovariateList extends BEASTObject {
     public Input<List<Covariate>> covariatesInput = new Input<>("covariates", "input of covariates", new ArrayList<>(), Validate.REQUIRED);
 
-    public Input<BooleanParameter> transformInput = new Input<>("transform", "whether covariates need transformation");
+    public Input<BoolVectorParam> transformInput = new Input<>("transform", "whether covariates need transformation");
 
     List<Covariate> covariates;
     boolean[] timeDependent;
@@ -32,7 +32,7 @@ public class CovariateList extends BEASTObject {
     	covariates = covariatesInput.get();
     	if (transformInput.get()!=null)
     		for (int i = 0; i < covariates.size(); i++)
-    			if (transformInput.get().getArrayValue(i)>0.5)
+    			if (transformInput.get().getValues()[i])
     				covariates.get(i).transform();
     			
 	}

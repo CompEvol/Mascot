@@ -4,8 +4,9 @@ import beast.base.core.Description;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.inference.Operator;
-import beast.base.inference.parameter.BooleanParameter;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.inference.parameter.BoolVectorParam;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import beast.base.util.Randomizer;
 
 import java.text.DecimalFormat;
@@ -20,12 +21,12 @@ public class RealRandomWalkOperator extends Operator {
             new Input<>("windowSizeOn", "the size of the window both up and down when using uniform interval OR standard deviation when using Gaussian", Input.Validate.REQUIRED);
     final public Input<Double> windowSizeOffInput =
             new Input<>("windowSizeOff", "the size of the window both up and down when using uniform interval OR standard deviation when using Gaussian", Input.Validate.REQUIRED);
-    final public Input<RealParameter> parameterInput =
+    final public Input<RealVectorParam<? extends Real>> parameterInput =
             new Input<>("parameter", "the parameter to operate a random walk on.", Validate.REQUIRED);
     final public Input<Boolean> useGaussianInput =
             new Input<>("useGaussian", "Use Gaussian to move instead of uniform interval. Default false.", true);
     
-    final public Input<BooleanParameter> indicatorInput =
+    final public Input<BoolVectorParam> indicatorInput =
             new Input<>("indicator", "Defines which parameters to scale");
    
     
@@ -47,13 +48,13 @@ public class RealRandomWalkOperator extends Operator {
     @Override
     public double proposal() {
 
-        RealParameter param = parameterInput.get();
-        for (int i = 0; i < param.getDimension(); i++){
-	        double value = param.getValue(i);
+        RealVectorParam<? extends Real> param = parameterInput.get();
+        for (int i = 0; i < param.size(); i++){
+	        double value = param.get(i);
 	        double newValue = value;
 	        double windowSize = 0.0;
-	        
-        	if (indicatorInput.get().getArrayValue(i) > 0.5)
+
+        	if (indicatorInput.get().get(i))
         		windowSize = windowSizeOn;
         	else
         		windowSize = windowSizeOff;
@@ -73,7 +74,7 @@ public class RealRandomWalkOperator extends Operator {
 	            return Double.NEGATIVE_INFINITY;
 	        }
 	
-	        param.setValue(i, newValue);
+	        param.set(i, newValue);
         }
         return 0.0;
     }

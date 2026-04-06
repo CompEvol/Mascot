@@ -2,14 +2,15 @@ package mascot.operators;
 
 import beast.base.core.Input;
 import beast.base.inference.Operator;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import beast.base.util.Randomizer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NeSwapper extends Operator {
-    public Input<List<RealParameter>> logNeInput = new Input<>(
+    public Input<List<RealVectorParam<? extends Real>>> logNeInput = new Input<>(
     		"logNe", "input of the log effective population sizes", new ArrayList<>());
 
     int length;
@@ -21,9 +22,9 @@ public class NeSwapper extends Operator {
 	@Override
 	public void initAndValidate() {
 		dim = logNeInput.get().size();
-		length = logNeInput.get().get(0).getDimension();
+		length = logNeInput.get().get(0).size();
 		for (int i = 0; i < dim; i++) {
-			if (logNeInput.get().get(0).getDimension()!=length)
+			if (logNeInput.get().get(0).size()!=length)
 				throw new IllegalArgumentException("all input paramter have to have the same dimension");
 		}			
 	}
@@ -46,9 +47,9 @@ public class NeSwapper extends Operator {
 					
 		for (int a = 0; a < nrSpots; a++) {
 			int index = a+startSpot;
-			double val = logNeInput.get().get(i).getArrayValue(index);
-			logNeInput.get().get(i).setValue(index, logNeInput.get().get(j).getArrayValue(index));
-			logNeInput.get().get(j).setValue(index, val);
+			double val = logNeInput.get().get(i).get(index);
+			logNeInput.get().get(i).set(index, logNeInput.get().get(j).get(index));
+			logNeInput.get().get(j).set(index, val);
 		}	
 				
 		//

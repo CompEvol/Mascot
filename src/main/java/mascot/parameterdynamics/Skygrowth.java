@@ -2,7 +2,8 @@ package mascot.parameterdynamics;
 
 import beast.base.core.Description;
 import beast.base.core.Input;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.dynamics.RateShifts;
 
 
@@ -12,7 +13,7 @@ import mascot.dynamics.RateShifts;
 @Description("Populaiton function with values at certain time points that are interpolated in between. Parameter has to be in log space")
 public class Skygrowth extends NeDynamics {
 	
-    final public Input<RealParameter> NeInput = new Input<>("logNe",
+    final public Input<RealVectorParam<? extends Real>> NeInput = new Input<>("logNe",
             "Nes over time in log space", Input.Validate.REQUIRED);
     final public Input<RateShifts> rateShiftsInput = new Input<>("rateShifts",
             "When to switch between elements of Ne", Input.Validate.REQUIRED);
@@ -20,7 +21,7 @@ public class Skygrowth extends NeDynamics {
     //
     // Public stuff
     //
-    RealParameter Ne;
+    RealVectorParam<? extends Real> Ne;
     RateShifts rateShifts;
     
     boolean NesKnown = false;
@@ -47,13 +48,13 @@ public class Skygrowth extends NeDynamics {
 
 		int intervalnr = getIntervalNr(t);
 		if (intervalnr>=rateShifts.getDimension()) {
-			return Math.exp(Ne.getArrayValue(Ne.getDimension()-1));
+			return Math.exp(Ne.get(Ne.size()-1));
 		}
 		double timediff = t;
 		if (intervalnr>0)
 			timediff -= rateShifts.getValue(intervalnr-1);
 				
-		return Math.exp(Ne.getArrayValue(intervalnr)-growth[intervalnr]*timediff);
+		return Math.exp(Ne.get(intervalnr)-growth[intervalnr]*timediff);
 	}
 
 
@@ -73,8 +74,8 @@ public class Skygrowth extends NeDynamics {
 	private void recalculateNe() {
 		growth = new double[rateShifts.getDimension()];
 		double curr_time = 0.0;
-		for (int i = 1; i < Ne.getDimension(); i++) {
-			growth[i-1] = (Ne.getArrayValue(i-1)- Ne.getArrayValue(i))/(rateShifts.getValue(i-1)-curr_time);
+		for (int i = 1; i < Ne.size(); i++) {
+			growth[i-1] = (Ne.get(i-1)- Ne.get(i))/(rateShifts.getValue(i-1)-curr_time);
 			curr_time = rateShifts.getValue(i-1);
 		}
 		NesKnown = true;

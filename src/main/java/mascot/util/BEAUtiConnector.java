@@ -4,7 +4,7 @@ import beast.base.core.BEASTInterface;
 import beast.base.inference.CompoundDistribution;
 import beast.base.inference.Distribution;
 import beast.base.inference.distribution.Prior;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.inference.StateNode;
 import beastfx.app.inputeditor.BeautiDoc;
 import mascot.dynamics.StructuredSkyline;
 import mascot.parameterdynamics.NotSet;
@@ -57,26 +57,23 @@ public class BEAUtiConnector {
         	if (p instanceof Prior) {
 	        	Prior pri = (Prior) p;
 	        	
-	        	if (pri.m_x.get() instanceof RealParameter) {
-		        	RealParameter rp =  (RealParameter) pri.m_x.get();
-	
-	        		
-		        	if (!rp.isEstimatedInput.get()) {
+	        	if (pri.m_x.get() instanceof StateNode sn) {
+		        	if (!sn.isEstimatedInput.get()) {
 		        		System.out.println("----");
 		        		System.out.println(p.getID());
 		        		doc.disconnect(pri, "prior", "distribution");
 		        	}
 	        	}else if (pri.m_x.get() instanceof Difference) {
-		        	RealParameter rp =  (RealParameter) ((Difference)  pri.m_x.get()).functionInput.get();
-		        	if (!rp.isEstimatedInput.get()) {
+		        	StateNode sn2 =  (StateNode) ((Difference)  pri.m_x.get()).functionInput.get();
+		        	if (!sn2.isEstimatedInput.get()) {
 		        		System.out.println("----");
 		        		System.out.println(p.getID());
 		        		doc.disconnect(pri, "prior", "distribution");
 		        	}
 
 	        	}else if (pri.m_x.get() instanceof First) {
-		        	RealParameter rp =  (RealParameter) ((First)  pri.m_x.get()).functionInput.get();
-		        	if (!rp.isEstimatedInput.get()) {
+		        	StateNode sn3 =  (StateNode) ((First)  pri.m_x.get()).functionInput.get();
+		        	if (!sn3.isEstimatedInput.get()) {
 		        		System.out.println("----");
 		        		System.out.println(p.getID());
 		        		doc.disconnect(pri, "prior", "distribution");

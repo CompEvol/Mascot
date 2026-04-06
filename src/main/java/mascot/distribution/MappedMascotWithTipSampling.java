@@ -6,7 +6,7 @@ import beast.base.evolution.tree.IntervalType;
 import beast.base.evolution.tree.Node;
 import beast.base.evolution.tree.Tree;
 import beast.base.inference.StateNode;
-import beast.base.inference.parameter.BooleanParameter;
+import beast.base.spec.inference.parameter.BoolVectorParam;
 import beast.base.util.Randomizer;
 import java.util.Arrays;
 
@@ -38,7 +38,7 @@ public class MappedMascotWithTipSampling extends MascotWithTipSampling implement
 			"meta data to be logged with the tree nodes", new ArrayList<>());
 	public Input<Boolean> maxStateInput = new Input<Boolean>("maxState",
 			"report branch lengths as substitutions (branch length times clock rate for the branch)", false);
-	public Input<BooleanParameter> conditionalStateProbsInput = new Input<BooleanParameter>("conditionalStateProbs",
+	public Input<BoolVectorParam> conditionalStateProbsInput = new Input<>("conditionalStateProbs",
 			"report branch lengths as substitutions (branch length times clock rate for the branch)");
 	public Input<Boolean> substitutionsInput = new Input<Boolean>("substitutions",
 			"report branch lengths as substitutions (branch length times clock rate for the branch)", false);

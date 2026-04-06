@@ -5,8 +5,9 @@ import beast.base.core.Description;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.inference.operator.kernel.KernelOperator;
-import beast.base.inference.parameter.RealParameter;
 import beast.base.inference.util.InputUtil;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import beast.base.util.Randomizer;
 
 import java.text.DecimalFormat;
@@ -16,7 +17,7 @@ import java.text.DecimalFormat;
         "random amount according to a Bactrian distribution (Yang & Rodriguez, 2013), which is a mixture of two Gaussians:"
         + "p(x) = 1/2*N(x;-m,1-m^2) + 1/2*N(x;+m,1-m^2) and more efficient than RealRandomWalkOperator")
 public class BactrianBlockRandomWalkOperator extends KernelOperator {
-    final public Input<RealParameter> parameterInput = new Input<>("parameter", "the parameter to operate a random walk on.", Validate.REQUIRED);
+    final public Input<RealVectorParam<? extends Real>> parameterInput = new Input<>("parameter", "the parameter to operate a random walk on.", Validate.REQUIRED);
     public final Input<Double> scaleFactorInput = new Input<>("scaleFactor", "scaling factor: larger means more bold proposals", 1.0);
     final public Input<Boolean> optimiseInput = new Input<>("optimise", "flag to indicate that the scale factor is automatically changed in order to achieve a good acceptance rate (default true)", true);
 
@@ -31,29 +32,30 @@ public class BactrianBlockRandomWalkOperator extends KernelOperator {
     @Override
     public double proposal() {
 
-        RealParameter param = (RealParameter)InputUtil.get(parameterInput, this);
-        
-        
-		int nrSpots = Randomizer.nextInt(param.getDimension())+1;
-		
+        @SuppressWarnings("unchecked")
+        RealVectorParam<? extends Real> param = (RealVectorParam<? extends Real>)InputUtil.get(parameterInput, this);
+
+
+		int nrSpots = Randomizer.nextInt(param.size())+1;
+
 		int startSpot = 0;
-		if (nrSpots!=param.getDimension()) {
-			startSpot= Randomizer.nextInt(param.getDimension()-nrSpots+1);
+		if (nrSpots!=param.size()) {
+			startSpot= Randomizer.nextInt(param.size()-nrSpots+1);
 		}
 
-        int i = Randomizer.nextInt(param.getDimension());
-        
+        int i = Randomizer.nextInt(param.size());
+
         double add = kernelDistribution.getRandomDelta(i, 0, scaleFactor);
-        
+
 		for (int a = 0; a < nrSpots; a++) {
 			int index = a+startSpot;
-	        double value = param.getValue(index);
-	        double newValue = value +add; 
+	        double value = param.get(index);
+	        double newValue = value +add;
             if (newValue < param.getLower() || newValue > param.getUpper()) {
                 return Double.NEGATIVE_INFINITY;
             }
 
-            param.setValue(index, newValue);
+            param.set(index, newValue);
 		}	        
 
 

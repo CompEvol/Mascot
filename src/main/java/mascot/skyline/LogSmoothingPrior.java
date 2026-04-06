@@ -5,14 +5,15 @@ import beast.base.core.Input.Validate;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
 import beast.base.inference.distribution.ParametricDistribution;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 
 import java.util.List;
 import java.util.Random;
 
 public class LogSmoothingPrior extends Distribution {
 	
-    public Input<RealParameter> NeLogInput = new Input<>(
+    public Input<RealVectorParam<? extends Real>> NeLogInput = new Input<>(
     		"NeLog", "input of effective population sizes");        
     
     final public Input<ParametricDistribution> distInput = new Input<>("distr", 
@@ -31,7 +32,7 @@ public class LogSmoothingPrior extends Distribution {
     		"distribution used to calculate prior on the difference between intervals, e.g. normal, beta, gamma.", 
     		Input.Validate.OPTIONAL);   
     
-    private RealParameter NeLog;
+    private RealVectorParam<? extends Real> NeLog;
     
     protected ParametricDistribution dist;
     protected ParametricDistribution initDistr;
@@ -79,24 +80,24 @@ public class LogSmoothingPrior extends Distribution {
                
         
         //loop over all time points
-    	for (int j = 1; j < NeLog.getDimension(); j++){
-    		double diff = NeLog.getArrayValue(j) - NeLog.getArrayValue(j-1);    		
+    	for (int j = 1; j < NeLog.size(); j++){
+    		double diff = NeLog.get(j) - NeLog.get(j-1);
     		logP += dist.logDensity(diff);
     	}
-        
+
         // add contribution from first or last entry
         if (initDistrInput.get()!=null)
-    		logP += initDistr.logDensity(NeLog.getArrayValue(0));
+    		logP += initDistr.logDensity(NeLog.get(0));
         if (finalDistrInput.get()!=null) {
-    		logP += finalDistr.logDensity(NeLog.getArrayValue(NeLog.getDimension()-1));
+    		logP += finalDistr.logDensity(NeLog.get(NeLog.size()-1));
         }
-        
+
         if (meanDistrInput.get()!=null) {
         	double mean=0.0;
-        	for (int j = 0; j < NeLog.getDimension(); j++){
-        		mean += NeLog.getArrayValue(j);    		
+        	for (int j = 0; j < NeLog.size(); j++){
+        		mean += NeLog.get(j);
         	}
-        	mean /= NeLog.getDimension();
+        	mean /= NeLog.size();
     		logP += meanDistr.logDensity(mean);
         }
         

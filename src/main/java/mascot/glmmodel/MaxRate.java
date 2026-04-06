@@ -7,7 +7,8 @@ import beast.base.core.Input.Validate;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
 import beast.base.inference.distribution.ParametricDistribution;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.dynamics.GLM;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class MaxRate extends Distribution {
      */
     protected ParametricDistribution dist;
 
-    
+
     @Override
     public void initAndValidate() {
         dist = distInput.get();
@@ -40,13 +41,12 @@ public class MaxRate extends Distribution {
     public double calculateLogP() {
     	Double[] mig = GLMStepwiseModelInput.get().getAllCoalescentRate();
 		Double[] coal = GLMStepwiseModelInput.get().getAllBackwardsMigration();
-    	
-    	
-    	RealParameter dCoal = new RealParameter(coal);
-    	RealParameter dMig = new RealParameter(mig);
-    	
+
+    	RealVectorParam<Real> dCoal = new RealVectorParam<>(unbox(coal), Real.INSTANCE);
+    	RealVectorParam<Real> dMig = new RealVectorParam<>(unbox(mig), Real.INSTANCE);
+
     	logP = 0.0;
-    	    	
+
     	if (migrationOnlyInput.get()){
 	        logP += dist.calcLogP(dMig);
     	}else{
@@ -59,13 +59,18 @@ public class MaxRate extends Distribution {
         return logP;
     }
 
+    private static double[] unbox(Double[] values) {
+        double[] result = new double[values.length];
+        for (int i = 0; i < values.length; i++) {
+            result[i] = values[i];
+        }
+        return result;
+    }
+
     /**
      * return name of the parameter this prior is applied to *
      */
     public String getParameterName() {
-//        if (m_x.get() instanceof BEASTObject) {
-//            return ((BEASTObject) m_x.get()).getID();
-//        }
         return "";
     }
 
@@ -79,28 +84,6 @@ public class MaxRate extends Distribution {
 
         // Cause conditional parameters to be sampled
         sampleConditions(state, random);
-
-        // sample distribution parameters
-//        Function x = m_x.get();
-//
-//        Double[] newx;
-//        try {
-//            newx = dist.sample(1)[0];
-//
-//            if (x instanceof RealParameter) {
-//                for (int i = 0; i < newx.length; i++) {
-//                    ((RealParameter) x).setValue(i, newx[i]);
-//                }
-//            } else if (x instanceof IntegerParameter) {
-//                for (int i = 0; i < newx.length; i++) {
-//                    ((IntegerParameter) x).setValue(i, (int)Math.round(newx[i]));
-//                }
-//            }
-//
-//        } catch (MathException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("Failed to sample!");
-//        }
     }
 
     @Override
@@ -113,12 +96,6 @@ public class MaxRate extends Distribution {
     @Override
     public List<String> getArguments() {
         List<String> arguments = new ArrayList<>();
-
-        String id = null;
-//        if (m_x.get() != null && m_x.get() instanceof BEASTInterface) {
-//            arguments.add(((BEASTInterface)m_x.get()).getID());
-//        }
-
         return arguments;
     }
 }

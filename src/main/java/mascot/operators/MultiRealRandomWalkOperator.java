@@ -4,7 +4,8 @@ import beast.base.core.Description;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.inference.Operator;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import beast.base.util.Randomizer;
 
 import java.text.DecimalFormat;
@@ -17,7 +18,7 @@ import java.text.DecimalFormat;
 public class MultiRealRandomWalkOperator extends Operator {
     final public Input<Double> windowSizeInput =
             new Input<>("windowSize", "the size of the window both up and down when using uniform interval OR standard deviation when using Gaussian", Input.Validate.REQUIRED);
-    final public Input<RealParameter> parameterInput =
+    final public Input<RealVectorParam<? extends Real>> parameterInput =
             new Input<>("parameter", "the parameter to operate a random walk on.", Validate.REQUIRED);
     
     
@@ -37,30 +38,30 @@ public class MultiRealRandomWalkOperator extends Operator {
     @Override
     public double proposal() {
 
-        RealParameter param = parameterInput.get();
-        
-        
-		int nrSpots = Randomizer.nextInt(param.getDimension())+1;
+        RealVectorParam<? extends Real> param = parameterInput.get();
+
+
+		int nrSpots = Randomizer.nextInt(param.size())+1;
 		double add = Randomizer.nextGaussian() * windowSize;
-		
+
 //		int nrSpots = 1;
-		
+
 		int startSpot = 0;
-		if (nrSpots!=param.getDimension()) {
-			startSpot= Randomizer.nextInt(param.getDimension()-nrSpots+1);
+		if (nrSpots!=param.size()) {
+			startSpot= Randomizer.nextInt(param.size()-nrSpots+1);
 		}
-        
+
 		for (int a = 0; a < nrSpots; a++) {
 			int index = a+startSpot;
-			double val = param.getArrayValue(index);
+			double val = param.get(index);
 			double newValue = val+add;
-			
-			
+
+
 	        if (newValue < param.getLower() || newValue > param.getUpper()) {
 	            return Double.NEGATIVE_INFINITY;
 	        }
 
-	        param.setValue(index, newValue);
+	        param.set(index, newValue);
 //			logNeInput.get().get(j).setValue(index, val);
 		}	
 

@@ -5,8 +5,9 @@ import beast.base.core.Description;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.core.Loggable;
-import beast.base.inference.parameter.BooleanParameter;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.inference.parameter.BoolVectorParam;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.parameterdynamics.NeDynamicsList;
 
 import java.io.PrintStream;
@@ -18,13 +19,13 @@ public class StructuredSkyline extends Dynamics implements Loggable {
     public Input<NeDynamicsList> parametricFunctionInput = new Input<>(
     		"NeDynamics", "input of the log effective population sizes", Validate.REQUIRED);    
     
-    public Input<RealParameter> f_mInput = new Input<>(
+    public Input<RealVectorParam<? extends Real>> f_mInput = new Input<>(
     		"forwardsMigration", "input of backwards in time migration rates", Validate.REQUIRED);  
     
     public Input<RateShifts> rateShiftsInput = new Input<>(
     		"rateShifts", "timing of the rate shifts", Validate.REQUIRED);   
     
-    public Input<BooleanParameter> indicatorInput = new Input<>(
+    public Input<BoolVectorParam> indicatorInput = new Input<>(
     		"indicators", "input of backwards in time migration rates", Validate.REQUIRED);    
 
 	public Input<Double> maxRateInput = new Input<>(
@@ -40,7 +41,7 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 	
 	boolean intTimesKnown = false;
 	
-	RealParameter migration;
+	RealVectorParam<? extends Real> migration;
 	
 	NeDynamicsList parametricFunction;
 	
@@ -60,8 +61,8 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 		isForward = true;
 
     	// check the dimension of the migration rates
-    	if (dimensionInput.get()*(dimensionInput.get()-1)!=migration.getDimension() || fromBeautiInput.get()){
-    		System.err.println("the dimension of " + migration.getID() + " is set to " + (dimensionInput.get()*(dimensionInput.get()-1)) + " from " + migration.getDimension());
+    	if (dimensionInput.get()*(dimensionInput.get()-1)!=migration.size() || fromBeautiInput.get()){
+    		System.err.println("the dimension of " + migration.getID() + " is set to " + (dimensionInput.get()*(dimensionInput.get()-1)) + " from " + migration.size());
     		if (dimensionInput.get()*(dimensionInput.get()-1)>0)
     			migration.setDimension(dimensionInput.get()*(dimensionInput.get()-1));
     	}
@@ -88,8 +89,8 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 			parametricFunction.get(i).setNrIntervals(intTimes.length);
 		
     	// Set the dimension of the indicator variables
-		if (indicatorInput.get().getDimension() != migration.getDimension())
-			indicatorInput.get().setDimension(migration.getDimension());
+		if (indicatorInput.get().size() != migration.size())
+			indicatorInput.get().setDimension(migration.size());
 		
     	hasIndicators = true;
     	
@@ -200,8 +201,8 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 		for (int a = 0; a < dim; a++){
 			for (int b = 0; b < dim; b++){
 				if (a!=b){
-    				if (indicatorInput.get().getArrayValue(dirs[b][a])>0.5)
-						m[a * dim + b] = Math.min(maxRateInput.get(), NeInt[b]*migration.getArrayValue(dirs[b][a])/NeInt[a]);
+    				if (indicatorInput.get().get(dirs[b][a]))
+						m[a * dim + b] = Math.min(maxRateInput.get(), NeInt[b]*migration.get(dirs[b][a])/NeInt[a]);
     				else
 						m[a * dim + b] = 0.0;
 				}
@@ -238,8 +239,8 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 	@Override
 	public int[] getIndicators(int i) {
 		int nrTrue = 0;
-		for (int j = 0; j < indicatorInput.get().getDimension(); j++)
-			if (indicatorInput.get().getArrayValue(j) > 0.5)
+		for (int j = 0; j < indicatorInput.get().size(); j++)
+			if (indicatorInput.get().get(j))
 				nrTrue++;		
 
 		int[] m = new int[nrTrue*2];
@@ -252,7 +253,7 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 	    	for (int a = 0; a < dimensionInput.get(); a++){
 	    		for (int b = 0; b < dimensionInput.get(); b++){
 	    			if (a!=b){
-	    				if (indicatorInput.get().getArrayValue(dirs[b][a])>0.5){
+	    				if (indicatorInput.get().get(dirs[b][a])){
 	    					m[mi * 2 + 0] = a;
 	    					m[mi * 2 + 1] = b;
 	    					mi++;
@@ -270,8 +271,8 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 //			for (int a = 0; a < dim; a++){
 //				for (int b = 0; b < dim; b++){
 //					if (a!=b){
-//	    				if (indicatorInput.get().getArrayValue(c2)>0.5)
-//							m[c1] = migration.getArrayValue(start+c2);
+//	    				if (indicatorInput.get().get(c2))
+//							m[c1] = migration.get(start+c2);
 //	    				else
 //							m[c1] = 0;
 //						c2++;
@@ -290,7 +291,7 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 //		    	for (int a = 0; a < NeInput.get().getDimension(); a++){
 //		    		for (int b = 0; b < NeInput.get().getDimension(); b++){
 //		    			if (a!=b){
-//		    				if (indicatorInput.get().getArrayValue(c)>0.5){
+//		    				if (indicatorInput.get().get(c)){
 //		    					m[mi * 2 + 0] = a;
 //		    					m[mi * 2 + 1] = b;
 //		    					mi++;
@@ -303,7 +304,7 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 //		    	for (int a = 0; a < NeInput.get().getDimension(); a++){
 //		    		for (int b = a+1; b < NeInput.get().getDimension(); b++){
 //		    			if (a!=b){
-//		    				if (indicatorInput.get().getArrayValue(c)>0.5){
+//		    				if (indicatorInput.get().get(c)){
 //		    					m[mi * 2 + 0] = a;
 //		    					m[mi * 2 + 1] = b;
 //		    					mi++;
@@ -321,7 +322,7 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 //		    	for (int a = 0; a < NeInput.get().getDimension(); a++){
 //		    		for (int b = 0; b < NeInput.get().getDimension(); b++){
 //		    			if (a!=b){
-//		    				if (indicatorInput.get().getArrayValue(c)>0.5){
+//		    				if (indicatorInput.get().get(c)){
 //		    					m[mi * 2 + 0] = a;
 //		    					m[mi * 2 + 1] = b;
 //		    					mi++;
@@ -334,7 +335,7 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 //		    	for (int a = 0; a < NeInput.get().getDimension(); a++){
 //		    		for (int b = a+1; b < NeInput.get().getDimension(); b++){
 //		    			if (a!=b){
-//		    				if (indicatorInput.get().getArrayValue(c)>0.5){
+//		    				if (indicatorInput.get().get(c)){
 //		    					m[mi * 2 + 0] = a;
 //		    					m[mi * 2 + 1] = b;
 //		    					mi++;
@@ -366,7 +367,7 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 			if(parametricFunction.get(i).isDirty())
 				return true;
 				
-		for (int i = 0; i < migration.getDimension(); i++)
+		for (int i = 0; i < migration.size(); i++)
 			if(migration.isDirty(i))
 				return true;
 
@@ -417,8 +418,8 @@ public class StructuredSkyline extends Dynamics implements Loggable {
 			for (int a = 0; a < dimensionInput.get(); a++) {
 				for (int b = 0; b < dimensionInput.get(); b++) { 
 					if (a!=b) {
-						if (indicatorInput.get().getArrayValue(dirs[a][b])>0.5)
-							out.print(f_mInput.get().getArrayValue(dirs[a][b]) + "\t");
+						if (indicatorInput.get().get(dirs[a][b]))
+							out.print(f_mInput.get().get(dirs[a][b]) + "\t");
 						else
 							out.print(0.0 + "\t");
 						

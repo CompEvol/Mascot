@@ -5,7 +5,8 @@ import beast.base.core.Input.Validate;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
 import beast.base.inference.distribution.ParametricDistribution;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.dynamics.RateShifts;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Random;
 
 public class GrowthRateSmoothingPrior extends Distribution {
 	
-    public Input<RealParameter> NeLogInput = new Input<>(
+    public Input<RealVectorParam<? extends Real>> NeLogInput = new Input<>(
     		"NeLog", "input of effective population sizes");        
     
     final public Input<ParametricDistribution> distInput = new Input<>("distr", 
@@ -38,7 +39,7 @@ public class GrowthRateSmoothingPrior extends Distribution {
 
    
     
-    private RealParameter NeLog;
+    private RealVectorParam<? extends Real> NeLog;
     
     protected ParametricDistribution dist;
     protected ParametricDistribution initDistr;
@@ -85,13 +86,13 @@ public class GrowthRateSmoothingPrior extends Distribution {
     public double calculateLogP() {
         logP = 0;
         
-        double[] growthRates = new double[NeLog.getDimension()-1];
-               
-        
+        double[] growthRates = new double[NeLog.size()-1];
+
+
         //loop over all time points
-    	for (int j = 1; j < NeLog.getDimension(); j++){
+    	for (int j = 1; j < NeLog.size(); j++){
     		double timediff = rateShifts.getValue(j) - rateShifts.getValue(j-1);
-    		double logdiff = NeLog.getArrayValue(j) - NeLog.getArrayValue(j-1); 
+    		double logdiff = NeLog.get(j) - NeLog.get(j-1); 
     		growthRates[j-1] = logdiff/timediff;    		
     	}
     	

@@ -5,9 +5,11 @@ import beast.base.core.*;
 import beast.base.core.Input.Validate;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
+import beast.base.inference.StateNode;
 import beast.base.inference.distribution.ParametricDistribution;
-import beast.base.inference.parameter.IntegerParameter;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.inference.parameter.IntVectorParam;
+import beast.base.spec.inference.parameter.RealVectorParam;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +20,7 @@ import java.util.Random;
         "so the sum of log probabilities of all elements of x is returned as the prior.")
 public class ErrorSmoothing extends Distribution {
     final public Input<Function> m_x = new Input<>("x", "point at which the density is calculated", Validate.REQUIRED);
-    
+
     final public Input<ParametricDistribution> distInput = new Input<>("distr", "distribution used to calculate prior, e.g. normal, beta, gamma.", Validate.REQUIRED);
 
     /**
@@ -35,25 +37,7 @@ public class ErrorSmoothing extends Distribution {
     @Override
     public double calculateLogP() {
         Function x = m_x.get();
-        if (x instanceof RealParameter || x instanceof IntegerParameter) {
-            // test that parameter is inside its bounds
-            double l = 0.0;
-            double h = 0.0;
-            if (x instanceof RealParameter) {
-                l = ((RealParameter) x).getLower();
-                h = ((RealParameter) x).getUpper();
-            } else {
-                l = ((IntegerParameter) x).getLower();
-                h = ((IntegerParameter) x).getUpper();
-            }
-            for (int i = 0; i < x.getDimension(); i++) {
-                double value = x.getArrayValue(i);
-                if (value < l || value > h) {
-                    logP = Double.NEGATIVE_INFINITY;
-                    return Double.NEGATIVE_INFINITY;
-                }
-            }
-        }
+        // spec types enforce bounds via domain, so no explicit check needed
         logP = dist.calcLogP(x);
         if (logP == Double.POSITIVE_INFINITY) {
             logP = Double.NEGATIVE_INFINITY;
@@ -89,13 +73,13 @@ public class ErrorSmoothing extends Distribution {
         try {
             newx = dist.sample(1)[0];
 
-            if (x instanceof RealParameter) {
+            if (x instanceof RealVectorParam<?> rvp) {
                 for (int i = 0; i < newx.length; i++) {
-                    ((RealParameter) x).setValue(i, newx[i]);
+                    rvp.set(i, newx[i]);
                 }
-            } else if (x instanceof IntegerParameter) {
+            } else if (x instanceof IntVectorParam<?> ivp) {
                 for (int i = 0; i < newx.length; i++) {
-                    ((IntegerParameter) x).setValue(i, (int)Math.round(newx[i]));
+                    ivp.set(i, (int)Math.round(newx[i]));
                 }
             }
 
