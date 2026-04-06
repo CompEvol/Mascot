@@ -6,3 +6,4 @@ target/
 .project
 .settings/
 *.zip
+*.xml.state
