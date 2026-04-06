@@ -1,7 +1,9 @@
 package mascot.ode;
 
-import junit.framework.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class Euler2ndOrderTest  {
@@ -35,13 +37,13 @@ public class Euler2ndOrderTest  {
 		euler2ndOrder.calculateValues(1.0, p, pDot, pDotDot, pDotDotDot, p.length);
 		
 		// check that it does not depend if multiplicators are used
-		Assert.assertTrue(Math.abs(p[0]-0.7280934851118206)<0.0000000001);
-		Assert.assertTrue(Math.abs(p[1]-0.2719065148881794)<0.0000000001);
-		Assert.assertTrue(Math.abs(p[2]-0.8961702265249307)<0.0000000001);
-		Assert.assertTrue(Math.abs(p[3]-0.10382977347506926)<0.0000000001);
-		Assert.assertTrue(Math.abs(p[4]-0.8961702265249307)<0.0000000001);		
-		Assert.assertTrue(Math.abs(p[5]-0.10382977347506926)<0.0000000001);
-		Assert.assertTrue(Math.abs(p[6]+2.1375326433098785)<0.0000000001);
+		assertTrue(Math.abs(p[0]-0.7280934851118206)<0.0000000001);
+		assertTrue(Math.abs(p[1]-0.2719065148881794)<0.0000000001);
+		assertTrue(Math.abs(p[2]-0.8961702265249307)<0.0000000001);
+		assertTrue(Math.abs(p[3]-0.10382977347506926)<0.0000000001);
+		assertTrue(Math.abs(p[4]-0.8961702265249307)<0.0000000001);		
+		assertTrue(Math.abs(p[5]-0.10382977347506926)<0.0000000001);
+		assertTrue(Math.abs(p[6]+2.1375326433098785)<0.0000000001);
 	}
 
 	@Test
@@ -86,10 +88,10 @@ public class Euler2ndOrderTest  {
 		euler2ndOrderMult.calculateValues(1.0, p_mul, pDot, pDotDot, pDotDotDot, p_mul.length);
 		
 		// check that it does not depend if multiplicators are used
-		Assert.assertTrue(Math.abs(p[0]-p_mul[0])<0.0000000001);
-		Assert.assertTrue(Math.abs(p[4]-p_mul[2])<0.0000000001);		
-		Assert.assertFalse(Math.abs(p[1]-p_mul[3])<0.0000000001);
-		Assert.assertTrue(Math.abs(p[6]-p_mul[4])<0.0000000001);
+		assertTrue(Math.abs(p[0]-p_mul[0])<0.0000000001);
+		assertTrue(Math.abs(p[4]-p_mul[2])<0.0000000001);		
+		assertFalse(Math.abs(p[1]-p_mul[3])<0.0000000001);
+		assertTrue(Math.abs(p[6]-p_mul[4])<0.0000000001);
 		
 		// check that it does not depend if indicators
 		
@@ -124,10 +126,10 @@ public class Euler2ndOrderTest  {
 		euler2ndOrder = new Euler2ndOrder(migration_rates, coalescent_rates, lineages+1, states, 0.001, 0.2);
 		euler2ndOrder.calculateValues(1.0, p_new, pDot, pDotDot, pDotDotDot, p_new.length);
 				
-		Assert.assertTrue(Math.abs(p_new[0]-p_ind[0])<0.0000000001);
-		Assert.assertTrue(Math.abs(p_new[1]-p_ind[1])<0.0000000001);		
-		Assert.assertFalse(Math.abs(p_new[1]-p_ind[3])<0.0000000001);
-		Assert.assertTrue(Math.abs(p_new[6]-p_ind[6])<0.0000000001);
+		assertTrue(Math.abs(p_new[0]-p_ind[0])<0.0000000001);
+		assertTrue(Math.abs(p_new[1]-p_ind[1])<0.0000000001);		
+		assertFalse(Math.abs(p_new[1]-p_ind[3])<0.0000000001);
+		assertTrue(Math.abs(p_new[6]-p_ind[6])<0.0000000001);
 
 
 	}

@@ -10,9 +10,11 @@ import beast.base.evolution.tree.TreeParser;
 import beast.base.evolution.tree.coalescent.Coalescent;
 import beast.base.evolution.tree.coalescent.ConstantPopulation;
 import beast.base.inference.parameter.RealParameter;
-import junit.framework.Assert;
 import mascot.dynamics.Constant;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class MascotTest  {
@@ -62,7 +64,7 @@ public class MascotTest  {
 		mascot.initByName("structuredTreeIntervals", st, "dynamics", constant, "tree", tree);
 		
 		double logP = mascot.calculateLogP();
-		Assert.assertEquals(logP,-6.870390751933608, 1e-15);
+		assertEquals(-6.870390751933608, logP, 1e-15);
 		
 
 	}
@@ -125,7 +127,7 @@ public class MascotTest  {
 		Coalescent coalescent = new Coalescent();
 		coalescent.initByName("populationModel", cp, "treeIntervals", ti);
 		
-		Assert.assertTrue(Math.abs(mascot.calculateLogP()-coalescent.calculateLogP())<0.000000001);
+		assertTrue(Math.abs(mascot.calculateLogP()-coalescent.calculateLogP())<0.000000001);
 	}
 
 }
