@@ -10,6 +10,7 @@ import beast.base.inference.Operator;
 import beast.base.inference.distribution.Prior;
 import beast.base.inference.distribution.Uniform;
 import beast.base.inference.operator.kernel.BactrianRandomWalkOperator;
+import beast.base.inference.StateNode;
 import beast.base.inference.parameter.RealParameter;
 import beastfx.app.inputeditor.BeautiDoc;
 import beastfx.app.inputeditor.BeautiSubTemplate;
@@ -457,16 +458,16 @@ public class NeDynamicsListInputEditor extends InputEditor.Base {
 		}
 	}
 
-	private void removeParameter(CompoundDistribution compoundDistribution, RealParameter realParameter) {
-		
+	private void removeParameter(CompoundDistribution compoundDistribution, StateNode realParameter) {
+
 		CompoundDistribution prior = (CompoundDistribution) doc.pluginmap.get("prior");
 		prior.initAndValidate();
 		String pId = realParameter.getID().substring(realParameter.getID().indexOf(".t:")+3, realParameter.getID().length());
 		String baseName = realParameter.getID().replace(".t:" + pId, "");
-		
-		doc.disconnect(doc.pluginmap.get(baseName + ".Scaler.t:" + pId), "mcmc", "operator");		
-		doc.disconnect(realParameter, "AVMNNoTransform.Mascot."+pId, "f");		
-		
+
+		doc.disconnect(doc.pluginmap.get(baseName + ".Scaler.t:" + pId), "mcmc", "operator");
+		doc.disconnect(realParameter, "AVMNNoTransform.Mascot."+pId, "f");
+
 		doc.disconnect(realParameter, "tracelog", "log");
 		doc.disconnect(realParameter, "state", "stateNode");
 		
@@ -474,19 +475,18 @@ public class NeDynamicsListInputEditor extends InputEditor.Base {
 		// set the parameter to not estimated (will be removed by connector, not cleanest solution, but a working solution)
 		for (int i=0; i < prior.pDistributions.get().size(); i++) {
 			if (prior.pDistributions.get().get(i).getID().contentEquals(baseName + ".Prior.t:" + pId)) {
-				if (((Prior) prior.pDistributions.get().get(i)).m_x.get() instanceof RealParameter) {
-					RealParameter rp = ((RealParameter) ((Prior) prior.pDistributions.get().get(i)).m_x.get());
-					rp.isEstimatedInput.setValue(false, rp);
+				if (((Prior) prior.pDistributions.get().get(i)).m_x.get() instanceof StateNode sn) {
+					sn.isEstimatedInput.setValue(false, sn);
 				}else{
 					Difference fun = ((Difference) ((Prior) prior.pDistributions.get().get(i)).m_x.get());
-					RealParameter rp  = (RealParameter) fun.functionInput.get();
-					rp.isEstimatedInput.setValue(false, rp);
+					StateNode sn  = (StateNode) fun.functionInput.get();
+					sn.isEstimatedInput.setValue(false, sn);
 				}
 			}
 			if (prior.pDistributions.get().get(i).getID().contentEquals(baseName + ".FirstPrior.t:" + pId)) {
 				First fun = ((First) ((Prior) prior.pDistributions.get().get(i)).m_x.get());
-				RealParameter rp  = (RealParameter) fun.functionInput.get();
-				rp.isEstimatedInput.setValue(false, rp);
+				StateNode sn  = (StateNode) fun.functionInput.get();
+				sn.isEstimatedInput.setValue(false, sn);
 			}
 		}
 		

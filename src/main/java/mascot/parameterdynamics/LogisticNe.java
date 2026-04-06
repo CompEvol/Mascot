@@ -2,33 +2,34 @@ package mascot.parameterdynamics;
 
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
-import beast.base.inference.parameter.RealParameter;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.parameter.RealScalarParam;
 
 public class LogisticNe extends NeDynamics {
-	
-    public Input<RealParameter> carryingProportionInput = new Input<>(
-    		"carryingProportion", "the proportion of the current Ne of the maximial Ne (capactity)", Validate.REQUIRED);    
-    public Input<RealParameter> capacityInput = new Input<>(
-    		"capacity", "input of the maximal Ne", Validate.REQUIRED);    
-    public Input<RealParameter> growthRateInput = new Input<>(
-    		"growthRate", "input of the growth rate", Validate.REQUIRED);  
-    
-    public Input<Double> minNeInput = new Input<>(
-    		"minNe", "input of the minimal Ne", 0.0);    
 
-    RealParameter cP;
-    RealParameter capacity;
-    RealParameter growthRate;
-    
+    public Input<RealScalarParam<Real>> carryingProportionInput = new Input<>(
+    		"carryingProportion", "the proportion of the current Ne of the maximial Ne (capactity)", Validate.REQUIRED);
+    public Input<RealScalarParam<Real>> capacityInput = new Input<>(
+    		"capacity", "input of the maximal Ne", Validate.REQUIRED);
+    public Input<RealScalarParam<Real>> growthRateInput = new Input<>(
+    		"growthRate", "input of the growth rate", Validate.REQUIRED);
+
+    public Input<Double> minNeInput = new Input<>(
+    		"minNe", "input of the minimal Ne", 0.0);
+
+    RealScalarParam<Real> cP;
+    RealScalarParam<Real> capacity;
+    RealScalarParam<Real> growthRate;
+
 	@Override
 	public void initAndValidate() {
 		// should be called by a time
 		isTime = true;
-		
+
 		cP = carryingProportionInput.get();
-		
+
 		capacity = capacityInput.get();
-		growthRate = growthRateInput.get();		
+		growthRate = growthRateInput.get();
 	}
 
 	@Override
@@ -36,22 +37,22 @@ public class LogisticNe extends NeDynamics {
 	}
 
 	@Override
-	public double getNeTime(double t) {		
-		return Math.max(minNeInput.get(),  Math.exp(capacity.getValue())/(1 + (1-cP.getValue())/cP.getValue() * Math.exp(t*growthRate.getArrayValue())));
+	public double getNeTime(double t) {
+		return Math.max(minNeInput.get(),  Math.exp(capacity.get())/(1 + (1-cP.get())/cP.get() * Math.exp(t*growthRate.get())));
 	}
 
 	@Override
 	public boolean isDirty() {
-		if (cP.isDirty(0))
-			return true;
-		
-		if (capacity.isDirty(0))
+		if (cP.somethingIsDirty())
 			return true;
 
-		if (growthRate.isDirty(0))
+		if (capacity.somethingIsDirty())
 			return true;
-		
+
+		if (growthRate.somethingIsDirty())
+			return true;
+
 		return false;
-	}	
+	}
 
 }
