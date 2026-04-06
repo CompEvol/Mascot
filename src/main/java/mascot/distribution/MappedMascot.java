@@ -8,7 +8,7 @@ import beast.base.evolution.tree.Tree;
 import beast.base.inference.StateNode;
 import beast.base.inference.parameter.BooleanParameter;
 import beast.base.util.Randomizer;
-import cern.colt.Arrays;
+import java.util.Arrays;
 
 import java.io.PrintStream;
 import java.math.RoundingMode;
