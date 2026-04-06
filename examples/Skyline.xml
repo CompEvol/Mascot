@@ -67,7 +67,7 @@ name="alignment">
             </tree>
             <parameter id="clockRate.c:sequences" spec="RealScalarParam" domain="PositiveReal" name="stateNode">1.0</parameter>
             <parameter id="kappa.s:sequences" spec="RealScalarParam" domain="NonNegativeReal" name="stateNode">2.0</parameter>
-            <parameter id="freqParameter.s:sequences" spec="RealVectorParam" domain="UnitInterval" dimension="4" name="stateNode">0.25</parameter>
+            <parameter id="freqParameter.s:sequences" spec="SimplexParam" dimension="4" name="stateNode">0.25</parameter>
             <parameter id="gammaShape.s:sequences" spec="RealScalarParam" domain="PositiveReal" name="stateNode">1.0</parameter>
             <parameter id="migrationRatesSkyline.t:sequences" spec="RealVectorParam" domain="NonNegativeReal" dimension="2" name="stateNode">1.0</parameter>
             <parameter id="SkylineNe.Brazil_Northeast.t:sequences" spec="RealVectorParam" domain="Real" dimension="2" name="stateNode">0.0</parameter>
@@ -99,43 +99,37 @@ name="alignment">
                     <structuredTreeIntervals id="StructuredTreeIntervals.t:sequences" spec="mascot.distribution.StructuredTreeIntervals" tree="@Tree.t:sequences"/>
                 </distribution>
                 <distribution id="ClockPrior.c:sequences" spec="beast.base.spec.inference.distribution.Uniform" param="@clockRate.c:sequences"/>
-                <distribution id="SkylineNe.Brazil_Northeast.Prior.t:sequences" spec="beast.base.inference.distribution.Prior">
-                    <x id="diff.SkylineNe.Brazil_Northeast.t:sequences" spec="mascot.util.Difference" arg="@SkylineNe.Brazil_Northeast.t:sequences"/>
+                <distribution id="SkylineNe.Brazil_Northeast.Prior.t:sequences" spec="beast.base.spec.inference.distribution.IID">
+                    <param id="diff.SkylineNe.Brazil_Northeast.t:sequences" spec="mascot.util.Difference" arg="@SkylineNe.Brazil_Northeast.t:sequences"/>
                     <distr spec="beast.base.spec.inference.distribution.Normal">
                         <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
                         <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
                     </distr>
                 </distribution>
-                <distribution id="SkylineNe.Caribbean.Prior.t:sequences" spec="beast.base.inference.distribution.Prior">
-                    <x id="diff.SkylineNe.Caribbean.t:sequences" spec="mascot.util.Difference" arg="@SkylineNe.Caribbean.t:sequences"/>
+                <distribution id="SkylineNe.Caribbean.Prior.t:sequences" spec="beast.base.spec.inference.distribution.IID">
+                    <param id="diff.SkylineNe.Caribbean.t:sequences" spec="mascot.util.Difference" arg="@SkylineNe.Caribbean.t:sequences"/>
                     <distr spec="beast.base.spec.inference.distribution.Normal">
                         <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
                         <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
                     </distr>
                 </distribution>
-                <distribution id="SkylineNe.Brazil_Northeast.FirstPrior.t:sequences" spec="beast.base.inference.distribution.Prior">
-                    <x id="first.SkylineNe.Brazil_Northeast.t:sequences" spec="mascot.util.First" arg="@SkylineNe.Brazil_Northeast.t:sequences"/>
-                    <distr spec="beast.base.spec.inference.distribution.Normal">
-                        <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
-                        <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
-                    </distr>
+                <distribution id="SkylineNe.Brazil_Northeast.FirstPrior.t:sequences" spec="beast.base.spec.inference.distribution.Normal">
+                    <param id="first.SkylineNe.Brazil_Northeast.t:sequences" spec="mascot.util.First" arg="@SkylineNe.Brazil_Northeast.t:sequences"/>
+                    <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
+                    <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
                 </distribution>
-                <distribution id="SkylineNe.Caribbean.FirstPrior.t:sequences" spec="beast.base.inference.distribution.Prior">
-                    <x id="first.SkylineNe.Caribbean.t:sequences" spec="mascot.util.First" arg="@SkylineNe.Caribbean.t:sequences"/>
-                    <distr spec="beast.base.spec.inference.distribution.Normal">
-                        <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
-                        <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
-                    </distr>
+                <distribution id="SkylineNe.Caribbean.FirstPrior.t:sequences" spec="beast.base.spec.inference.distribution.Normal">
+                    <param id="first.SkylineNe.Caribbean.t:sequences" spec="mascot.util.First" arg="@SkylineNe.Caribbean.t:sequences"/>
+                    <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
+                    <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
                 </distribution>
-                <distribution id="FrequenciesPrior.s:sequences" spec="beast.base.inference.distribution.Prior" x="@freqParameter.s:sequences">
-                    <distr id="Dirichlet.0" spec="distribution.Dirichlet">
-                        <parameter id="RealParameter.3" spec="RealVectorParam" domain="Real" dimension="4" estimate="false" name="alpha">4.0 4.0 4.0 4.0</parameter>
-                    </distr>
+                <distribution id="FrequenciesPrior.s:sequences" spec="beast.base.spec.inference.distribution.Dirichlet" param="@freqParameter.s:sequences">
+                    <alpha id="DirichletAlpha.0" spec="RealVectorParam" domain="PositiveReal" dimension="4" estimate="false">4.0 4.0 4.0 4.0</alpha>
                 </distribution>
                 <distribution id="GammaShapePrior.s:sequences" spec="beast.base.spec.inference.distribution.Exponential" param="@gammaShape.s:sequences">
                     <mean spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
                 </distribution>
-                <distribution id="KappaPrior.s:sequences" spec="beast.base.spec.inference.distribution.LogNormalDistributionModel" param="@kappa.s:sequences">
+                <distribution id="KappaPrior.s:sequences" spec="beast.base.spec.inference.distribution.LogNormal" param="@kappa.s:sequences">
                     <M spec="RealScalarParam" domain="Real" value="1.0" estimate="false"/>
                     <S spec="RealScalarParam" domain="PositiveReal" value="1.25" estimate="false"/>
                 </distribution>
@@ -151,7 +145,7 @@ name="alignment">
                         <parameter id="mutationRate.s:sequences" spec="RealScalarParam" domain="NonNegativeReal" estimate="false" name="mutationRate">1.0</parameter>
                         <parameter id="proportionInvariant.s:sequences" spec="RealScalarParam" domain="UnitInterval" estimate="false" name="proportionInvariant">0.0</parameter>
                         <substModel id="hky.s:sequences" spec="beast.base.spec.evolution.substitutionmodel.HKY" kappa="@kappa.s:sequences">
-                            <frequencies id="estimatedFreqs.s:sequences" spec="Frequencies" frequencies="@freqParameter.s:sequences"/>
+                            <frequencies id="estimatedFreqs.s:sequences" spec="beast.base.spec.evolution.substitutionmodel.Frequencies" frequencies="@freqParameter.s:sequences"/>
                         </substModel>
                     </siteModel>
                     <branchRateModel id="StrictClock.c:sequences" spec="beast.base.spec.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:sequences"/>
@@ -190,7 +184,7 @@ name="alignment">
         <operator id="FrequenciesExchanger.s:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="0.05">
             <parameter idref="freqParameter.s:sequences"/>
             <operator idref="AVMNOperator.sequences"/>
-            <operator id="FrequenciesExchangerX.s:sequences" spec="operator.kernel.BactrianDeltaExchangeOperator" delta="0.01" weight="0.1">
+            <operator id="FrequenciesExchangerX.s:sequences" spec="beast.base.spec.inference.operator.DeltaExchangeOperator" delta="0.01" weight="0.1">
                 <parameter idref="freqParameter.s:sequences"/>
             </operator>
         </operator>
@@ -224,12 +218,12 @@ name="alignment">
         </operator>
         <operator id="SkylineNe.Brazil_Northeast.Scaler.t:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.0">
             <parameter idref="SkylineNe.Brazil_Northeast.t:sequences"/>
-            <operator id="SkylineNe.Brazil_Northeast.ScalerX.t:sequences" spec="operator.kernel.BactrianRandomWalkOperator" parameter="@SkylineNe.Brazil_Northeast.t:sequences" scaleFactor="0.5" weight="1.0"/>
+            <operator id="SkylineNe.Brazil_Northeast.ScalerX.t:sequences" spec="beast.base.spec.inference.operator.RealRandomWalkOperator" parameter="@SkylineNe.Brazil_Northeast.t:sequences" scaleFactor="0.5" weight="1.0"/>
             <operator idref="AVMNOperator.Mascot.sequences"/>
         </operator>
         <operator id="SkylineNe.Caribbean.Scaler.t:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.0">
             <parameter idref="SkylineNe.Caribbean.t:sequences"/>
-            <operator id="SkylineNe.Caribbean.ScalerX.t:sequences" spec="operator.kernel.BactrianRandomWalkOperator" parameter="@SkylineNe.Caribbean.t:sequences" scaleFactor="0.5" weight="1.0"/>
+            <operator id="SkylineNe.Caribbean.ScalerX.t:sequences" spec="beast.base.spec.inference.operator.RealRandomWalkOperator" parameter="@SkylineNe.Caribbean.t:sequences" scaleFactor="0.5" weight="1.0"/>
             <operator idref="AVMNOperator.Mascot.sequences"/>
         </operator>
         <logger id="tracelog" spec="Logger" fileName="$(filebase).log" logEvery="1000" model="@posterior" sanitiseHeaders="true" sort="smart">

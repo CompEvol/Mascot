@@ -130,13 +130,11 @@ name="alignment">
                         <mean spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
                     </distr>
                 </distribution>
-                <distribution id="nonZeroRatePrior.t:ebov_noncoding" spec="beast.base.inference.distribution.Prior">
-                    <x id="sumNonZeroRates.t:ebov_noncoding" spec="beast.base.spec.evolution.Sum">
-                        <arg idref="indicatorsConstantBSSVS.t:ebov_noncoding"/>
-                    </x>
-                    <distr id="Poisson.0" spec="distribution.Poisson" offset="1.0">
-                        <lambda id="Function$Constant.4" spec="Function$Constant" value="1.0"/>
-                    </distr>
+                <distribution id="nonZeroRatePrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.Poisson">
+                    <lambda spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    <param id="sumNonZeroRates.t:ebov_noncoding" spec="beast.base.spec.inference.util.AsIntScalar" domain="NonNegativeInt">
+                        <arg spec="beast.base.spec.evolution.IntSum" arg="@indicatorsConstantBSSVS.t:ebov_noncoding"/>
+                    </param>
                 </distribution>
             </distribution>
             <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
@@ -193,7 +191,6 @@ name="alignment">
             <log idref="clockRate.c:ebov_noncoding"/>
             <log idref="Mascot.t:ebov_noncoding"/>
             <log idref="ConstantBSSVS.t:ebov_noncoding"/>
-            <log idref="sumNonZeroRates.t:ebov_noncoding"/>
         </logger>
         <logger id="screenlog" spec="Logger" logEvery="1000">
             <log idref="posterior"/>

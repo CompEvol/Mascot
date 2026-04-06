@@ -1,19 +1,20 @@
 package mascot.util;
 
 import beast.base.core.Description;
-import beast.base.core.Function;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.inference.CalculationNode;
+import beast.base.spec.domain.Real;
+import beast.base.spec.type.RealVector;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
-@Description("calculates the differences between the entries of a vector")
-public class Difference extends CalculationNode implements Function {
-    final public Input<Function> functionInput = new Input<>("arg", "argument for which the differences for entries is calculated", Validate.REQUIRED);
-
-    enum Mode {integer_mode, double_mode}
-
-    Mode mode;
+@Description("calculates the differences between consecutive entries of a real vector")
+public class Difference extends CalculationNode implements RealVector<Real> {
+    final public Input<RealVector<? extends Real>> functionInput = new Input<>("arg", "argument for which the differences for entries is calculated", Validate.REQUIRED);
 
     boolean needsRecompute = true;
     double[] difference;
@@ -21,45 +22,41 @@ public class Difference extends CalculationNode implements Function {
 
     @Override
     public void initAndValidate() {
-    	difference = new double[functionInput.get().getDimension()];
-    	storedDifference = new double[functionInput.get().getDimension()];
+    	difference = new double[functionInput.get().size()];
+    	storedDifference = new double[functionInput.get().size()];
     }
 
     @Override
-    public int getDimension() {
+    public Real getDomain() {
+        return Real.INSTANCE;
+    }
+
+    @Override
+    public int size() {
         return difference.length;
     }
 
     @Override
-    public double getArrayValue() {
+    public double get(int i) {
         if (needsRecompute) {
             compute();
         }
-        return difference[0];
-    }
-
-    /**
-     * do the actual work, and reset flag *
-     */
-    void compute() {
-        for (int i = 1; i < functionInput.get().getDimension(); i++) {
-        	difference[i-1] = functionInput.get().getArrayValue(i-1)-functionInput.get().getArrayValue(i);
-        }
-        
-        needsRecompute = false;
+        return difference[i];
     }
 
     @Override
-    public double getArrayValue(int dim) {
-        if (needsRecompute) {
-            compute();
-        }
-        return difference[dim];
+    public List<Double> getElements() {
+        if (needsRecompute) compute();
+        return Arrays.stream(difference).boxed().collect(Collectors.toList());
     }
 
-    /**
-     * CalculationNode methods *
-     */
+    void compute() {
+        for (int i = 1; i < functionInput.get().size(); i++) {
+        	difference[i-1] = functionInput.get().get(i-1) - functionInput.get().get(i);
+        }
+        needsRecompute = false;
+    }
+
     @Override
     public void store() {
     	System.arraycopy(difference, 0, storedDifference, 0, difference.length);
@@ -68,7 +65,7 @@ public class Difference extends CalculationNode implements Function {
 
     @Override
     public void restore() {
-    	double [] tmp = storedDifference;
+    	double[] tmp = storedDifference;
     	storedDifference = difference;
     	difference = tmp;
         super.restore();
@@ -79,4 +76,4 @@ public class Difference extends CalculationNode implements Function {
         needsRecompute = true;
         return true;
     }
-} // class Sum
+}

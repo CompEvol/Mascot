@@ -1,42 +1,29 @@
 package mascot.util;
 
 import beast.base.core.Description;
-import beast.base.core.Function;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.inference.CalculationNode;
+import beast.base.spec.domain.Real;
+import beast.base.spec.type.RealScalar;
+import beast.base.spec.type.RealVector;
 
 
-@Description("calculates the differences between the entries of a vector")
-public class First extends CalculationNode implements Function {
-    final public Input<Function> functionInput = new Input<>("arg", "argument for which the differences for entries is calculated", Validate.REQUIRED);
-
-    enum Mode {integer_mode, double_mode}
-
-    Mode mode;
-
-    boolean needsRecompute = true;
-    double mean;
-    double storedMean;
+@Description("returns the first entry of a real vector")
+public class First extends CalculationNode implements RealScalar<Real> {
+    final public Input<RealVector<? extends Real>> functionInput = new Input<>("arg", "argument for which the first entry is returned", Validate.REQUIRED);
 
     @Override
     public void initAndValidate() {
     }
 
     @Override
-    public int getDimension() {
-        return 1;
+    public Real getDomain() {
+        return Real.INSTANCE;
     }
 
     @Override
-    public double getArrayValue() {
-    	return functionInput.get().getArrayValue(0);
-     }
-
-
-    @Override
-    public double getArrayValue(int dim) {
-    	return functionInput.get().getArrayValue(0);
+    public double get() {
+    	return functionInput.get().get(0);
     }
-
-} // class Sum
+}

@@ -1,20 +1,17 @@
 package mascot.util;
 
-
 import beast.base.core.Description;
-import beast.base.core.Function;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.inference.CalculationNode;
+import beast.base.spec.domain.Real;
+import beast.base.spec.type.RealScalar;
+import beast.base.spec.type.RealVector;
 
 
-@Description("calculates the differences between the entries of a vector")
-public class Mean extends CalculationNode implements Function {
-    final public Input<Function> functionInput = new Input<>("arg", "argument for which the differences for entries is calculated", Validate.REQUIRED);
-
-    enum Mode {integer_mode, double_mode}
-
-    Mode mode;
+@Description("calculates the mean of the entries of a real vector")
+public class Mean extends CalculationNode implements RealScalar<Real> {
+    final public Input<RealVector<? extends Real>> functionInput = new Input<>("arg", "argument for which the mean is calculated", Validate.REQUIRED);
 
     boolean needsRecompute = true;
     double mean;
@@ -25,43 +22,27 @@ public class Mean extends CalculationNode implements Function {
     }
 
     @Override
-    public int getDimension() {
-        return 1;
+    public Real getDomain() {
+        return Real.INSTANCE;
     }
 
     @Override
-    public double getArrayValue() {
+    public double get() {
         if (needsRecompute) {
             compute();
         }
         return mean;
     }
 
-    /**
-     * do the actual work, and reset flag *
-     */
     void compute() {
     	mean = 0.0;
-        for (int i = 0; i < functionInput.get().getDimension(); i++) {
-        	mean += functionInput.get().getArrayValue(i);
+        for (int i = 0; i < functionInput.get().size(); i++) {
+        	mean += functionInput.get().get(i);
         }
-        
-        mean/=functionInput.get().getDimension();
-        
+        mean /= functionInput.get().size();
         needsRecompute = false;
     }
 
-    @Override
-    public double getArrayValue(int dim) {
-        if (needsRecompute) {
-            compute();
-        }
-        return mean;
-    }
-
-    /**
-     * CalculationNode methods *
-     */
     @Override
     public void store() {
     	storedMean = mean;
@@ -79,4 +60,4 @@ public class Mean extends CalculationNode implements Function {
         needsRecompute = true;
         return true;
     }
-} // class Sum
+}

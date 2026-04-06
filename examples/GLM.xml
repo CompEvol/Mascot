@@ -134,13 +134,11 @@ name="alignment">
                 <distribution id="NeClockGLMPrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.Exponential" param="@NeClockGLM.t:ebov_noncoding">
                     <mean spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
                 </distribution>
-                <distribution id="NeIndicatorActivePredictorsPrior.t:ebov_noncoding" spec="beast.base.inference.distribution.Prior">
-                    <x id="NeIndicator.sumActivePredictors.t:ebov_noncoding" spec="beast.base.evolution.Sum">
-                        <arg idref="NeIndicatorGLM.t:ebov_noncoding"/>
-                    </x>
-                    <distr id="Poisson.1" spec="distribution.Poisson">
-                        <lambda id="Function$Constant.11" spec="Function$Constant" value="1.0"/>
-                    </distr>
+                <distribution id="NeIndicatorActivePredictorsPrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.Poisson">
+                    <lambda spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    <param id="NeIndicator.sumActivePredictors.t:ebov_noncoding" spec="beast.base.spec.inference.util.AsIntScalar" domain="NonNegativeInt">
+                        <arg spec="beast.base.spec.evolution.IntSum" arg="@NeIndicatorGLM.t:ebov_noncoding"/>
+                    </param>
                 </distribution>
                 <distribution id="NeScalerGLMPrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.IID" param="@NeScalerGLM.t:ebov_noncoding">
                     <distr spec="beast.base.spec.inference.distribution.Normal">
@@ -152,13 +150,11 @@ name="alignment">
                 <distribution id="migrationClockGLMPrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.Exponential" param="@migrationClockGLM.t:ebov_noncoding">
                     <mean spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
                 </distribution>
-                <distribution id="migrationIndicatorActivePredictorsPrior.t:ebov_noncoding" spec="beast.base.inference.distribution.Prior">
-                    <x id="migrationIndicator.sumActivePredictors.t:ebov_noncoding" spec="beast.base.evolution.Sum">
-                        <arg idref="migrationIndicatorGLM.t:ebov_noncoding"/>
-                    </x>
-                    <distr id="Poisson.0" spec="distribution.Poisson">
-                        <lambda id="Function$Constant.10" spec="Function$Constant" value="1.0"/>
-                    </distr>
+                <distribution id="migrationIndicatorActivePredictorsPrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.Poisson">
+                    <lambda spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    <param id="migrationIndicator.sumActivePredictors.t:ebov_noncoding" spec="beast.base.spec.inference.util.AsIntScalar" domain="NonNegativeInt">
+                        <arg spec="beast.base.spec.evolution.IntSum" arg="@migrationIndicatorGLM.t:ebov_noncoding"/>
+                    </param>
                 </distribution>
                 <distribution id="migrationScalerGLMPrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.IID" param="@migrationScalerGLM.t:ebov_noncoding">
                     <distr spec="beast.base.spec.inference.distribution.Normal">
@@ -210,10 +206,10 @@ name="alignment">
         <operator id="MascotWilsonBalding.t:ebov_noncoding" spec="WilsonBalding" tree="@Tree.t:ebov_noncoding" weight="3.0"/>
         <operator id="migrationClockGLMScaler.t:ebov_noncoding" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@migrationClockGLM.t:ebov_noncoding" weight="3.0"/>
         <operator id="NeClockGLMScaler.t:ebov_noncoding" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@NeClockGLM.t:ebov_noncoding" weight="3.0"/>
-        <operator id="migrationScalerGLMScaler.t:ebov_noncoding" spec="operator.RealRandomWalkOperator" parameter="@migrationScalerGLM.t:ebov_noncoding" weight="3.0" windowSize="0.5"/>
-        <operator id="NeScalerGLMScaler.t:ebov_noncoding" spec="operator.RealRandomWalkOperator" parameter="@NeScalerGLM.t:ebov_noncoding" weight="3.0" windowSize="0.5"/>
-        <operator id="migrationIndicatorGLMFlipper.t:ebov_noncoding" spec="operator.BitFlipOperator" parameter="@migrationIndicatorGLM.t:ebov_noncoding" weight="3.0"/>
-        <operator id="NeIndicatorGLMFlipper.t:ebov_noncoding" spec="operator.BitFlipOperator" parameter="@NeIndicatorGLM.t:ebov_noncoding" weight="3.0"/>
+        <operator id="migrationScalerGLMScaler.t:ebov_noncoding" spec="beast.base.spec.inference.operator.RealRandomWalkOperator" parameter="@migrationScalerGLM.t:ebov_noncoding" weight="3.0" windowSize="0.5"/>
+        <operator id="NeScalerGLMScaler.t:ebov_noncoding" spec="beast.base.spec.inference.operator.RealRandomWalkOperator" parameter="@NeScalerGLM.t:ebov_noncoding" weight="3.0" windowSize="0.5"/>
+        <operator id="migrationIndicatorGLMFlipper.t:ebov_noncoding" spec="beast.base.spec.inference.operator.BitFlipOperator" parameter="@migrationIndicatorGLM.t:ebov_noncoding" weight="3.0"/>
+        <operator id="NeIndicatorGLMFlipper.t:ebov_noncoding" spec="beast.base.spec.inference.operator.BitFlipOperator" parameter="@NeIndicatorGLM.t:ebov_noncoding" weight="3.0"/>
         <logger id="tracelog" spec="Logger" fileName="$(filebase).log" logEvery="1000" model="@posterior" sanitiseHeaders="true" sort="smart">
             <log idref="posterior"/>
             <log idref="likelihood"/>
@@ -225,8 +221,6 @@ name="alignment">
             <log idref="migrationGLM.t:ebov_noncoding"/>
             <log idref="NeGLM.t:ebov_noncoding"/>
             <log id="GLMRatesLogger.t:ebov_noncoding" spec="mascot.util.GLMLogger" glm="@GLM.t:ebov_noncoding"/>
-            <log idref="migrationIndicator.sumActivePredictors.t:ebov_noncoding"/>
-            <log idref="NeIndicator.sumActivePredictors.t:ebov_noncoding"/>
         </logger>
         <logger id="screenlog" spec="Logger" logEvery="1000">
             <log idref="posterior"/>
