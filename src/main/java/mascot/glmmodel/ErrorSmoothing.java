@@ -8,8 +8,6 @@ import beast.base.inference.State;
 import beast.base.inference.distribution.ParametricDistribution;
 import beast.base.inference.parameter.IntegerParameter;
 import beast.base.inference.parameter.RealParameter;
-import org.apache.commons.math.MathException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -101,7 +99,7 @@ public class ErrorSmoothing extends Distribution {
                 }
             }
 
-        } catch (MathException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to sample!");
         }

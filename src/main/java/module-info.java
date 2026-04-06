@@ -24,8 +24,6 @@ open module mascot {
         mascot.distribution.MascotWithTipSampling,
         mascot.distribution.MappedMascot,
         mascot.distribution.MappedMascotWithTipSampling,
-        mascot.distribution.MascotNative,
-        mascot.distribution.MascotNative2,
         mascot.distribution.StructuredTreeDistribution,
         mascot.distribution.StructuredTreeIntervals,
         // dynamics
@@ -94,11 +92,6 @@ open module mascot {
         mascot.app.beauti.TreeWithTrait,
         mascot.app.beauti.TreeWithTraitInitializer;
 
-    provides beastfx.app.inputeditor.InputEditor with
-        mascot.app.beauti.CovariateListInputEditor,
-        mascot.app.beauti.GLMInputEditor,
-        mascot.app.beauti.NeDynamicsListInputEditor,
-        mascot.app.beauti.RateShiftInputEditor,
-        mascot.app.beauti.RateShiftForSkylineInputEditor,
-        mascot.app.beauti.TypeTraitSetInputEditor;
+    // InputEditor providers are registered via version.xml only
+    // (InputEditor.Base does not have a no-arg constructor required by JPMS provides)
 }

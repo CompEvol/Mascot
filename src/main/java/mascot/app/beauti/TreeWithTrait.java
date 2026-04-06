@@ -58,7 +58,7 @@ public class TreeWithTrait extends Tree implements StateNodeInitialiser {
     }
 
     @Override
-    protected void processTraits(List<TraitSet> traitList) {
+    public void processTraits(List<TraitSet> traitList) {
         super.processTraits(traitList);
         
         // Record trait set associated with leaf types.
