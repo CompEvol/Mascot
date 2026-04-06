@@ -38,7 +38,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>25</maven.compiler.release>
 
-        <beast.version>2.8.0-beta3</beast.version>
+        <beast.version>2.8.0-SNAPSHOT</beast.version>
         <javafx.version>25.0.2</javafx.version>
         <beast.module>beast.base</beast.module>
         <beast.main>beast.base.minimal.BeastMain</beast.main>
