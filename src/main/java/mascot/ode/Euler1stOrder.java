@@ -1,7 +1,7 @@
 package mascot.ode;
 
 
-import org.apache.commons.math3.util.FastMath;
+
 
 public class Euler1stOrder {
 
@@ -96,21 +96,21 @@ public class Euler1stOrder {
 	private double updateP (double duration, double[] p, double[] pDot, double[] pDotDot){
 		double max_dotdotdot = 0.0;
 		for (int i = 0; i < (p.length-1); i++){
-			if (FastMath.abs(pDotDot[i]) > max_dotdotdot)
-				max_dotdotdot = FastMath.abs(pDotDot[i]);
+			if (Math.abs(pDotDot[i]) > max_dotdotdot)
+				max_dotdotdot = Math.abs(pDotDot[i]);
 		}
 				
-		double timeStep = FastMath.min(FastMath.pow((epsilon*6/max_dotdotdot), 1.0/3), FastMath.min(duration, max_step));
+		double timeStep = Math.min(Math.pow((epsilon*6/max_dotdotdot), 1.0/3), Math.min(duration, max_step));
 
 		iterations=0;
 		for (int i = 0; i < (p.length-1); i++){
 			double new_val = p[i] + pDot[i]*timeStep;
-			double diff = FastMath.abs(new_val - p[i]);
+			double diff = Math.abs(new_val - p[i]);
 			while (new_val > 1 || new_val < 0 || diff>0.2){
 				iterations++;
 				timeStep *= 0.9;
 				new_val = p[i] + pDot[i]*timeStep;
-				diff = FastMath.abs(new_val - p[i]);
+				diff = Math.abs(new_val - p[i]);
 				if (iterations>100){
 					System.err.println("too many iterations, return negative infinity");
 					p[p.length-1] = Double.NEGATIVE_INFINITY;

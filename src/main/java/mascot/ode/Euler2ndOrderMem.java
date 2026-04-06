@@ -1,7 +1,7 @@
 package mascot.ode;
 
 
-import org.apache.commons.math3.util.FastMath;
+
 
 public class Euler2ndOrderMem {
 
@@ -109,11 +109,11 @@ public class Euler2ndOrderMem {
 	private double updateP (double duration, double[] p, double[] pDot, double[] pDotDot, double[] pDotDotDot){
 		double max_dotdotdot = 0.0;
 		for (int i = 0; i < dimension; i++){
-			max_dotdotdot = FastMath.max(max_dotdotdot, FastMath.abs(pDotDotDot[i]));
+			max_dotdotdot = Math.max(max_dotdotdot, Math.abs(pDotDotDot[i]));
 		}
 		
 				
-		double timeStep = FastMath.min(FastMath.pow((epsilon*6/max_dotdotdot), 1.0/3), FastMath.min(duration, max_step));
+		double timeStep = Math.min(Math.pow((epsilon*6/max_dotdotdot), 1.0/3), Math.min(duration, max_step));
 
 		iterations=0;
 		double timeStepSquare = timeStep*timeStep*0.5;

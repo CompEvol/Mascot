@@ -1,7 +1,7 @@
 package mascot.ode;
 
 
-import org.apache.commons.math3.util.FastMath;
+
 
 import java.util.Arrays;
 
@@ -9,20 +9,20 @@ public class Euler2ndOrder7 extends Euler2ndOrder {
 	double updateP (double duration, double[] p, double[] pDot, double[] pDotDot, double[] pDotDotDot, int length){
 		final double max_dotdotdot = maxAbs(pDotDotDot, length);	
 		
-		//double timeStep = FastMath.min(FastMath.pow(epsilon*6/max_dotdotdot, C), FastMath.min(duration, max_step));
+		//double timeStep = Math.min(Math.pow(epsilon*6/max_dotdotdot, C), Math.min(duration, max_step));
 
-		double timeStep = FastMath.min(FastMath.cbrt(epsilon*6/max_dotdotdot), FastMath.min(duration, max_step));
+		double timeStep = Math.min(Math.cbrt(epsilon*6/max_dotdotdot), Math.min(duration, max_step));
 		double timeStepSquare = timeStep * timeStep * 0.5;
 		
 		for (int i = 0; i < length; i++) {
 			double new_val = p[i] + pDot[i] * timeStep + pDotDot[i] * timeStepSquare;
-			double diff = FastMath.abs(new_val - p[i]);
+			double diff = Math.abs(new_val - p[i]);
 			int its = 0;
 			while (new_val > 1 || new_val < 0 || diff > 0.2) {
 				timeStep *= 0.9;
 				timeStepSquare = timeStep * timeStep * 0.5;
 				new_val = p[i] + pDot[i] * timeStep + pDotDot[i] * timeStepSquare;
-				diff = FastMath.abs(new_val - p[i]);
+				diff = Math.abs(new_val - p[i]);
 				its++;
 				if (its > 10000) {
 //					System.err.println("cannot find proper time step, skip these parameter values");
@@ -50,7 +50,7 @@ public class Euler2ndOrder7 extends Euler2ndOrder {
 	double maxAbs(double[] pDotDotDot, int length) {
 		double max_dotdotdot = 0.0;
 		for (int i = 0; i < length; i++) {
-			max_dotdotdot = FastMath.max(max_dotdotdot, FastMath.abs(pDotDotDot[i]));
+			max_dotdotdot = Math.max(max_dotdotdot, Math.abs(pDotDotDot[i]));
 		}
 		return max_dotdotdot;
 	}

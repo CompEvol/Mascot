@@ -7,7 +7,7 @@ import beast.base.core.Input.Validate;
 import beast.base.core.Loggable;
 import mascot.glmmodel.GlmModel;
 import mascot.parameterdynamics.Skygrowth;
-import org.apache.commons.math3.util.FastMath;
+
 
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -134,7 +134,7 @@ public class GLMWithSkylineNe extends Dynamics implements Loggable {
     	double[] Ne = NeGLMInput.get().getRates(intervalNr);
 		double[] coal = new double[Ne.length];
 		for (int j = 0; j < Ne.length; j++){
-			coal[j] = FastMath.min(1/(Ne[j]*NeRatio), maxRateInput.get());
+			coal[j] = Math.min(1/(Ne[j]*NeRatio), maxRateInput.get());
 		}
 		return coal;
     }
@@ -156,7 +156,7 @@ public class GLMWithSkylineNe extends Dynamics implements Loggable {
 		for (int a = 0; a < dimensionInput.get(); a++){
 			for (int b = 0; b < dimensionInput.get(); b++){
 				if (a!=b){
-					m[b * n + a] = FastMath.min( 
+					m[b * n + a] = Math.min( 
 							Ne[a]*mig[c]/Ne[b],
 							maxRateInput.get());
 					c++;

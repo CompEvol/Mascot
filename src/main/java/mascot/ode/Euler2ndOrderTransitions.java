@@ -1,7 +1,7 @@
 package mascot.ode;
 
 
-import org.apache.commons.math3.util.FastMath;
+
 
 /**
  * @author Nicola Felix Mueller
@@ -79,16 +79,16 @@ public class Euler2ndOrderTransitions  {
 	private double updateP (double duration, double[] p, double[] pDot, double[] pDotDot, double[] pDotDotDot) throws Exception{
 		double max_dotdotdot = 0.0;
 		for (int i = 0; i < p.length; i++){
-			if (FastMath.abs(pDotDotDot[i]) > max_dotdotdot)
-				max_dotdotdot = FastMath.abs(pDotDotDot[i]);
+			if (Math.abs(pDotDotDot[i]) > max_dotdotdot)
+				max_dotdotdot = Math.abs(pDotDotDot[i]);
 		}
 		
-		double timeStep = FastMath.min(FastMath.pow((epsilon*6/max_dotdotdot), 1.0/3), FastMath.min(duration, max_step));
+		double timeStep = Math.min(Math.pow((epsilon*6/max_dotdotdot), 1.0/3), Math.min(duration, max_step));
 
 		double timeStepSquare = timeStep*timeStep*0.5;
 		for (int i = 0; i < p.length; i++){
 			double new_val = p[i] + pDot[i]*timeStep + pDotDot[i]*timeStepSquare;
-			double diff = FastMath.abs(new_val - p[i]);
+			double diff = Math.abs(new_val - p[i]);
 			while (new_val > 1 || new_val < 0 || diff>0.2){
 				timeStep *= 0.9;
 				if (timeStep<1e-32){
@@ -99,7 +99,7 @@ public class Euler2ndOrderTransitions  {
 				}
 				timeStepSquare = timeStep*timeStep*0.5;
 				new_val = p[i] + pDot[i]*timeStep + pDotDot[i]*timeStepSquare;
-				diff = FastMath.abs(new_val - p[i]);
+				diff = Math.abs(new_val - p[i]);
 			}			
 		}
 		doUpdating(timeStep, timeStepSquare, p, pDot, pDotDot);
