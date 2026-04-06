@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.base.evolution.alignment:beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.evolution.tree.coalescent:beast.pkgmgmt:beast.base.core:beast.base.inference.util:beast.evolution.nuc:beast.base.evolution.operator:beast.base.inference.operator:beast.base.evolution.sitemodel:beast.base.evolution.substitutionmodel:beast.base.evolution.likelihood" required="BEAST.base v2.7.5:Mascot v3.0.5" version="2.7">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.base.spec.inference.parameter:beast.base.spec.domain:beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.base.evolution.alignment:beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.evolution.tree.coalescent:beast.pkgmgmt:beast.base.core:beast.base.inference.util:beast.evolution.nuc:beast.base.evolution.operator:beast.base.inference.operator:beast.base.evolution.sitemodel:beast.base.evolution.substitutionmodel:beast.base.evolution.likelihood" required="BEAST.base v2.7.5:Mascot v3.0.5" version="2.7">
 
     <data
 id="sequences"
@@ -55,26 +55,6 @@ name="alignment">
         <sequence id="seq_seq_ZIKV|XXX|Pardis_PRI_2016_MA-WGS16-019-SER|Caribbean|2016.494536" spec="Sequence" taxon="seq_ZIKV|XXX|Pardis_PRI_2016_MA-WGS16-019-SER|Caribbean|2016.494536" totalcount="4" value="---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------aataagtgttatatacagatcatggatcttggacacatgtgtga------------------------------------------------------------------------------gtcaacttgggttgtgtacggaacctgccatcacaaaaaaggtgaagcacggagatctagaagagctgtgacgctcccctcccattccaccaggaagctg------------------------------------tacacaaagcacttgattagagtcgaaaattggatattcaggaaccctggcttcgcgtt-gcagcagctgccatcgcttggcttt---------------------------------------------------------------------------------------------------ttgtggaaggtatgtcaggtgggacttgggttgatgtt---------------------------------------------------------------------------------------------------------------------gcatcaatatcagacatggcttctgacagccgctgcccaacacaaggtgaagcctaccttgacaa-----------------------------------------------------------gatgtggactttttggcaaagggagcctggtgacatgcgctaagtttgcatgctccaagaaaatgaccgggaagagcatccagccagagaatctggag---------------------------------------------------------------------------------------aaagttgagataacgcccaattcaccgagagccgaag------------------------------------------------------------tttcagatttgtattacttgactatgaataacaagcactggttggttcacaaggagtggttccacgacattccattaccttggcacgctggggcagacaccggaactccacactggaacaacaaagaagcactggtagagttcaaggacgcacatgccaaaaggcaaactgtcgtggctctagggagtcaagaaggagcagttcacacggcccttgctggagctctggaggctgagatggatggtgcaaagggaaggctgtcctctggccacttgaaatgtcgcctgaaaatggataaacttagattgaagggcgtgtcatactccttgtgtactgcagcgttcacattcaccaagatcccggctgaaacactgcacgggacagtcacagtggaggtacagtacgcagggacagatggaccttgcaaggttccagctcagatggcggtggacatgcaaactctgaccccagttgggaggttgataaccgctaaccccgtaatcactgaaagcactgagaactctaagatgatgctggaacttgatccaccatttggggactcttacattgtcataggagtcggggagaagaagatcacccaccactggcacaggagtggcagcaccattggaaaagcatttgaagccactgtgagaggtgccaagagaatggcagtcttgggagacacagcctgggactttggatcagttggaggcgc-------------------------------------------------------------------------------------------attggaacgttgctgatgtggttgg---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------tgtggagaggtccacagagattgcccgtgcctgtgaacgagctgccccacggctggaaggcttgggggaaatcgtatttcgtcagagcagcaaagacaaataacagctttgtcgtggatggtgacacactgaaggaatgcccactcaaacatagagcatggaacagctttcttgtggaggatcatgggttcggggtatttcacactagtgtctggctcaaggttagagaagattattcattagagtgtgatccagccgttattggaacagctgttaagggaaaggaggctgtacacagtgatctaggctactggattgagagtgagaagaatgacacatggaggctgaagagggcccatctgatcgagatgaaaacatgtgaatggccaaagtcccacacattgtggacagatggaatagaagagagtgatctgatcatacccaagtctttagctgggccactcagccatcacaataccagagagggctacaggacccaaatgaaagggccatggcacagtgaagagcttgaaattcggtttgaggaatgcccaggcactaaggtccacgtggaggaaacatgtggaacaagaggaccatctctgagatcaaccactgcaagcggaagggtgatcgaggaatggtgctgcagggagtgcacaatgcccccactgtcgttccgggctaaagatggc----------------------------------------------------------ca-tggtgactgcaggatcaactgatcacatgga-cacttctcccttggagtgc------------------------------------------------------------------------------------------------------gattttcaatgagtgacctggctaagcttgcaattttgatgggtgccaccttcgcggaaatgaacact--------------------------------------------------------------------------------------------ccgtgaaagcatgctgctggccttggcctcgtgtcttttgcaaactgcgatctccgccttg--------------------------------tgctttggcctggttggcaatacgagcgatggttgttccacgcactgataacatcaccttggcaatcctggctgctctgacaccactggcccggggcacactgcttgtggcgtggagagcaggccttgctacttgcggggggtttatgctcctctctctgaagggaaaaggcagtgtgaagaagaacttaccatttgtcatggccctgggactaaccgctgtgaggctggtcgaccccatcaacgtggtgggactgctgttgctcacaaggagtgggaagcggagctggccccctagcgaagtactcacagctgttggcctgatatgcgcattggctggagggttcgccaaggcagatatagagatggctgggcccatggccgcggtcggtctgctaattgtcagttacgtggtctcaggaaagagtgtggacatgtacattgaaagagcaggtgacatca--------------------------------------------------------------------------------------------------------------------------------------------------atgaacccaatagccataccctttgcagctggagcgtggtacgtatacgtgaagactggaaaaaggagtggtgctctatgggatgtgcctgctcccaaggaagtaaaaaagggggagaccacagatggagtttacagagtaatgactcgtagactgctaggttcaacacaagttggagtgggagttatgcaagagggggtctttcacactatgtggcacgtcacaaaaggatccgcgctgagaagcggtgaagggagacttgatccatactggggagatgtcaagcaggatctggtgtcatactgtggtccatggaagctagatgccgcctgggatgggcacagcgaggtgcagctcttggccgtgccccccggagagagagcgaggaacatccagactctgcccggaatatttaagacaaaggatggggacattggagc----------------------------------------------------------------------------------------------------------------------------------------------------------------ttcgagccttcgatgctgaagaagaagcagctaactgtcttagacttgcatcctggagctgggaaaaccaggagagttcttcctgaaatagtccgtgaagccataaaaacaagactccgtactgtgatcttagctccaaccagggttgtcgctgctgaaatggaggaggcccttagagggcttccagtgcgttatatgacaacagcagtcaatgtcacccactctggaacagaaatcgtcgacttaatgtgccatgccaccttcacttcacgtctactacagccaatcagagtccccaactataatctgtatattatggatgaggcccacttcacagatccctcaagtatagcagcaagaggatacatttcaacaagggttgagatgggcgaggcggctgccatcttcatgaccgccacgccaccaggaacccg---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------aaagacttttgagacagagttccagaaaacaaaacatcaagagtgggactttgtcgtgacaac-gacatttcagagatgggcgccaactttaaagctgaccgtgtcatagattccagg-------------------------------------------------------tgcctgtcacacatgccagcgctgcccagaggagggggcgcataggca-------------------------------------------------------------------------------tgaagcaagaatgctccttgacaatatttacctccaagatggcctcatagcctcgctctatcgacctgaggccgacaaagtagcagccattgagggagagttcaagcttaggacggagcaaaggaagacctttgtggaactcatgaaaagaggagatcttcctgtttggctggcctatcaggttgcatctgccggaataacttacacagatagaagatggtgctttgatggcacgaccaacaacaccataatggaagacagtgtgccggcagaggtgtggaccagacacggagagaaaagagtgctcaaaccgaggtggatggacgccagagtttgttcagatcatgcggccctgaagtcattcaaggagt---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ctccccaggacaaccaaatggcaatcatcatcatggtagcagcaggtcttctgggcttgatcaccgccaatgaactcg------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ccataaaaagtgtgtccaccacgagccagctcctcttggggcgcatggacgggcctaggaggccag------------------------------------------ctgtggtaagctgcgctgaagctcccaacatgaagatcattggtaaccgcattgaaaggatccgcagtgagcacgcggaaacgtggttctttgacgagaaccacccatatagga---------------------------------------------------------------------tcaggctcctgtcaaaaccctgggatgtggtgactgg------------------------------------------------------------------------------------------agaaggcactcgtcaggttatgagcatggtctcttcctggttgtggaaagagctaggcaaacacaaacggccacgagtctgyaccaaagaagagttcatcaacaaggttcgtagcaatgcagcattaggggcaatatttgaagaggaaaaagagtggaagactgcagtggaagctgtgaacgatccaaggttctgggctctagtggacaaggaaagagagcaccacctgagaggagagtgccagagttgtgtgtacaacatgatgggaaaaagagaaaagaaacaaggggaatttggaaaggccaagggcagccgcgccatctggtatatgtggctaggggctagatttctagagttcgaagcccttggattcttgaacgaggatcactggatggggagagagaac--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------actcattcggaatatggaggctgaggaagttctagagatgcaagacttgtggctgctgcgg-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------gaagggacctccgactgatggccaatgccatttgttcatctgtgccagttgactgggttccaactgggagaactacctggtcaatccatggaaagggagaatggatgaccactgaagacatgcttgtggtgtggaacagagtgtggattgaggagaacgaccacatggaagacaagaccccagttacgaaatggacagacattccctatttgggaaaaagggaagacttgtggtgtggatctctcatagggcacagaccgcgcaccacctgggctgagaacattaaaaacacagtcaacatggtgcgcaggatcataggtgatgaagaaaagtacatggactacctatccacccaagttcgctacttgggtgaagaagggtctacacctggagtgctg"/>
     </data>
 
-    <map name="Uniform" >beast.base.inference.distribution.Uniform</map>
-
-    <map name="Exponential" >beast.base.inference.distribution.Exponential</map>
-
-    <map name="LogNormal" >beast.base.inference.distribution.LogNormalDistributionModel</map>
-
-    <map name="Normal" >beast.base.inference.distribution.Normal</map>
-
-    <map name="Beta" >beast.base.inference.distribution.Beta</map>
-
-    <map name="Gamma" >beast.base.inference.distribution.Gamma</map>
-
-    <map name="LaplaceDistribution" >beast.base.inference.distribution.LaplaceDistribution</map>
-
-    <map name="prior" >beast.base.inference.distribution.Prior</map>
-
-    <map name="InverseGamma" >beast.base.inference.distribution.InverseGamma</map>
-
-    <map name="OneOnX" >beast.base.inference.distribution.OneOnX</map>
-
     <run id="mcmc" spec="MCMC" chainLength="2000000">
         <state id="state" spec="State" storeEvery="5000">
             <tree id="Tree.t:sequences" spec="beast.base.evolution.tree.Tree" name="stateNode">
@@ -85,7 +65,7 @@ name="alignment">
                 </trait>
                 <taxonset idref="TaxonSet.sequences"/>
             </tree>
-            <parameter id="clockRate.c:sequences" spec="RealScalarParam" domain="NonNegativeReal" name="stateNode">1.0</parameter>
+            <parameter id="clockRate.c:sequences" spec="RealScalarParam" domain="PositiveReal" name="stateNode">1.0</parameter>
             <parameter id="kappa.s:sequences" spec="RealScalarParam" domain="NonNegativeReal" name="stateNode">2.0</parameter>
             <parameter id="freqParameter.s:sequences" spec="RealVectorParam" domain="UnitInterval" dimension="4" name="stateNode">0.25</parameter>
             <parameter id="gammaShape.s:sequences" spec="RealScalarParam" domain="PositiveReal" name="stateNode">1.0</parameter>
@@ -93,8 +73,8 @@ name="alignment">
             <parameter id="SkylineNe.Brazil_Northeast.t:sequences" spec="RealVectorParam" domain="Real" dimension="2" name="stateNode">0.0</parameter>
             <parameter id="SkylineNe.Caribbean.t:sequences" spec="RealVectorParam" domain="Real" dimension="2" name="stateNode">0.0</parameter>
         </state>
-        <init id="RandomTree.t:sequences" spec="RandomTree" estimate="false" initial="@Tree.t:sequences" taxa="@sequences">
-            <populationModel id="ConstantPopulation0.t:sequences" spec="ConstantPopulation">
+        <init id="RandomTree.t:sequences" spec="beast.base.spec.evolution.tree.coalescent.RandomTree" estimate="false" initial="@Tree.t:sequences" taxa="@sequences">
+            <populationModel id="ConstantPopulation0.t:sequences" spec="beast.base.spec.evolution.tree.coalescent.ConstantPopulation">
                 <parameter id="randomPopSize.t:sequences" spec="RealScalarParam" domain="PositiveReal" name="popSize">1.0</parameter>
             </populationModel>
         </init>
@@ -118,114 +98,106 @@ name="alignment">
                     </dynamics>
                     <structuredTreeIntervals id="StructuredTreeIntervals.t:sequences" spec="mascot.distribution.StructuredTreeIntervals" tree="@Tree.t:sequences"/>
                 </distribution>
-                <prior id="ClockPrior.c:sequences" name="distribution" x="@clockRate.c:sequences">
-                    <Uniform id="Uniform.0" name="distr" upper="Infinity"/>
-                </prior>
-                <prior id="SkylineNe.Brazil_Northeast.Prior.t:sequences" name="distribution">
+                <distribution id="ClockPrior.c:sequences" spec="beast.base.spec.inference.distribution.Uniform" param="@clockRate.c:sequences"/>
+                <distribution id="SkylineNe.Brazil_Northeast.Prior.t:sequences" spec="beast.base.inference.distribution.Prior">
                     <x id="diff.SkylineNe.Brazil_Northeast.t:sequences" spec="mascot.util.Difference" arg="@SkylineNe.Brazil_Northeast.t:sequences"/>
-                    <Normal id="Normal.0" name="distr">
-                        <parameter id="RealParameter.5" spec="RealScalarParam" domain="Real" estimate="false" name="mean">0.0</parameter>
-                        <parameter id="RealParameter.6" spec="RealScalarParam" domain="Real" estimate="false" name="sigma">1.0</parameter>
-                    </Normal>
-                </prior>
-                <prior id="SkylineNe.Caribbean.Prior.t:sequences" name="distribution">
+                    <distr spec="beast.base.spec.inference.distribution.Normal">
+                        <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
+                        <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    </distr>
+                </distribution>
+                <distribution id="SkylineNe.Caribbean.Prior.t:sequences" spec="beast.base.inference.distribution.Prior">
                     <x id="diff.SkylineNe.Caribbean.t:sequences" spec="mascot.util.Difference" arg="@SkylineNe.Caribbean.t:sequences"/>
-                    <Normal id="Normal.1" name="distr">
-                        <parameter id="RealParameter.7" spec="RealScalarParam" domain="Real" estimate="false" name="mean">0.0</parameter>
-                        <parameter id="RealParameter.8" spec="RealScalarParam" domain="Real" estimate="false" name="sigma">1.0</parameter>
-                    </Normal>
-                </prior>
-                <prior id="SkylineNe.Brazil_Northeast.FirstPrior.t:sequences" name="distribution">
+                    <distr spec="beast.base.spec.inference.distribution.Normal">
+                        <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
+                        <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    </distr>
+                </distribution>
+                <distribution id="SkylineNe.Brazil_Northeast.FirstPrior.t:sequences" spec="beast.base.inference.distribution.Prior">
                     <x id="first.SkylineNe.Brazil_Northeast.t:sequences" spec="mascot.util.First" arg="@SkylineNe.Brazil_Northeast.t:sequences"/>
-                    <Normal id="Normal.2" name="distr">
-                        <parameter id="RealParameter.9" spec="RealScalarParam" domain="Real" estimate="false" name="mean">0.0</parameter>
-                        <parameter id="RealParameter.10" spec="RealScalarParam" domain="Real" estimate="false" name="sigma">1.0</parameter>
-                    </Normal>
-                </prior>
-                <prior id="SkylineNe.Caribbean.FirstPrior.t:sequences" name="distribution">
+                    <distr spec="beast.base.spec.inference.distribution.Normal">
+                        <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
+                        <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    </distr>
+                </distribution>
+                <distribution id="SkylineNe.Caribbean.FirstPrior.t:sequences" spec="beast.base.inference.distribution.Prior">
                     <x id="first.SkylineNe.Caribbean.t:sequences" spec="mascot.util.First" arg="@SkylineNe.Caribbean.t:sequences"/>
-                    <Normal id="Normal.3" name="distr">
-                        <parameter id="RealParameter.11" spec="RealScalarParam" domain="Real" estimate="false" name="mean">0.0</parameter>
-                        <parameter id="RealParameter.12" spec="RealScalarParam" domain="Real" estimate="false" name="sigma">1.0</parameter>
-                    </Normal>
-                </prior>
-                <prior id="FrequenciesPrior.s:sequences" name="distribution" x="@freqParameter.s:sequences">
+                    <distr spec="beast.base.spec.inference.distribution.Normal">
+                        <mean spec="RealScalarParam" domain="Real" value="0.0" estimate="false"/>
+                        <sigma spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    </distr>
+                </distribution>
+                <distribution id="FrequenciesPrior.s:sequences" spec="beast.base.inference.distribution.Prior" x="@freqParameter.s:sequences">
                     <distr id="Dirichlet.0" spec="distribution.Dirichlet">
                         <parameter id="RealParameter.3" spec="RealVectorParam" domain="Real" dimension="4" estimate="false" name="alpha">4.0 4.0 4.0 4.0</parameter>
                     </distr>
-                </prior>
-                <prior id="GammaShapePrior.s:sequences" name="distribution" x="@gammaShape.s:sequences">
-                    <Exponential id="Exponential.0" name="distr">
-                        <parameter id="RealParameter.0" spec="RealScalarParam" domain="Real" estimate="false" name="mean">1.0</parameter>
-                    </Exponential>
-                </prior>
-                <prior id="KappaPrior.s:sequences" name="distribution" x="@kappa.s:sequences">
-                    <LogNormal id="LogNormalDistributionModel.0" name="distr">
-                        <parameter id="RealParameter.1" spec="RealScalarParam" domain="Real" estimate="false" name="M">1.0</parameter>
-                        <parameter id="RealParameter.2" spec="RealScalarParam" domain="Real" estimate="false" name="S">1.25</parameter>
-                    </LogNormal>
-                </prior>
-                <prior id="migrationRatesSkylinePrior.t:sequences" name="distribution" x="@migrationRatesSkyline.t:sequences">
-                    <Exponential id="Exponential.3" name="distr">
-                        <parameter id="RealParameter.4" spec="RealScalarParam" domain="Real" estimate="false" name="mean">1.0</parameter>
-                    </Exponential>
-                </prior>
+                </distribution>
+                <distribution id="GammaShapePrior.s:sequences" spec="beast.base.spec.inference.distribution.Exponential" param="@gammaShape.s:sequences">
+                    <mean spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                </distribution>
+                <distribution id="KappaPrior.s:sequences" spec="beast.base.spec.inference.distribution.LogNormalDistributionModel" param="@kappa.s:sequences">
+                    <M spec="RealScalarParam" domain="Real" value="1.0" estimate="false"/>
+                    <S spec="RealScalarParam" domain="PositiveReal" value="1.25" estimate="false"/>
+                </distribution>
+                <distribution id="migrationRatesSkylinePrior.t:sequences" spec="beast.base.spec.inference.distribution.IID" param="@migrationRatesSkyline.t:sequences">
+                    <distr spec="beast.base.spec.inference.distribution.Exponential">
+                        <mean spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    </distr>
+                </distribution>
             </distribution>
             <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
-                <distribution id="treeLikelihood.sequences" spec="ThreadedTreeLikelihood" data="@sequences" tree="@Tree.t:sequences">
-                    <siteModel id="SiteModel.s:sequences" spec="SiteModel" gammaCategoryCount="4" shape="@gammaShape.s:sequences">
+                <distribution id="treeLikelihood.sequences" spec="beast.base.spec.evolution.likelihood.ThreadedTreeLikelihood" data="@sequences" tree="@Tree.t:sequences">
+                    <siteModel id="SiteModel.s:sequences" spec="beast.base.spec.evolution.sitemodel.SiteModel" gammaCategoryCount="4" shape="@gammaShape.s:sequences">
                         <parameter id="mutationRate.s:sequences" spec="RealScalarParam" domain="NonNegativeReal" estimate="false" name="mutationRate">1.0</parameter>
                         <parameter id="proportionInvariant.s:sequences" spec="RealScalarParam" domain="UnitInterval" estimate="false" name="proportionInvariant">0.0</parameter>
-                        <substModel id="hky.s:sequences" spec="HKY" kappa="@kappa.s:sequences">
+                        <substModel id="hky.s:sequences" spec="beast.base.spec.evolution.substitutionmodel.HKY" kappa="@kappa.s:sequences">
                             <frequencies id="estimatedFreqs.s:sequences" spec="Frequencies" frequencies="@freqParameter.s:sequences"/>
                         </substModel>
                     </siteModel>
-                    <branchRateModel id="StrictClock.c:sequences" spec="beast.base.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:sequences"/>
+                    <branchRateModel id="StrictClock.c:sequences" spec="beast.base.spec.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:sequences"/>
                 </distribution>
             </distribution>
         </distribution>
-        <operator id="StrictClockRateScaler.c:sequences" spec="AdaptableOperatorSampler" weight="1.5">
+        <operator id="StrictClockRateScaler.c:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.5">
             <parameter idref="clockRate.c:sequences"/>
-            <operator id="AVMNOperator.sequences" spec="kernel.AdaptableVarianceMultivariateNormalOperator" allowNonsense="true" beta="0.05" burnin="400" initial="800" weight="0.1">
-                <transformations id="AVMNSumTransform.sequences" spec="operator.kernel.Transform$LogConstrainedSumTransform">
+            <operator id="AVMNOperator.sequences" spec="beast.base.spec.evolution.operator.AdaptableVarianceMultivariateNormalOperator" allowNonsense="true" beta="0.05" burnin="400" initial="800" weight="0.1">
+                <transformations id="AVMNSumTransform.sequences" spec="beast.base.spec.inference.operator.Transform$LogConstrainedSumTransform">
                     <f idref="freqParameter.s:sequences"/>
                 </transformations>
-                <transformations id="AVMNLogTransform.sequences" spec="operator.kernel.Transform$LogTransform">
+                <transformations id="AVMNLogTransform.sequences" spec="beast.base.spec.inference.operator.Transform$LogTransform">
                     <f idref="clockRate.c:sequences"/>
                     <f idref="kappa.s:sequences"/>
                     <f idref="gammaShape.s:sequences"/>
                 </transformations>
-                <transformations id="AVMNNoTransform.sequences" spec="operator.kernel.Transform$NoTransform">
-                    <f idref="Tree.t:sequences"/>
-                </transformations>
+                <transformations id="AVMNNoTransform.sequences" spec="beast.base.spec.inference.operator.Transform$NoTransform"/>
             </operator>
-            <operator id="StrictClockRateScalerX.c:sequences" spec="kernel.BactrianScaleOperator" parameter="@clockRate.c:sequences" upper="10.0" weight="3.0"/>
+            <operator id="StrictClockRateScalerX.c:sequences" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@clockRate.c:sequences" upper="10.0" weight="3.0"/>
         </operator>
-        <operator id="strictClockUpDownOperator.c:sequences" spec="AdaptableOperatorSampler" weight="1.5">
+        <operator id="strictClockUpDownOperator.c:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.5">
             <parameter idref="clockRate.c:sequences"/>
             <tree idref="Tree.t:sequences"/>
             <operator idref="AVMNOperator.sequences"/>
-            <operator id="strictClockUpDownOperatorX.c:sequences" spec="operator.kernel.BactrianUpDownOperator" scaleFactor="0.75" weight="3.0">
+            <operator id="strictClockUpDownOperatorX.c:sequences" spec="beast.base.spec.evolution.operator.UpDownOperator" scaleFactor="0.75" weight="3.0">
                 <up idref="clockRate.c:sequences"/>
                 <down idref="Tree.t:sequences"/>
             </operator>
         </operator>
-        <operator id="KappaScaler.s:sequences" spec="AdaptableOperatorSampler" weight="0.05">
+        <operator id="KappaScaler.s:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="0.05">
             <parameter idref="kappa.s:sequences"/>
             <operator idref="AVMNOperator.sequences"/>
-            <operator id="KappaScalerX.s:sequences" spec="kernel.BactrianScaleOperator" parameter="@kappa.s:sequences" scaleFactor="0.1" upper="10.0" weight="0.1"/>
+            <operator id="KappaScalerX.s:sequences" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@kappa.s:sequences" scaleFactor="0.1" upper="10.0" weight="0.1"/>
         </operator>
-        <operator id="FrequenciesExchanger.s:sequences" spec="AdaptableOperatorSampler" weight="0.05">
+        <operator id="FrequenciesExchanger.s:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="0.05">
             <parameter idref="freqParameter.s:sequences"/>
             <operator idref="AVMNOperator.sequences"/>
             <operator id="FrequenciesExchangerX.s:sequences" spec="operator.kernel.BactrianDeltaExchangeOperator" delta="0.01" weight="0.1">
                 <parameter idref="freqParameter.s:sequences"/>
             </operator>
         </operator>
-        <operator id="gammaShapeScaler.s:sequences" spec="AdaptableOperatorSampler" weight="0.05">
+        <operator id="gammaShapeScaler.s:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="0.05">
             <parameter idref="gammaShape.s:sequences"/>
             <operator idref="AVMNOperator.sequences"/>
-            <operator id="gammaShapeScalerX.s:sequences" spec="kernel.BactrianScaleOperator" parameter="@gammaShape.s:sequences" scaleFactor="0.5" upper="10.0" weight="0.1"/>
+            <operator id="gammaShapeScalerX.s:sequences" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@gammaShape.s:sequences" scaleFactor="0.5" upper="10.0" weight="0.1"/>
         </operator>
         <operator id="MascotBICEPSEpochTop.t:sequences" spec="EpochFlexOperator" scaleFactor="0.1" tree="@Tree.t:sequences" weight="2.0"/>
         <operator id="MascotBICEPSEpochAll.t:sequences" spec="EpochFlexOperator" fromOldestTipOnly="false" scaleFactor="0.1" tree="@Tree.t:sequences" weight="2.0"/>
@@ -236,26 +208,26 @@ name="alignment">
         <operator id="MascotNarrow.t:sequences" spec="Exchange" tree="@Tree.t:sequences" weight="15.0"/>
         <operator id="MascotWide.t:sequences" spec="Exchange" isNarrow="false" tree="@Tree.t:sequences" weight="3.0"/>
         <operator id="MascotWilsonBalding.t:sequences" spec="WilsonBalding" tree="@Tree.t:sequences" weight="3.0"/>
-        <operator id="migrationRatesScaler.s:sequences" spec="AdaptableOperatorSampler" weight="1.0">
+        <operator id="migrationRatesScaler.s:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.0">
             <parameter idref="migrationRatesSkyline.t:sequences"/>
-            <operator id="AVMNOperator.Mascot.sequences" spec="kernel.AdaptableVarianceMultivariateNormalOperator" allowNonsense="true" beta="0.05" burnin="400" initial="800" weight="1.0">
-                <transformations id="AVMNSumTransform.Mascot.sequences" spec="operator.kernel.Transform$LogConstrainedSumTransform"/>
-                <transformations id="AVMNLogTransform.Mascot.sequences" spec="operator.kernel.Transform$LogTransform">
+            <operator id="AVMNOperator.Mascot.sequences" spec="beast.base.spec.evolution.operator.AdaptableVarianceMultivariateNormalOperator" allowNonsense="true" beta="0.05" burnin="400" initial="800" weight="1.0">
+                <transformations id="AVMNSumTransform.Mascot.sequences" spec="beast.base.spec.inference.operator.Transform$LogConstrainedSumTransform"/>
+                <transformations id="AVMNLogTransform.Mascot.sequences" spec="beast.base.spec.inference.operator.Transform$LogTransform">
                     <f idref="migrationRatesSkyline.t:sequences"/>
                 </transformations>
-                <transformations id="AVMNNoTransform.Mascot.sequences" spec="operator.kernel.Transform$NoTransform">
+                <transformations id="AVMNNoTransform.Mascot.sequences" spec="beast.base.spec.inference.operator.Transform$NoTransform">
                     <f idref="SkylineNe.Brazil_Northeast.t:sequences"/>
                     <f idref="SkylineNe.Caribbean.t:sequences"/>
                 </transformations>
             </operator>
-            <operator id="migrationRatesScalerX.s:sequences" spec="kernel.BactrianScaleOperator" parameter="@migrationRatesSkyline.t:sequences" scaleFactor="0.5" upper="10.0" weight="1.0"/>
+            <operator id="migrationRatesScalerX.s:sequences" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@migrationRatesSkyline.t:sequences" scaleFactor="0.5" upper="10.0" weight="1.0"/>
         </operator>
-        <operator id="SkylineNe.Brazil_Northeast.Scaler.t:sequences" spec="AdaptableOperatorSampler" weight="1.0">
+        <operator id="SkylineNe.Brazil_Northeast.Scaler.t:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.0">
             <parameter idref="SkylineNe.Brazil_Northeast.t:sequences"/>
             <operator id="SkylineNe.Brazil_Northeast.ScalerX.t:sequences" spec="operator.kernel.BactrianRandomWalkOperator" parameter="@SkylineNe.Brazil_Northeast.t:sequences" scaleFactor="0.5" weight="1.0"/>
             <operator idref="AVMNOperator.Mascot.sequences"/>
         </operator>
-        <operator id="SkylineNe.Caribbean.Scaler.t:sequences" spec="AdaptableOperatorSampler" weight="1.0">
+        <operator id="SkylineNe.Caribbean.Scaler.t:sequences" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.0">
             <parameter idref="SkylineNe.Caribbean.t:sequences"/>
             <operator id="SkylineNe.Caribbean.ScalerX.t:sequences" spec="operator.kernel.BactrianRandomWalkOperator" parameter="@SkylineNe.Caribbean.t:sequences" scaleFactor="0.5" weight="1.0"/>
             <operator idref="AVMNOperator.Mascot.sequences"/>
