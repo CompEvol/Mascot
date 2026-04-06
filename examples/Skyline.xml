@@ -85,17 +85,17 @@ name="alignment">
                 </trait>
                 <taxonset idref="TaxonSet.sequences"/>
             </tree>
-            <parameter id="clockRate.c:sequences" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0</parameter>
-            <parameter id="kappa.s:sequences" spec="parameter.RealParameter" lower="0.0" name="stateNode">2.0</parameter>
-            <parameter id="freqParameter.s:sequences" spec="parameter.RealParameter" dimension="4" lower="0.0" name="stateNode" upper="1.0">0.25</parameter>
-            <parameter id="gammaShape.s:sequences" spec="parameter.RealParameter" lower="0.1" name="stateNode">1.0</parameter>
-            <parameter id="migrationRatesSkyline.t:sequences" spec="parameter.RealParameter" dimension="2" lower="0.0" name="stateNode">1.0</parameter>
-            <parameter id="SkylineNe.Brazil_Northeast.t:sequences" spec="parameter.RealParameter" dimension="2" lower="-Infinity" name="stateNode" upper="Infinity">0.0</parameter>
-            <parameter id="SkylineNe.Caribbean.t:sequences" spec="parameter.RealParameter" dimension="2" lower="-Infinity" name="stateNode" upper="Infinity">0.0</parameter>
+            <parameter id="clockRate.c:sequences" spec="RealScalarParam" domain="NonNegativeReal" name="stateNode">1.0</parameter>
+            <parameter id="kappa.s:sequences" spec="RealScalarParam" domain="NonNegativeReal" name="stateNode">2.0</parameter>
+            <parameter id="freqParameter.s:sequences" spec="RealVectorParam" domain="UnitInterval" dimension="4" name="stateNode">0.25</parameter>
+            <parameter id="gammaShape.s:sequences" spec="RealScalarParam" domain="PositiveReal" name="stateNode">1.0</parameter>
+            <parameter id="migrationRatesSkyline.t:sequences" spec="RealVectorParam" domain="NonNegativeReal" dimension="2" name="stateNode">1.0</parameter>
+            <parameter id="SkylineNe.Brazil_Northeast.t:sequences" spec="RealVectorParam" domain="Real" dimension="2" name="stateNode">0.0</parameter>
+            <parameter id="SkylineNe.Caribbean.t:sequences" spec="RealVectorParam" domain="Real" dimension="2" name="stateNode">0.0</parameter>
         </state>
         <init id="RandomTree.t:sequences" spec="RandomTree" estimate="false" initial="@Tree.t:sequences" taxa="@sequences">
             <populationModel id="ConstantPopulation0.t:sequences" spec="ConstantPopulation">
-                <parameter id="randomPopSize.t:sequences" spec="parameter.RealParameter" name="popSize">1.0</parameter>
+                <parameter id="randomPopSize.t:sequences" spec="RealScalarParam" domain="PositiveReal" name="popSize">1.0</parameter>
             </populationModel>
         </init>
         <distribution id="posterior" spec="CompoundDistribution">
@@ -111,7 +111,7 @@ name="alignment">
                             </neDynamics>
                         </NeDynamics>
                         <rateShifts id="rateShifts.t:sequences" spec="mascot.util.InitializedRateShifts" tree="@Tree.t:sequences">0.0 0.01 0.02 0.03 0.04 0.05 0.060000000000000005 0.07 0.08 0.09 0.09999999999999999 0.10999999999999999 0.11999999999999998 0.12999999999999998 0.13999999999999999 0.15 0.16 0.17 0.18000000000000002 0.19000000000000003 0.20000000000000004 0.21000000000000005 0.22000000000000006 0.23000000000000007 0.24000000000000007 0.25000000000000006 0.26000000000000006 0.2700000000000001 0.2800000000000001 0.2900000000000001 0.3000000000000001 0.3100000000000001 0.3200000000000001 0.3300000000000001 0.34000000000000014 0.35000000000000014 0.36000000000000015 0.37000000000000016 0.38000000000000017 0.3900000000000002 0.4000000000000002 0.4100000000000002 0.4200000000000002 0.4300000000000002 0.4400000000000002 0.45000000000000023 0.46000000000000024 0.47000000000000025 0.48000000000000026 0.49000000000000027 0.5000000000000002 0.5100000000000002 0.5200000000000002 0.5300000000000002 0.5400000000000003 0.5500000000000003 0.5600000000000003 0.5700000000000003 0.5800000000000003 0.5900000000000003 0.6000000000000003 0.6100000000000003 0.6200000000000003 0.6300000000000003 0.6400000000000003 0.6500000000000004 0.6600000000000004 0.6700000000000004 0.6800000000000004 0.6900000000000004 0.7000000000000004 0.7100000000000004 0.7200000000000004 0.7300000000000004 0.7400000000000004 0.7500000000000004 0.7600000000000005 0.7700000000000005 0.7800000000000005 0.7900000000000005 0.8000000000000005 0.8100000000000005 0.8200000000000005 0.8300000000000005 0.8400000000000005 0.8500000000000005 0.8600000000000005 0.8700000000000006 0.8800000000000006 0.8900000000000006 0.9000000000000006 0.9100000000000006 0.9200000000000006 0.9300000000000006 0.9400000000000006 0.9500000000000006 0.9600000000000006 0.9700000000000006 0.9800000000000006 0.9900000000000007 1.1</rateShifts>
-                        <indicators id="indicatorsSkyline.t:sequences" spec="parameter.BooleanParameter" dimension="2" estimate="false">true</indicators>
+                        <indicators id="indicatorsSkyline.t:sequences" spec="BoolVectorParam" dimension="2" estimate="false">true</indicators>
                         <typeTrait id="typeTraitSet.t:sequences" spec="mascot.util.InitializedTraitSet" traitname="type" value="seq_ZBRA105|20160912_library15|joao_camara|Brazil_Northeast|2015.145205=Brazil_Northeast,seq_ZBRC16|20160914_library17|garanhuns|Brazil_Northeast|2016.04918=Brazil_Northeast,seq_ZBRC18|20160910_library14|caetes|Brazil_Northeast|2016.013661=Brazil_Northeast,seq_ZBRC302|20160910_library14|paulista|Brazil_Northeast|2015.361644=Brazil_Northeast,seq_ZBRC313|20160913_library16|paulista|Brazil_Northeast|2015.452055=Brazil_Northeast,seq_ZBRC321|20160913_library16|paulista|Brazil_Northeast|2015.60274=Brazil_Northeast,seq_ZBRD107|20160912_library15|maceio|Brazil_Northeast|2015.687671=Brazil_Northeast,seq_ZBRD116|20160912_library15|arapiraca|Brazil_Northeast|2015.654795=Brazil_Northeast,seq_ZBRE69|20160910_library13|feira_de_santana|Brazil_Northeast|2016.289617=Brazil_Northeast,seq_ZIKV|KU365780|BeH815744|Brazil_Northeast|2015.375342=Brazil_Northeast,seq_ZIKV|KU509998|Haiti_1225_2014|Caribbean|2014.945205=Caribbean,seq_ZIKV|KU647676|MRS_OPY_Martinique_PaRi_2015|Caribbean|2015.953425=Caribbean,seq_ZIKV|KU707826|SSABR1|Brazil_Northeast|2015.49589=Brazil_Northeast,seq_ZIKV|KU729217|BeH823339|Brazil_Northeast|2015.879452=Brazil_Northeast,seq_ZIKV|KU853012|Dominican_Republic_2016_PD1|Caribbean|2016.084699=Caribbean,seq_ZIKV|KU940224|Bahia09|Brazil_Northeast|2015.284932=Brazil_Northeast,seq_ZIKV|KU940228|Bahia07|Brazil_Northeast|2015.657534=Brazil_Northeast,seq_ZIKV|KU991811|Brazil_2016_INMI1|Brazil_Northeast|2016.177596=Brazil_Northeast,seq_ZIKV|KX051563|Haiti_1_2016|Caribbean|2016.095628=Caribbean,seq_ZIKV|KX101063|Bahia05|Brazil_Northeast|2015.939726=Brazil_Northeast,seq_ZIKV|KX101064|Bahia11|Brazil_Northeast|2015.317808=Brazil_Northeast,seq_ZIKV|KX101065|Bahia15|Brazil_Northeast|2016.040984=Brazil_Northeast,seq_ZIKV|KX280026|Paraiba_01|Brazil_Northeast|2015.375342=Brazil_Northeast,seq_ZIKV|KX520666|HS-2015-BA-01|Brazil_Northeast|2015.622489=Brazil_Northeast,seq_ZIKV|KX673530|PHE_semen_Guadeloupe|Caribbean|2016.303279=Caribbean,seq_ZIKV|KX811222|Brazil_2015_MG|Brazil_Northeast|2016.45082=Brazil_Northeast,seq_ZIKV|KY003153|ZIKV_34997_Pavia_2016|Brazil_Northeast|2016.290301=Brazil_Northeast,seq_ZIKV|KY003155|ZIKV_34825_Pavia_2016|Caribbean|2016.290301=Caribbean,seq_ZIKV|KY003156|ZIKV_39210_Pavia_2016|Caribbean|2016.456967=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0071-SER|Caribbean|2016.259563=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0076-SER|Caribbean|2016.259563=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0076-URI|Caribbean|2016.259563=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0085-SER|Caribbean|2016.265027=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0085-URI|Caribbean|2016.265027=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0115-SER|Caribbean|2016.275956=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0180-SER|Caribbean|2016.295082=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0208-SER|Caribbean|2016.300546=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0433-SER|Caribbean|2016.448087=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_BB-0436-PLA|Caribbean|2016.45082=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_MA-WGS16-007-SER|Caribbean|2016.355191=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_MA-WGS16-014-SER|Caribbean|2016.461749=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_MA-WGS16-036-SER|Caribbean|2016.724044=Caribbean,seq_ZIKV|XXX|Pardis_DOM_2016_MA-WGS16-040-SER|Caribbean|2016.762295=Caribbean,seq_ZIKV|XXX|Pardis_HTI_2016_MA-WGS16-022-SER|Caribbean|2016.508197=Caribbean,seq_ZIKV|XXX|Pardis_JAM_2016_MA-WGS16-025-SER|Caribbean|2016.521858=Caribbean,seq_ZIKV|XXX|Pardis_JAM_2016_MA-WGS16-038-SER|Caribbean|2016.734973=Caribbean,seq_ZIKV|XXX|Pardis_JAM_2016_MA-WGS16-041-SER|Caribbean|2016.778689=Caribbean,seq_ZIKV|XXX|Pardis_PRI_2016_MA-WGS16-004-SER|Caribbean|2016.281421=Caribbean,seq_ZIKV|XXX|Pardis_PRI_2016_MA-WGS16-019-SER|Caribbean|2016.494536=Caribbean">
                             <taxa id="TaxonSet.1" spec="TaxonSet" alignment="@sequences"/>
                         </typeTrait>
@@ -124,58 +124,58 @@ name="alignment">
                 <prior id="SkylineNe.Brazil_Northeast.Prior.t:sequences" name="distribution">
                     <x id="diff.SkylineNe.Brazil_Northeast.t:sequences" spec="mascot.util.Difference" arg="@SkylineNe.Brazil_Northeast.t:sequences"/>
                     <Normal id="Normal.0" name="distr">
-                        <parameter id="RealParameter.5" spec="parameter.RealParameter" estimate="false" name="mean">0.0</parameter>
-                        <parameter id="RealParameter.6" spec="parameter.RealParameter" estimate="false" name="sigma">1.0</parameter>
+                        <parameter id="RealParameter.5" spec="RealScalarParam" domain="Real" estimate="false" name="mean">0.0</parameter>
+                        <parameter id="RealParameter.6" spec="RealScalarParam" domain="Real" estimate="false" name="sigma">1.0</parameter>
                     </Normal>
                 </prior>
                 <prior id="SkylineNe.Caribbean.Prior.t:sequences" name="distribution">
                     <x id="diff.SkylineNe.Caribbean.t:sequences" spec="mascot.util.Difference" arg="@SkylineNe.Caribbean.t:sequences"/>
                     <Normal id="Normal.1" name="distr">
-                        <parameter id="RealParameter.7" spec="parameter.RealParameter" estimate="false" name="mean">0.0</parameter>
-                        <parameter id="RealParameter.8" spec="parameter.RealParameter" estimate="false" name="sigma">1.0</parameter>
+                        <parameter id="RealParameter.7" spec="RealScalarParam" domain="Real" estimate="false" name="mean">0.0</parameter>
+                        <parameter id="RealParameter.8" spec="RealScalarParam" domain="Real" estimate="false" name="sigma">1.0</parameter>
                     </Normal>
                 </prior>
                 <prior id="SkylineNe.Brazil_Northeast.FirstPrior.t:sequences" name="distribution">
                     <x id="first.SkylineNe.Brazil_Northeast.t:sequences" spec="mascot.util.First" arg="@SkylineNe.Brazil_Northeast.t:sequences"/>
                     <Normal id="Normal.2" name="distr">
-                        <parameter id="RealParameter.9" spec="parameter.RealParameter" estimate="false" name="mean">0.0</parameter>
-                        <parameter id="RealParameter.10" spec="parameter.RealParameter" estimate="false" name="sigma">1.0</parameter>
+                        <parameter id="RealParameter.9" spec="RealScalarParam" domain="Real" estimate="false" name="mean">0.0</parameter>
+                        <parameter id="RealParameter.10" spec="RealScalarParam" domain="Real" estimate="false" name="sigma">1.0</parameter>
                     </Normal>
                 </prior>
                 <prior id="SkylineNe.Caribbean.FirstPrior.t:sequences" name="distribution">
                     <x id="first.SkylineNe.Caribbean.t:sequences" spec="mascot.util.First" arg="@SkylineNe.Caribbean.t:sequences"/>
                     <Normal id="Normal.3" name="distr">
-                        <parameter id="RealParameter.11" spec="parameter.RealParameter" estimate="false" name="mean">0.0</parameter>
-                        <parameter id="RealParameter.12" spec="parameter.RealParameter" estimate="false" name="sigma">1.0</parameter>
+                        <parameter id="RealParameter.11" spec="RealScalarParam" domain="Real" estimate="false" name="mean">0.0</parameter>
+                        <parameter id="RealParameter.12" spec="RealScalarParam" domain="Real" estimate="false" name="sigma">1.0</parameter>
                     </Normal>
                 </prior>
                 <prior id="FrequenciesPrior.s:sequences" name="distribution" x="@freqParameter.s:sequences">
                     <distr id="Dirichlet.0" spec="distribution.Dirichlet">
-                        <parameter id="RealParameter.3" spec="parameter.RealParameter" dimension="4" estimate="false" name="alpha">4.0 4.0 4.0 4.0</parameter>
+                        <parameter id="RealParameter.3" spec="RealVectorParam" domain="Real" dimension="4" estimate="false" name="alpha">4.0 4.0 4.0 4.0</parameter>
                     </distr>
                 </prior>
                 <prior id="GammaShapePrior.s:sequences" name="distribution" x="@gammaShape.s:sequences">
                     <Exponential id="Exponential.0" name="distr">
-                        <parameter id="RealParameter.0" spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                        <parameter id="RealParameter.0" spec="RealScalarParam" domain="Real" estimate="false" name="mean">1.0</parameter>
                     </Exponential>
                 </prior>
                 <prior id="KappaPrior.s:sequences" name="distribution" x="@kappa.s:sequences">
                     <LogNormal id="LogNormalDistributionModel.0" name="distr">
-                        <parameter id="RealParameter.1" spec="parameter.RealParameter" estimate="false" name="M">1.0</parameter>
-                        <parameter id="RealParameter.2" spec="parameter.RealParameter" estimate="false" name="S">1.25</parameter>
+                        <parameter id="RealParameter.1" spec="RealScalarParam" domain="Real" estimate="false" name="M">1.0</parameter>
+                        <parameter id="RealParameter.2" spec="RealScalarParam" domain="Real" estimate="false" name="S">1.25</parameter>
                     </LogNormal>
                 </prior>
                 <prior id="migrationRatesSkylinePrior.t:sequences" name="distribution" x="@migrationRatesSkyline.t:sequences">
                     <Exponential id="Exponential.3" name="distr">
-                        <parameter id="RealParameter.4" spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                        <parameter id="RealParameter.4" spec="RealScalarParam" domain="Real" estimate="false" name="mean">1.0</parameter>
                     </Exponential>
                 </prior>
             </distribution>
             <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
                 <distribution id="treeLikelihood.sequences" spec="ThreadedTreeLikelihood" data="@sequences" tree="@Tree.t:sequences">
                     <siteModel id="SiteModel.s:sequences" spec="SiteModel" gammaCategoryCount="4" shape="@gammaShape.s:sequences">
-                        <parameter id="mutationRate.s:sequences" spec="parameter.RealParameter" estimate="false" lower="0.0" name="mutationRate">1.0</parameter>
-                        <parameter id="proportionInvariant.s:sequences" spec="parameter.RealParameter" estimate="false" lower="0.0" name="proportionInvariant" upper="1.0">0.0</parameter>
+                        <parameter id="mutationRate.s:sequences" spec="RealScalarParam" domain="NonNegativeReal" estimate="false" name="mutationRate">1.0</parameter>
+                        <parameter id="proportionInvariant.s:sequences" spec="RealScalarParam" domain="UnitInterval" estimate="false" name="proportionInvariant">0.0</parameter>
                         <substModel id="hky.s:sequences" spec="HKY" kappa="@kappa.s:sequences">
                             <frequencies id="estimatedFreqs.s:sequences" spec="Frequencies" frequencies="@freqParameter.s:sequences"/>
                         </substModel>

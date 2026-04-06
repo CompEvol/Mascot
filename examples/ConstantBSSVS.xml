@@ -113,15 +113,15 @@ name="alignment">
                 </trait>
                 <taxonset idref="TaxonSet.ebov_noncoding"/>
             </tree>
-            <parameter id="clockRate.c:ebov_noncoding" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0</parameter>
-            <parameter id="relativeMigrationRatesConstantBSSVS.t:ebov_noncoding" spec="parameter.RealParameter" dimension="20" lower="0.0" name="stateNode">1.0</parameter>
-            <parameter id="migrationClockConstantBSSVS.t:ebov_noncoding" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0</parameter>
-            <parameter id="NeConstantBSSVS.t:ebov_noncoding" spec="parameter.RealParameter" dimension="5" lower="0.0" name="stateNode">1.0</parameter>
-            <stateNode id="indicatorsConstantBSSVS.t:ebov_noncoding" spec="parameter.BooleanParameter" dimension="20">true</stateNode>
+            <parameter id="clockRate.c:ebov_noncoding" spec="RealScalarParam" domain="NonNegativeReal" name="stateNode">1.0</parameter>
+            <parameter id="relativeMigrationRatesConstantBSSVS.t:ebov_noncoding" spec="RealVectorParam" domain="NonNegativeReal" dimension="20" name="stateNode">1.0</parameter>
+            <parameter id="migrationClockConstantBSSVS.t:ebov_noncoding" spec="RealScalarParam" domain="NonNegativeReal" name="stateNode">1.0</parameter>
+            <parameter id="NeConstantBSSVS.t:ebov_noncoding" spec="RealVectorParam" domain="NonNegativeReal" dimension="5" name="stateNode">1.0</parameter>
+            <stateNode id="indicatorsConstantBSSVS.t:ebov_noncoding" spec="BoolVectorParam" dimension="20">true</stateNode>
         </state>
         <init id="RandomTree.t:ebov_noncoding" spec="RandomTree" estimate="false" initial="@Tree.t:ebov_noncoding" taxa="@ebov_noncoding">
             <populationModel id="ConstantPopulation0.t:ebov_noncoding" spec="ConstantPopulation">
-                <parameter id="randomPopSize.t:ebov_noncoding" spec="parameter.RealParameter" name="popSize">1.0</parameter>
+                <parameter id="randomPopSize.t:ebov_noncoding" spec="RealScalarParam" domain="PositiveReal" name="popSize">1.0</parameter>
             </populationModel>
         </init>
         <distribution id="posterior" spec="CompoundDistribution">
@@ -164,9 +164,9 @@ name="alignment">
             <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
                 <distribution id="treeLikelihood.ebov_noncoding" spec="ThreadedTreeLikelihood" data="@ebov_noncoding" tree="@Tree.t:ebov_noncoding">
                     <siteModel id="SiteModel.s:ebov_noncoding" spec="SiteModel">
-                        <parameter id="mutationRate.s:ebov_noncoding" spec="parameter.RealParameter" estimate="false" lower="0.0" name="mutationRate">1.0</parameter>
-                        <parameter id="gammaShape.s:ebov_noncoding" spec="parameter.RealParameter" estimate="false" lower="0.1" name="shape">1.0</parameter>
-                        <parameter id="proportionInvariant.s:ebov_noncoding" spec="parameter.RealParameter" estimate="false" lower="0.0" name="proportionInvariant" upper="1.0">0.0</parameter>
+                        <parameter id="mutationRate.s:ebov_noncoding" spec="RealScalarParam" domain="NonNegativeReal" estimate="false" name="mutationRate">1.0</parameter>
+                        <parameter id="gammaShape.s:ebov_noncoding" spec="RealScalarParam" domain="PositiveReal" estimate="false" name="shape">1.0</parameter>
+                        <parameter id="proportionInvariant.s:ebov_noncoding" spec="RealScalarParam" domain="UnitInterval" estimate="false" name="proportionInvariant">0.0</parameter>
                         <substModel id="JC69.s:ebov_noncoding" spec="JukesCantor"/>
                     </siteModel>
                     <branchRateModel id="StrictClock.c:ebov_noncoding" spec="beast.base.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:ebov_noncoding"/>
