@@ -1,4 +1,4 @@
-<package name='Mascot' version='4.0.0'>
+<package name='Mascot' version='3.1.0'>
   <depends on='BEAST.base' atleast='2.8.0'/>
 
     <service type="beastfx.app.inputeditor.InputEditor">

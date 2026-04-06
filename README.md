@@ -10,7 +10,7 @@ A tutorial on how to use MASCOT can be found [here](https://taming-the-beast.org
 <dependency>
     <groupId>io.github.compevol</groupId>
     <artifactId>mascot</artifactId>
-    <version>4.0.0</version>
+    <version>3.1.0</version>
 </dependency>
 ```
 

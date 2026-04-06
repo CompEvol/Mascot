@@ -6,7 +6,7 @@
 
     <groupId>io.github.compevol</groupId>
     <artifactId>mascot</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
 
     <name>Mascot</name>
     <description>BEAST 3 package for MASCOT - Marginal Approximation of the Structured Coalescent</description>
@@ -44,7 +44,7 @@
         <beast.main>beast.base.minimal.BeastMain</beast.main>
         <beast.args/>
         <beast.pkg.name>Mascot</beast.pkg.name>
-        <beast.pkg.version>4.0.0</beast.pkg.version>
+        <beast.pkg.version>3.1.0</beast.pkg.version>
     </properties>
 
     <dependencies>
