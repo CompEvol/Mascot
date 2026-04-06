@@ -52,6 +52,7 @@ public class TypeTraitSetInputEditor extends InputEditor.Base {
     TableView<Location> table;
     private ObservableList<Location> locations;
 
+    public TypeTraitSetInputEditor() { super(); }
     public TypeTraitSetInputEditor(BeautiDoc doc) {
         super(doc);
 

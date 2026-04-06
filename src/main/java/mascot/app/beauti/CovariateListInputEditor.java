@@ -34,6 +34,7 @@ public class CovariateListInputEditor extends InputEditor.Base {
 
 	CovariateList covariateList;
 
+	public CovariateListInputEditor() { super(); }
 	public CovariateListInputEditor(BeautiDoc doc) {
 		super(doc);
 	}

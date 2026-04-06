@@ -17,6 +17,7 @@ public class GLMInputEditor extends BEASTObjectInputEditor {
 
 	GLM dyn;
 	
+	public GLMInputEditor() { super(); }
 	public GLMInputEditor(BeautiDoc doc) {
 		super(doc);
 	}

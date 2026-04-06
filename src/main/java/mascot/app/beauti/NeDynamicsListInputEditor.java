@@ -36,6 +36,7 @@ public class NeDynamicsListInputEditor extends InputEditor.Base {
     public BeautiSubTemplate hyperPriorTemplate = null;
 
 	
+	public NeDynamicsListInputEditor() { super(); }
 	public NeDynamicsListInputEditor(BeautiDoc doc) {
 		super(doc);
 	}

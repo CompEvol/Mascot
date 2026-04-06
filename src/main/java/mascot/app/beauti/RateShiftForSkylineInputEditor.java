@@ -25,6 +25,7 @@ public class RateShiftForSkylineInputEditor extends InputEditor.Base {
 
 	RateShifts rateShifts;
 	
+	public RateShiftForSkylineInputEditor() { super(); }
 	public RateShiftForSkylineInputEditor(BeautiDoc doc) {
 		super(doc);
 	}

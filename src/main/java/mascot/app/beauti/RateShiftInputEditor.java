@@ -24,6 +24,7 @@ public class RateShiftInputEditor extends InputEditor.Base {
 
 	RateShifts rateShifts;
 	
+	public RateShiftInputEditor() { super(); }
 	public RateShiftInputEditor(BeautiDoc doc) {
 		super(doc);
 	}
