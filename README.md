@@ -16,6 +16,20 @@ A tutorial on how to use MASCOT can be found [here](https://taming-the-beast.org
 
 JPMS module name: `mascot`
 
+## Building from source
+
+Requires Java 25 and Maven.
+
+```bash
+mvn install -DskipTests
+```
+
+## Running BEAST with Mascot
+
+```bash
+mvn exec:exec -Dbeast.args="-overwrite examples/Constant.xml"
+```
+
 ## License
 
 The java source code is licensed under the [GNU General Public License v3.0](LICENSE).
