@@ -1,13 +1,9 @@
-# Ignore everything in this directory
 .DS_Store
+target/
+*.iml
+.idea/
 .classpath
 .project
-/bin/
-/build/
-/build-lib/
-/build-beast/
-/build-test/
-/test-reports/
-/dist/
-/templates/MascotBSSVS/
-src/beast/mascot/operators/BitFlipBSSVSOperator.java
+.settings/
+*.zip
+*.xml.state

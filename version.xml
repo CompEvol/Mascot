@@ -1,56 +1,48 @@
-<package name='Mascot' version='3.0.8'>
-  <depends on='BEAST.base' atleast='2.7.2'/>
-  <depends on='BEAST.app' atleast='2.7.2'/>
+<package name='Mascot' version='3.1.0'>
+  <depends on='BEAST.base' atleast='2.8.0'/>
 
-
-    
     <service type="beastfx.app.inputeditor.InputEditor">
-          <provider classname="mascot.app.beauti.CovariateListInputEditor"/>
-          <provider classname="mascot.app.beauti.GLMInputEditor"/>
-          <provider classname="mascot.app.beauti.NeDynamicsInputEditor"/>
-          <provider classname="mascot.app.beauti.NeDynamicsListInputEditor"/>
-          <provider classname="mascot.app.beauti.RateShiftInputEditor"/>
-          <provider classname="mascot.app.beauti.TypeTraitSetInputEditor"/>
+        <provider classname="mascot.app.beauti.CovariateListInputEditor"/>
+        <provider classname="mascot.app.beauti.GLMInputEditor"/>
+        <provider classname="mascot.app.beauti.NeDynamicsListInputEditor"/>
+        <provider classname="mascot.app.beauti.RateShiftInputEditor"/>
+        <provider classname="mascot.app.beauti.RateShiftForSkylineInputEditor"/>
+        <provider classname="mascot.app.beauti.TypeTraitSetInputEditor"/>
     </service>
 
-
-
     <service type="beast.base.core.BEASTInterface">
-        <provider classname="mascot.distribution.MappedMascot"/>
-        <provider classname="mascot.distribution.MappedMascotWithTipSampling"/>
         <provider classname="mascot.distribution.Mascot"/>
         <provider classname="mascot.distribution.MascotWithTipSampling"/>
+        <provider classname="mascot.distribution.MappedMascot"/>
+        <provider classname="mascot.distribution.MappedMascotWithTipSampling"/>
         <provider classname="mascot.distribution.MascotNative"/>
         <provider classname="mascot.distribution.MascotNative2"/>
         <provider classname="mascot.distribution.StructuredTreeDistribution"/>
         <provider classname="mascot.distribution.StructuredTreeIntervals"/>
         <provider classname="mascot.dynamics.Constant"/>
         <provider classname="mascot.dynamics.ConstantBSSVS"/>
-        <provider classname="mascot.dynamics.DynamicEffectivePopulationSizes"/>
         <provider classname="mascot.dynamics.DynamicEffectivePopulationSizesBSSVS"/>
-        <provider classname="mascot.dynamics.DynamicEffectivePopulationSizesInterpolate"/>
-        <provider classname="mascot.dynamics.DynamicParametersBSSVS"/>
         <provider classname="mascot.dynamics.GLM"/>
         <provider classname="mascot.dynamics.GLMWithSkylineNe"/>
         <provider classname="mascot.dynamics.RateShifts"/>
-        <provider classname="mascot.dynamics.StructuredSkyline"/>
         <provider classname="mascot.dynamics.StructuredMigrationSkyline"/>
-        
+        <provider classname="mascot.dynamics.StructuredSkyline"/>
         <provider classname="mascot.glmmodel.Covariate"/>
         <provider classname="mascot.glmmodel.CovariateList"/>
         <provider classname="mascot.glmmodel.ErrorSmoothing"/>
         <provider classname="mascot.glmmodel.LogLinear"/>
         <provider classname="mascot.glmmodel.MaxRate"/>
-        <provider classname="mascot.logger.mappedProbLogger"/>
         <provider classname="mascot.logger.MigrationCountLogger"/>
         <provider classname="mascot.logger.MigrationCountLoggerWithTipSampling"/>
         <provider classname="mascot.logger.RootStateLogger"/>
         <provider classname="mascot.logger.StructuredTreeLogger"/>
-        <provider classname="mascot.mapped.MappedTreeIntervals"/>
+        <provider classname="mascot.logger.mappedProbLogger"/>
         <provider classname="mascot.mapped.AncestralMappedTreeSequenceLogger"/>
         <provider classname="mascot.mapped.AncestralStateTreeLikelihood"/>
+        <provider classname="mascot.mapped.MappedTreeIntervals"/>
         <provider classname="mascot.mapped.MutationTableLogger"/>
         <provider classname="mascot.mapped.MutationTimeLogger"/>
+        <provider classname="mascot.operators.BactrianBlockRandomWalkOperator"/>
         <provider classname="mascot.operators.BooleanSwapOperator"/>
         <provider classname="mascot.operators.MultiRealRandomWalkOperator"/>
         <provider classname="mascot.operators.NeSwapper"/>
@@ -60,27 +52,29 @@
         <provider classname="mascot.parameterdynamics.ExponentialNe"/>
         <provider classname="mascot.parameterdynamics.LogisticNe"/>
         <provider classname="mascot.parameterdynamics.LogLinearGLM"/>
-        <provider classname="mascot.parameterdynamics.NeDynamics"/>
+        <provider classname="mascot.parameterdynamics.NeDynamicsList"/>
+        <provider classname="mascot.parameterdynamics.NeSplineInterpolation"/>
         <provider classname="mascot.parameterdynamics.NotSet"/>
         <provider classname="mascot.parameterdynamics.Skygrowth"/>
         <provider classname="mascot.parameterdynamics.StructuredSkygrid"/>
+        <provider classname="mascot.skyline.GLMPrior"/>
         <provider classname="mascot.skyline.GrowthRateSmoothingPrior"/>
         <provider classname="mascot.skyline.LogSmoothingPrior"/>
+        <provider classname="mascot.util.Difference"/>
+        <provider classname="mascot.util.Final"/>
+        <provider classname="mascot.util.First"/>
         <provider classname="mascot.util.GLMLogger"/>
         <provider classname="mascot.util.InitializedCovariate"/>
         <provider classname="mascot.util.InitializedCovariatesList"/>
         <provider classname="mascot.util.InitializedGlmModel"/>
         <provider classname="mascot.util.InitializedNeDynamicsList"/>
         <provider classname="mascot.util.InitializedRateShifts"/>
-        <provider classname="mascot.util.Difference"/>
+        <provider classname="mascot.util.InitializedRateShiftsForSkyline"/>
         <provider classname="mascot.util.InitializedTraitSet"/>
-        <provider classname="mascot.util.Mean"/>
-        <provider classname="mascot.util.First"/>
-        <provider classname="mascot.util.Final"/>
         <provider classname="mascot.util.LargerThan"/>
-   </service>
-
-
-
+        <provider classname="mascot.util.Mean"/>
+        <provider classname="mascot.app.beauti.TreeWithTrait"/>
+        <provider classname="mascot.app.beauti.TreeWithTraitInitializer"/>
+    </service>
 
 </package>

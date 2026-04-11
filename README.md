@@ -1,9 +1,35 @@
 # MASCOT
 
+MASCOT (Marginal Approximation of the Structured Coalescent) is a [BEAST 3](https://github.com/CompEvol/beast3) package for efficient phylogeographic inference under the structured coalescent.
 
-MASCOT is a [BEAST2](http://beast2.org) package that allows to use MASCOT with other BEAST2 utilities. A tutorial on how to use MASCOT can be found [here](https://taming-the-beast.org/tutorials/Mascot-Tutorial/)
+A tutorial on how to use MASCOT can be found [here](https://taming-the-beast.org/tutorials/Mascot-Tutorial/).
 
+## Maven coordinates
 
-# License
+```xml
+<dependency>
+    <groupId>io.github.compevol</groupId>
+    <artifactId>mascot</artifactId>
+    <version>3.1.0</version>
+</dependency>
+```
 
-The content of this project itself is licensed under the Creative Commons Attribution 3.0 license, and the java source code of esco is licensed under the GNU General Public License.
+JPMS module name: `mascot`
+
+## Building from source
+
+Requires Java 25 and Maven.
+
+```bash
+mvn install -DskipTests
+```
+
+## Running BEAST with Mascot
+
+```bash
+mvn exec:exec -Dbeast.args="-overwrite examples/Constant.xml"
+```
+
+## License
+
+The java source code is licensed under the [GNU General Public License v3.0](LICENSE).

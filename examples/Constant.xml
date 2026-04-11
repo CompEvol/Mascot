@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.evolution.likelihoodbeast.base.evolution.alignment:beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.evolution.tree.coalescent:beast.pkgmgmt:beast.base.core:beast.base.inference.util:beast.evolution.nuc:beast.base.evolution.operator:beast.base.inference.operator:beast.base.evolution.sitemodel:beast.base.evolution.substitutionmodel:beast.base.evolution.likelihood" required="" version="2.7">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.base.spec.inference.parameter:beast.base.spec.inference.operator:beast.base.spec.inference.distribution:beast.base.spec.inference.util:beast.base.spec.evolution.tree.coalescent:beast.base.spec.evolution.sitemodel:beast.base.spec.evolution.likelihood:beast.base.spec.evolution.operator:beast.base.spec.evolution.substitutionmodel:beast.base.spec.evolution.branchratemodel:beast.base.spec.domain:beast.base.evolution.alignment:beast.base.evolution.tree:beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.inference.operator:beast.base.evolution.operator" required="" version="2.8">
 
     <data
 id="ebov_noncoding"
@@ -83,26 +83,6 @@ name="alignment">
         <sequence id="seq_MK0592|KU296814|Bombali|2014-12-28" spec="beast.base.evolution.alignment.Sequence" taxon="MK0592|KU296814|Bombali|2014-12-28" totalcount="4" value="NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNGTGTGCGAATAACTATGAGGAAGATTAATAATTTTCCT-CTCATTGAAATTTATACCGG-AATTTAAATTGAAATTGTTACTGTAATCATACCTGGTTTG-TTTCAGAGCCATATCACCAAGATAGAGAACAACCTAGGTCTCCGGAGGGGGCAAGGGCATCAGTGTGCTCAGTTGAAAATCCCTTGTCAACATCTAGGCCTTATCACATCACAAGTTCCGCCTTAAACTCTGCAGGGTGATCCAACAACCTTAATAGCAACATTATTGTTAAAGGACAGCATTAGTTCACAGTCAAACAAGCAAGATTGAGAATTAACTTTGATTTTGAACCTGAACACCCAGAGGACTGGAGACTCAACAACCCTAAAGCCTGGGGTAAAACATTAGAAATAGTTTAAAGACAAATTGCTCGGAATCACAAAATTCCGAGTATGAGCATGTAATAATGGGATGATTTAATCGACAAATAGCTAACATTAAATAGTCAAGGAACGCAAACAGGAAGAATTTTTGATGTCTAAGGTGTGAATTATTATCACAATAAAAGTGATTCTTAGTTTTGAATTTAAAGCTAGCTTATTATTACTAGCCGTTTTTCAAAGTTCAATTTGAGTCTTAATGCAAATAAGCGTTAAGCCACAGTTATAGCCATAATGGTAACTCAATATCTTAGCCAGCGATTTATCTAAATTAAATTACATTATGCTTTTATAACTTACCTACTAGCCTGCCCAACATTTACACGATCGCTTCATAATTAAGAAAAAATTAATGATGAAGATTAAAACCTTCATCATCCTTACGTCAATTGAATTCTCTAGCACTAGAAGCTTATTGTCTTCAATGATAAAAGAAAAGCTGGCCTAACAAGGCCAATCTCTTTTCCCTCCGAAAGAGGCAACTAATAGCAGAGGCTTCAACTGCTGAACTATAGGGTATGTTACATTAATGATACACTTGTGAGTATCAGCCCTAGATAATATAAGTCAATTAAACAACCAAGATAAAATTGTTCATATCCCGCTAGCAGCTTTAAAGATAAATGTAATAGGAGCTATACCTCTGACAGTATTATAATTAATTGTTATTAAGTAACCCAAACCAAAAATGATGAAGATTAAGAAAAACCTACCTCGACTGAGAGAGTGTTTTTTCATTAACCTTCATCTTGTAAACGTTGAGCAAAATTGTTAAAAATTTGCAATAATTGACTCAGATCCAGTTTTACAGAATCTTCTCAGGGATAGTGATAACATC-TTTTTAATAATCCGTCTACTAGAAGAGATACTTCTAATTGATCAATATACTAAAGGTGCTTTACACCATTGTCTCTTTTCTCTCCTAAATGTAGAGCTTAACAAAAGACTCATAATATACCTGTTTTTAAAAGATTGATTGATGAAAGATC--ATGACTAATAACATTACAAACAATCCTACTATAATCAAT-ACGGTGATTCAAATGTCAATCTTTCTCATTGCACATACTCTTTGTCCTTATCCTCAAATTGCCTACATGCTTACATCTGAGGACAGCCAGTGTGACTTGGATTGGAGATGTGGAGGAAAAATCGGGGCCCATTTCTAAGTTGTTCACAATCTAAGTACAGACATTGCTCTTCTAATTAAGAAAAAATCGGCGATGAAGATTAAGCCGACAGTGAGCGTAATCTTCATCTCTCTTAGATTATTTGTCTTCCAGAGTAGGGGTCATCAGGTCCTTTTCAATTGGATAACCAAAATAAGCTTCACTAGAAGGATATTGTGAGGCGACAACACATCTTTCTTCAGATTGTTTCACGGCAAAACTCAACCTCAAATCAATGAAACTAGGATTTAATTATATGAATCACTTGAATCTAAGATTACTTGACAAATGATAACATAATACACTGGAGCTTCAAACATAGCCAATGTGATTCTAACTCCTTTAAACTCACAGTTAATCATAAACAAGGTTTGACATCAATCTAGCTATATCTTTAAGAATGATAAACTTGATGAAGATTAAGAAAAAGGTAATCTTTCGATTATCTTTAGTCTTCATCCTTGATTCTACAATCATGACAGTTGTCTTTAATGAAAAAGGAAAAAAGCCTTTTTA-TTAAGTTGTAATAATCAGATCTGCAAACCGGTAGAATTTAGTTGTAACCTAACACACACAAAGCATTGGTAAAAAAGTCAATAGAAATTTAAACAGTGAGTGCAGACAACTCTTAATAAGGCTGACTAAAACACTATATAACCTTCTACTTGATCACAATACTCCGTATACCTATCATCATATATTTAATCAAGACGATATCCTTTAAAAC-TTATTCAGTACTATAATCACTCTCATTTCAAATTGATAAGATATGCATAATTGCCTTAATATATAAAGAGGTATGATATAACCCCAACATTGACCAAAGAAAATCATAATCTCGTATCGCTCGCAATATAACCTGCCAAGCATACCTCTTGCACAAAGTGATTCTTGTACACAAATAATGTTTGACTCTACAGGAGGTAGCAACGATCCATCTCATC-AAAAAATAAGTATTTTATGATTTACTAATGATCTCTTAAAATATTAAGAAAAACTGACGGAACATAAATTCTTTCTGCTTCAAGTTGTGGAGGAGGTCTATGGTATTCGCTATTGTTATATTACAATCAATAACAAGCTTG------TAAAAATATTGTTCTTGTTTCAGGAGGTATATTGTGACCGGAAAAGCTAAACTAATGATGAAGATTAATGCGGAGGTCTGATGAGAATAAACCTTATTATTCAGATTAGGCCCCAAGAGGCATTCTTCATCTCCTTTTAGCAAAATACTATTTCAGGATAGTCCAGCTAGTGACACGTCTTTTAGCTGTATACCAGTTGCCCCTGAGATACGCCACAAAAGTGTCTCTGAGCTAAAGTGGTCTGTACACATCTCATACATTGTATTAGGGGCAATAATATCTAATTGAACTTAGCCATTTAAAATTTAGTGCATAAATCTGGGCTAACTCCACCAGGTCAACTCC-ATTGGCTGAAAAGAAGCCCACCTACAACGAACATTACTTTGAGCACCCTCACAATTAAAAAATAAGAGCGTCGTTCCAACAATCGAGCGCAAGGTTACAAGGTTGAACTGAGAGTGTCTAGACAACAAAATATCGATACTCCAGACACCAAGCAAGACCTGAG--AAAAAACCCTAAGATGGAATACTTCATATTGGGCTAACTCATATATGCTGACTCAATAGTTAACTTGACATCTCTGCCTTCATAATCAGATATATAAGCATAATAAATAAATACTCATATTTCTTGATAATTTGTTTAACCACAGATAAATCCTCACTGTAAGCCAGCTTCCAAGTTGACACCCTTACAAAAACCAGGACTCAGAATCCCTCAAATAAGAGATTCCAAGACAACATCATAGAATTGCTTTAT--TATATTAATAAGCATTTTATCACTAGAAATCCAATATACGAAATGGTTAATTGTAACTAAACCCGCAGGTCATGTGTGTTAGGTTTCACAAATTATATATATTACTAACTCCATACTCGTAACTAACATTAGATAAGTAGGTTAAGAAAAAAGCTTGAGGAAGATTAAG-AAAAACTGCTTATTGGGTCTTTCCGTGTTTTAGATGAAGCAGTTGACATTCTTCCTCTTGATATTAAATAACCGTGCATAGTATTTTGATACTTGTAAAGGTTGGTTATCAACATACAGATTAT-AAAAAACTCATAAATTGCTCTCATACATCATCTTGATCTGATTTCAATAAATAACTATTTAGATAACGAAAGGAGTCCTTACATTATACACTATATTTGGCCTCTCTCCCTGCGTGATAATC-AAAAAATTCACAATACAGCATGTGTGACATATTACTGCTGCAATGAGTCTAACGCAACATAATAAACTCCGCACTCTTTATAATTAAGCTTTAACGATAGGTCTGGGCTCATATTGTTATTGATATAGTAATGTTGTATCAATATCTTGCCAGATGGAATAGTGCTTTGGTTGATAACACGACTTCTTAAAACAAAACTGATCTTTAAGATTAAG-TTTTTTATAATTGTCATTGCTTTAATTTGTCGA-TTTAAAAATGGTGATAGCCTTAATCTTTGTGTAAAATAAGAGATTAGGTGTAATAACTTTAACATTTTTGTCTAGTAAGCTACTATTCCATTCAGAATGATAAAATTAAAAGAAAAGACATGACTGTAAAATCAGAAATACCTTCTTTACAATATAGCAGACTAGATAATAATCTTCGTGTTAATGATAATTAAGGCATTGACCACGCTCATCAGAAGGCTCACTAGAATAAACGTTGCAAAAAGGATCCCTGGAAAAATGGTCGCNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"/>
     </data>
 
-    <map name="Uniform" >beast.base.inference.distribution.Uniform</map>
-
-    <map name="Exponential" >beast.base.inference.distribution.Exponential</map>
-
-    <map name="LogNormal" >beast.base.inference.distribution.LogNormalDistributionModel</map>
-
-    <map name="Normal" >beast.base.inference.distribution.Normal</map>
-
-    <map name="Beta" >beast.base.inference.distribution.Beta</map>
-
-    <map name="Gamma" >beast.base.inference.distribution.Gamma</map>
-
-    <map name="LaplaceDistribution" >beast.base.inference.distribution.LaplaceDistribution</map>
-
-    <map name="prior" >beast.base.inference.distribution.Prior</map>
-
-    <map name="InverseGamma" >beast.base.inference.distribution.InverseGamma</map>
-
-    <map name="OneOnX" >beast.base.inference.distribution.OneOnX</map>
-
     <run id="mcmc" spec="MCMC" chainLength="10000000">
         <state id="state" spec="State" storeEvery="5000">
             <tree id="Tree.t:ebov_noncoding" spec="beast.base.evolution.tree.Tree" name="stateNode">
@@ -113,13 +93,13 @@ name="alignment">
                 </trait>
                 <taxonset idref="TaxonSet.ebov_noncoding"/>
             </tree>
-            <parameter id="clockRate.c:ebov_noncoding" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0</parameter>
-            <parameter id="NeConstant.t:ebov_noncoding" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0</parameter>
-            <parameter id="migrationConstant.t:ebov_noncoding" spec="parameter.RealParameter" dimension="0" lower="0.0" name="stateNode">1.0</parameter>
+            <parameter id="clockRate.c:ebov_noncoding" spec="RealScalarParam" domain="PositiveReal" name="stateNode">1.0</parameter>
+            <parameter id="NeConstant.t:ebov_noncoding" spec="RealVectorParam" domain="NonNegativeReal" name="stateNode">1.0</parameter>
+            <parameter id="migrationConstant.t:ebov_noncoding" spec="RealVectorParam" domain="NonNegativeReal" dimension="0" name="stateNode">1.0</parameter>
         </state>
-        <init id="RandomTree.t:ebov_noncoding" spec="RandomTree" estimate="false" initial="@Tree.t:ebov_noncoding" taxa="@ebov_noncoding">
-            <populationModel id="ConstantPopulation0.t:ebov_noncoding" spec="ConstantPopulation">
-                <parameter id="randomPopSize.t:ebov_noncoding" spec="parameter.RealParameter" name="popSize">1.0</parameter>
+        <init id="RandomTree.t:ebov_noncoding" spec="beast.base.spec.evolution.tree.coalescent.RandomTree" estimate="false" initial="@Tree.t:ebov_noncoding" taxa="@ebov_noncoding">
+            <populationModel id="ConstantPopulation0.t:ebov_noncoding" spec="beast.base.spec.evolution.tree.coalescent.ConstantPopulation">
+                <parameter id="randomPopSize.t:ebov_noncoding" spec="RealScalarParam" domain="PositiveReal" name="popSize">1.0</parameter>
             </populationModel>
         </init>
         <distribution id="posterior" spec="CompoundDistribution">
@@ -132,50 +112,46 @@ name="alignment">
                     </dynamics>
                     <structuredTreeIntervals id="StructuredTreeIntervals.t:ebov_noncoding" spec="mascot.distribution.StructuredTreeIntervals" tree="@Tree.t:ebov_noncoding"/>
                 </distribution>
-                <prior id="NeConstantPrior.t:ebov_noncoding" name="distribution" x="@NeConstant.t:ebov_noncoding">
-                    <Exponential id="Exponential.1" name="distr">
-                        <mean id="Function$Constant.2" spec="Function$Constant" value="1.0"/>
-                    </Exponential>
-                </prior>
-                <prior id="ClockPrior.c:ebov_noncoding" name="distribution" x="@clockRate.c:ebov_noncoding">
-                    <Uniform id="Uniform.0" name="distr" upper="Infinity"/>
-                </prior>
-                <prior id="migrationConstantPrior.t:ebov_noncoding" name="distribution" x="@migrationConstant.t:ebov_noncoding">
-                    <Exponential id="Exponential.2" name="distr">
-                        <mean id="Function$Constant.3" spec="Function$Constant" value="1.0"/>
-                    </Exponential>
-                </prior>
+                <distribution id="NeConstantPrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.IID" param="@NeConstant.t:ebov_noncoding">
+                    <distr spec="beast.base.spec.inference.distribution.Exponential">
+                        <mean spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    </distr>
+                </distribution>
+                <distribution id="ClockPrior.c:ebov_noncoding" spec="beast.base.spec.inference.distribution.Uniform" param="@clockRate.c:ebov_noncoding"/>
+                <distribution id="migrationConstantPrior.t:ebov_noncoding" spec="beast.base.spec.inference.distribution.IID" param="@migrationConstant.t:ebov_noncoding">
+                    <distr spec="beast.base.spec.inference.distribution.Exponential">
+                        <mean spec="RealScalarParam" domain="PositiveReal" value="1.0" estimate="false"/>
+                    </distr>
+                </distribution>
             </distribution>
             <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
-                <distribution id="treeLikelihood.ebov_noncoding" spec="ThreadedTreeLikelihood" data="@ebov_noncoding" tree="@Tree.t:ebov_noncoding">
-                    <siteModel id="SiteModel.s:ebov_noncoding" spec="SiteModel">
-                        <parameter id="mutationRate.s:ebov_noncoding" spec="parameter.RealParameter" estimate="false" lower="0.0" name="mutationRate">1.0</parameter>
-                        <parameter id="gammaShape.s:ebov_noncoding" spec="parameter.RealParameter" estimate="false" lower="0.1" name="shape">1.0</parameter>
-                        <parameter id="proportionInvariant.s:ebov_noncoding" spec="parameter.RealParameter" estimate="false" lower="0.0" name="proportionInvariant" upper="1.0">0.0</parameter>
-                        <substModel id="JC69.s:ebov_noncoding" spec="JukesCantor"/>
+                <distribution id="treeLikelihood.ebov_noncoding" spec="beast.base.spec.evolution.likelihood.ThreadedTreeLikelihood" data="@ebov_noncoding" tree="@Tree.t:ebov_noncoding">
+                    <siteModel id="SiteModel.s:ebov_noncoding" spec="beast.base.spec.evolution.sitemodel.SiteModel">
+                        <parameter id="mutationRate.s:ebov_noncoding" spec="RealScalarParam" domain="NonNegativeReal" estimate="false" name="mutationRate">1.0</parameter>
+                        <parameter id="gammaShape.s:ebov_noncoding" spec="RealScalarParam" domain="PositiveReal" estimate="false" name="shape">1.0</parameter>
+                        <parameter id="proportionInvariant.s:ebov_noncoding" spec="RealScalarParam" domain="UnitInterval" estimate="false" name="proportionInvariant">0.0</parameter>
+                        <substModel id="JC69.s:ebov_noncoding" spec="beast.base.spec.evolution.substitutionmodel.JukesCantor"/>
                     </siteModel>
-                    <branchRateModel id="StrictClock.c:ebov_noncoding" spec="beast.base.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:ebov_noncoding"/>
+                    <branchRateModel id="StrictClock.c:ebov_noncoding" spec="beast.base.spec.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:ebov_noncoding"/>
                 </distribution>
             </distribution>
         </distribution>
-        <operator id="StrictClockRateScaler.c:ebov_noncoding" spec="AdaptableOperatorSampler" weight="1.5">
+        <operator id="StrictClockRateScaler.c:ebov_noncoding" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.5">
             <parameter idref="clockRate.c:ebov_noncoding"/>
-            <operator id="AVMNOperator.ebov_noncoding" spec="kernel.AdaptableVarianceMultivariateNormalOperator" allowNonsense="true" beta="0.05" burnin="400" initial="800" weight="0.1">
-                <transformations id="AVMNSumTransform.ebov_noncoding" spec="operator.kernel.Transform$LogConstrainedSumTransform"/>
-                <transformations id="AVMNLogTransform.ebov_noncoding" spec="operator.kernel.Transform$LogTransform">
+            <operator id="AVMNOperator.ebov_noncoding" spec="beast.base.spec.evolution.operator.AdaptableVarianceMultivariateNormalOperator" allowNonsense="true" beta="0.05" burnin="400" initial="800" weight="0.1">
+                <transformations id="AVMNSumTransform.ebov_noncoding" spec="beast.base.spec.inference.operator.Transform$LogConstrainedSumTransform"/>
+                <transformations id="AVMNLogTransform.ebov_noncoding" spec="beast.base.spec.inference.operator.Transform$LogTransform">
                     <f idref="clockRate.c:ebov_noncoding"/>
                 </transformations>
-                <transformations id="AVMNNoTransform.ebov_noncoding" spec="operator.kernel.Transform$NoTransform">
-                    <f idref="Tree.t:ebov_noncoding"/>
-                </transformations>
+                <transformations id="AVMNNoTransform.ebov_noncoding" spec="beast.base.spec.inference.operator.Transform$NoTransform"/>
             </operator>
-            <operator id="StrictClockRateScalerX.c:ebov_noncoding" spec="kernel.BactrianScaleOperator" parameter="@clockRate.c:ebov_noncoding" upper="10.0" weight="3.0"/>
+            <operator id="StrictClockRateScalerX.c:ebov_noncoding" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@clockRate.c:ebov_noncoding" upper="10.0" weight="3.0"/>
         </operator>
-        <operator id="strictClockUpDownOperator.c:ebov_noncoding" spec="AdaptableOperatorSampler" weight="1.5">
+        <operator id="strictClockUpDownOperator.c:ebov_noncoding" spec="beast.base.spec.evolution.operator.AdaptableOperatorSampler" weight="1.5">
             <parameter idref="clockRate.c:ebov_noncoding"/>
             <tree idref="Tree.t:ebov_noncoding"/>
             <operator idref="AVMNOperator.ebov_noncoding"/>
-            <operator id="strictClockUpDownOperatorX.c:ebov_noncoding" spec="operator.kernel.BactrianUpDownOperator" scaleFactor="0.75" weight="3.0">
+            <operator id="strictClockUpDownOperatorX.c:ebov_noncoding" spec="beast.base.spec.evolution.operator.UpDownOperator" scaleFactor="0.75" weight="3.0">
                 <up idref="clockRate.c:ebov_noncoding"/>
                 <down idref="Tree.t:ebov_noncoding"/>
             </operator>
@@ -189,8 +165,8 @@ name="alignment">
         <operator id="MascotNarrow.t:ebov_noncoding" spec="Exchange" tree="@Tree.t:ebov_noncoding" weight="0.0"/>
         <operator id="MascotWide.t:ebov_noncoding" spec="Exchange" isNarrow="false" tree="@Tree.t:ebov_noncoding" weight="3.0"/>
         <operator id="MascotWilsonBalding.t:ebov_noncoding" spec="WilsonBalding" tree="@Tree.t:ebov_noncoding" weight="3.0"/>
-        <operator id="NeConstantScaler.t:ebov_noncoding" spec="ScaleOperator" parameter="@NeConstant.t:ebov_noncoding" weight="3.0"/>
-        <operator id="migrationConstantScaler.t:ebov_noncoding" spec="ScaleOperator" parameter="@migrationConstant.t:ebov_noncoding" weight="3.0"/>
+        <operator id="NeConstantScaler.t:ebov_noncoding" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@NeConstant.t:ebov_noncoding" weight="3.0"/>
+        <operator id="migrationConstantScaler.t:ebov_noncoding" spec="beast.base.spec.inference.operator.ScaleOperator" parameter="@migrationConstant.t:ebov_noncoding" weight="3.0"/>
         <logger id="tracelog" spec="Logger" fileName="$(filebase).log" logEvery="1000" model="@posterior" sanitiseHeaders="true" sort="smart">
             <log idref="posterior"/>
             <log idref="likelihood"/>
