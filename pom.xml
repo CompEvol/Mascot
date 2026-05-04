@@ -25,6 +25,10 @@
             <name>Nicola F. Müller</name>
             <url>https://github.com/nicfel</url>
         </developer>
+        <developer>
+            <name>Remco Bouckaert</name>
+            <url>https://github.com/rbouckaert</url>
+        </developer>
     </developers>
 
     <scm>
