@@ -44,11 +44,12 @@ jobs:
           mvn versions:set -DnewVersion=$VERSION -DgenerateBackupPoms=false
 
       - name: Build and test
+        if: "!startsWith(github.ref, 'refs/tags/v')"
         run: mvn verify
 
       - name: Publish to Maven Central
         if: startsWith(github.ref, 'refs/tags/v')
-        run: mvn deploy -Prelease -DskipTests
+        run: mvn -Prelease clean deploy
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
