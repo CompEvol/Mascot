@@ -11,7 +11,7 @@
     <name>Mascot</name>
     <description>BEAST 3 package for MASCOT - Marginal Approximation of the Structured Coalescent</description>
 
-    <url>https://github.com/nicfel/Mascot</url>
+    <url>https://github.com/CompEvol/Mascot</url>
 
     <licenses>
         <license>
@@ -28,9 +28,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/nicfel/Mascot.git</connection>
-        <developerConnection>scm:git:ssh://github.com:nicfel/Mascot.git</developerConnection>
-        <url>https://github.com/nicfel/Mascot</url>
+        <connection>scm:git:git://github.com/CompEvol/Mascot.git</connection>
+        <developerConnection>scm:git:ssh://github.com:CompEvol/Mascot.git</developerConnection>
+        <url>https://github.com/CompEvol/Mascot</url>
     </scm>
 
     <properties>
