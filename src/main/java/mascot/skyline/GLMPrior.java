@@ -1,5 +1,6 @@
 package mascot.skyline;
 
+import beast.base.core.Citation;
 import beast.base.core.Input;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
@@ -16,6 +17,11 @@ import mascot.parameterdynamics.Skygrowth;
 import java.util.List;
 import java.util.Random;
 
+@Citation(	"Nicola F. Müller, Remco R. Bouckaert, Chieh-Hsi Wu, Trevor Bedford (2025)\n"+
+			"  MASCOT-Skyline integrates population and migration dynamics\n"+
+			"  to enhance phylogeographic reconstructions\n"+
+			"  PLOS Computational Biology 21(9):e1013421,\n"+
+			"  https://doi.org/10.1371/journal.pcbi.1013421")
 public class GLMPrior extends Distribution {
 
     public Input<CovariateList> covariateListInput = new Input<>("covariateList", "input of covariates", Input.Validate.REQUIRED);

@@ -14,10 +14,10 @@ import java.util.HashMap;
 
 @Description("Extracts the intervals from a tree. Points in the intervals " +
         "are defined by the heights of nodes in the tree.")
-@Citation(	"Nicola F. Müller, Gytis Dudas, Tanja Stadler (2018)\n"+
+@Citation(	"Nicola F. Müller, Gytis Dudas, Tanja Stadler (2019)\n"+
 			"  Inferring time-dependent migration and coalescence patterns\n" +
 			"  from genetic sequence and predictor data in structured populations\n"+
-			"  bioRxiv, doi: bty406, 10.1101/342329")
+			"  Virus Evolution 5(2):vez030, https://doi.org/10.1093/ve/vez030")
 public class GLM extends Dynamics implements Loggable {	
     
 	public Input<GlmModel> migrationGLMInput = new Input<>(

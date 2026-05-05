@@ -1,6 +1,7 @@
 package mascot.dynamics;
 
 
+import beast.base.core.Citation;
 import beast.base.core.Description;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
@@ -14,7 +15,12 @@ import java.io.PrintStream;
 
 
 @Description("Wrapper class that takes parametric and non parametric dynamics as input.")
-public class StructuredSkyline extends Dynamics implements Loggable {	
+@Citation(	"Nicola F. Müller, Remco R. Bouckaert, Chieh-Hsi Wu, Trevor Bedford (2025)\n"+
+			"  MASCOT-Skyline integrates population and migration dynamics\n"+
+			"  to enhance phylogeographic reconstructions\n"+
+			"  PLOS Computational Biology 21(9):e1013421,\n"+
+			"  https://doi.org/10.1371/journal.pcbi.1013421")
+public class StructuredSkyline extends Dynamics implements Loggable {
         
     public Input<NeDynamicsList> parametricFunctionInput = new Input<>(
     		"NeDynamics", "input of the log effective population sizes", Validate.REQUIRED);    
