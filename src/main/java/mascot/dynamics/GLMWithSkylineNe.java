@@ -15,10 +15,11 @@ import java.util.HashMap;
 
 @Description("Extracts the intervals from a tree. Points in the intervals " +
         "are defined by the heights of nodes in the tree.")
-@Citation(	"Nicola F. Müller, Gytis Dudas, Tanja Stadler (2018)\n"+
-			"  Inferring time-dependent migration and coalescence patterns\n" +
-			"  from genetic sequence and predictor data in structured populations\n"+
-			"  bioRxiv, doi: bty406, 10.1101/342329")
+@Citation(	"Nicola F. Müller, Remco R. Bouckaert, Chieh-Hsi Wu, Trevor Bedford (2025)\n"+
+			"  MASCOT-Skyline integrates population and migration dynamics\n"+
+			"  to enhance phylogeographic reconstructions\n"+
+			"  PLOS Computational Biology 21(9):e1013421,\n"+
+			"  https://doi.org/10.1371/journal.pcbi.1013421")
 public class GLMWithSkylineNe extends Dynamics implements Loggable {	
     
 	public Input<GlmModel> migrationGLMInput = new Input<>(
