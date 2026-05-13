@@ -4,7 +4,9 @@ import beast.base.core.Citation;
 import beast.base.core.Input;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
-import beast.base.inference.distribution.ParametricDistribution;
+import beast.base.inference.StateNode;
+import beast.base.inference.StateNodeInitialiser;
+import beast.base.spec.inference.distribution.ScalarDistribution;
 import beast.base.spec.inference.parameter.BoolVectorParam;
 import beast.base.spec.domain.Real;
 import beast.base.spec.inference.parameter.RealVectorParam;
@@ -22,7 +24,7 @@ import java.util.Random;
 			"  to enhance phylogeographic reconstructions\n"+
 			"  PLOS Computational Biology 21(9):e1013421,\n"+
 			"  https://doi.org/10.1371/journal.pcbi.1013421")
-public class GLMPrior extends Distribution {
+public class GLMPrior extends Distribution implements StateNodeInitialiser {
 
     public Input<CovariateList> covariateListInput = new Input<>("covariateList", "input of covariates", Input.Validate.REQUIRED);
     public Input<RealVectorParam<? extends Real>> scalerInput = new Input<>("scaler", "input of covariates scaler", Input.Validate.REQUIRED);
@@ -33,11 +35,11 @@ public class GLMPrior extends Distribution {
     public Input<NeDynamicsList> NeFunctionInput = new Input<>(
             "NeDynamics", "input of the log effective population sizes", Input.Validate.REQUIRED);
 
-    final public Input<ParametricDistribution> distInput = new Input<>("distr",
+    final public Input<ScalarDistribution<?, Double>> distInput = new Input<>("distr",
             "distribution used to on the error terms of the GLM.",
             Input.Validate.REQUIRED);
 
-    protected ParametricDistribution dist;
+    protected ScalarDistribution<?, Double> dist;
 
     double[] intTimes;
 
@@ -166,5 +168,15 @@ public class GLMPrior extends Distribution {
     @Override
     public void sample(State state, Random random) {
 
+    }
+
+    @Override
+    public void initStateNodes() {
+    }
+
+    @Override
+    public void getInitialisedStateNodes(List<StateNode> stateNodes) {
+        stateNodes.add(scalerInput.get());
+        stateNodes.add(indicatorInput.get());
     }
 }

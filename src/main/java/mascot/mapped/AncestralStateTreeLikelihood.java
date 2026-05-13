@@ -5,7 +5,7 @@ import beast.base.core.Input;
 import beast.base.core.Loggable;
 import beast.base.evolution.alignment.Alignment;
 import beast.base.evolution.datatype.DataType;
-import beast.base.evolution.likelihood.TreeLikelihood;
+import beast.base.spec.evolution.likelihood.TreeLikelihood;
 import beast.base.evolution.tree.Node;
 import beast.base.evolution.tree.Tree;
 import beast.base.evolution.tree.TreeInterface;

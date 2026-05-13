@@ -445,17 +445,22 @@ public class NeDynamicsListInputEditor extends InputEditor.Base {
 	}
 	
 	private void removeParameters(NeDynamics neDynamics, MCMC mcmc) {
+		// The spec interface inputs (RealScalar / RealVector) don't extend
+		// StateNode, but at runtime the XML always binds a RealScalarParam /
+		// RealVectorParam (which do). Cast to StateNode at the call site so
+		// the BEAUti disconnect logic can use getID().
+		CompoundDistribution posterior = (CompoundDistribution) mcmc.posteriorInput.get();
 		if (neDynamics instanceof ConstantNe) {
-			removeParameter(((CompoundDistribution) mcmc.posteriorInput.get()), ((ConstantNe) neDynamics).NeInput.get());
+			removeParameter(posterior, (StateNode) ((ConstantNe) neDynamics).NeInput.get());
 		}else if (neDynamics instanceof ExponentialNe) {
-			removeParameter(((CompoundDistribution) mcmc.posteriorInput.get()), ((ExponentialNe) neDynamics).growthRateInput.get());
-			removeParameter(((CompoundDistribution) mcmc.posteriorInput.get()), ((ExponentialNe) neDynamics).logNeNullInput.get());			
+			removeParameter(posterior, (StateNode) ((ExponentialNe) neDynamics).growthRateInput.get());
+			removeParameter(posterior, (StateNode) ((ExponentialNe) neDynamics).logNeNullInput.get());
 		}else if (neDynamics instanceof Skygrowth) {
-			removeParameter(((CompoundDistribution) mcmc.posteriorInput.get()), ((Skygrowth) neDynamics).NeInput.get());
+			removeParameter(posterior, (StateNode) ((Skygrowth) neDynamics).NeInput.get());
 		}else if (neDynamics instanceof LogisticNe) {
-			removeParameter(((CompoundDistribution) mcmc.posteriorInput.get()), ((LogisticNe) neDynamics).capacityInput.get());
-			removeParameter(((CompoundDistribution) mcmc.posteriorInput.get()), ((LogisticNe) neDynamics).carryingProportionInput.get());
-			removeParameter(((CompoundDistribution) mcmc.posteriorInput.get()), ((LogisticNe) neDynamics).growthRateInput.get());
+			removeParameter(posterior, (StateNode) ((LogisticNe) neDynamics).capacityInput.get());
+			removeParameter(posterior, (StateNode) ((LogisticNe) neDynamics).carryingProportionInput.get());
+			removeParameter(posterior, (StateNode) ((LogisticNe) neDynamics).growthRateInput.get());
 		}
 	}
 

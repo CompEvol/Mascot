@@ -3,20 +3,20 @@ package mascot.parameterdynamics;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.spec.domain.Real;
-import beast.base.spec.inference.parameter.RealScalarParam;
+import beast.base.spec.type.RealScalar;
 
 public class ExponentialNe extends NeDynamics {
 
-    public Input<RealScalarParam<Real>> logNeNullInput = new Input<>(
+    public Input<RealScalar<Real>> logNeNullInput = new Input<>(
     		"NeNull", "input of the Ne at the time of the most recent sampled ancestor", Validate.REQUIRED);
-    public Input<RealScalarParam<Real>> growthRateInput = new Input<>(
+    public Input<RealScalar<Real>> growthRateInput = new Input<>(
     		"growthRate", "input of the growth rate", Validate.REQUIRED);
 
     public Input<Double> minNeInput = new Input<>(
     		"minNe", "input of the minimal Ne", 0.0);
 
-    RealScalarParam<Real> logNeNull;
-    RealScalarParam<Real> growthRate;
+    RealScalar<Real> logNeNull;
+    RealScalar<Real> growthRate;
 
 	@Override
 	public void initAndValidate() {
@@ -39,13 +39,7 @@ public class ExponentialNe extends NeDynamics {
 
 	@Override
 	public boolean isDirty() {
-		if (logNeNull.somethingIsDirty())
-			return true;
-
-		if (growthRate.somethingIsDirty())
-			return true;
-
-		return false;
+		return isDirtyInput(logNeNull) || isDirtyInput(growthRate);
 	}
 
 

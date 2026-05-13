@@ -3,14 +3,14 @@ package mascot.parameterdynamics;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.spec.domain.Real;
-import beast.base.spec.inference.parameter.RealScalarParam;
+import beast.base.spec.type.RealScalar;
 
 public class ConstantNe extends NeDynamics {
 
-    public Input<RealScalarParam<Real>> NeInput = new Input<>(
+    public Input<RealScalar<Real>> NeInput = new Input<>(
     		"logNe", "input of the Ne at the time of the most recent sampled ancestor", Validate.REQUIRED);
 
-    RealScalarParam<Real> Ne;
+    RealScalar<Real> Ne;
 
 	@Override
 	public void initAndValidate() {
@@ -31,9 +31,6 @@ public class ConstantNe extends NeDynamics {
 
 	@Override
 	public boolean isDirty() {
-		if (Ne.somethingIsDirty())
-			return true;
-
-		return false;
+		return isDirtyInput(Ne);
 	}
 }

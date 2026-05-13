@@ -2,18 +2,22 @@ package mascot.parameterdynamics;
 
 import beast.base.core.Description;
 import beast.base.core.Input;
+import beast.base.inference.StateNode;
+import beast.base.inference.StateNodeInitialiser;
 import beast.base.spec.domain.Real;
 import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.dynamics.RateShifts;
 import org.apache.commons.math4.legacy.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math4.legacy.analysis.polynomials.PolynomialSplineFunction;
 
+import java.util.List;
+
 
 /**
  * @author Nicola F. Mueller
  */
 @Description("Populaiton function with values at certain time points that are interpolated in between. Parameter has to be in log space")
-public class NeSplineInterpolation extends NeDynamics {
+public class NeSplineInterpolation extends NeDynamics implements StateNodeInitialiser {
 	
     final public Input<RealVectorParam<? extends Real>> NeInput = new Input<>("logNe",
             "Nes over time in log space", Input.Validate.REQUIRED);
@@ -116,10 +120,17 @@ public class NeSplineInterpolation extends NeDynamics {
 	public boolean isDirty() {
 		if (Ne.isDirty(0))
 			return true;
-		
+
 		return false;
 	}
 
+	@Override
+	public void initStateNodes() {
+	}
 
-	
+	@Override
+	public void getInitialisedStateNodes(List<StateNode> stateNodes) {
+		stateNodes.add(NeInput.get());
+	}
+
 }

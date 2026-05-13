@@ -6,9 +6,7 @@ import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
-import beast.base.inference.distribution.ParametricDistribution;
-import beast.base.spec.domain.Real;
-import beast.base.spec.inference.parameter.RealVectorParam;
+import beast.base.spec.inference.distribution.ScalarDistribution;
 import mascot.dynamics.GLM;
 
 import java.util.ArrayList;
@@ -21,14 +19,14 @@ import java.util.Random;
         "so the sum of log probabilities of all elements of x is returned as the prior.")
 public class MaxRate extends Distribution {
     final public Input<GLM> GLMStepwiseModelInput = new Input<>("GLMmodel", "glm model input");
-    final public Input<ParametricDistribution> distInput = new Input<>("distr", "distribution used to calculate prior, e.g. normal, beta, gamma.", Validate.REQUIRED);
+    final public Input<ScalarDistribution<?, Double>> distInput = new Input<>("distr", "distribution used to calculate prior, e.g. normal, beta, gamma.", Validate.REQUIRED);
     final public Input<Boolean> migrationOnlyInput = new Input<>("migrationOnly", "put prior only on migration rates", false);
     final public Input<Boolean> NeOnlyInput = new Input<>("NeOnly", "put prior only on migration rates", false);
 
     /**
      * shadows distInput *
      */
-    protected ParametricDistribution dist;
+    protected ScalarDistribution<?, Double> dist;
 
 
     @Override
@@ -42,16 +40,13 @@ public class MaxRate extends Distribution {
     	Double[] mig = GLMStepwiseModelInput.get().getAllCoalescentRate();
 		Double[] coal = GLMStepwiseModelInput.get().getAllBackwardsMigration();
 
-    	RealVectorParam<Real> dCoal = new RealVectorParam<>(unbox(coal), Real.INSTANCE);
-    	RealVectorParam<Real> dMig = new RealVectorParam<>(unbox(mig), Real.INSTANCE);
-
     	logP = 0.0;
 
     	if (migrationOnlyInput.get()){
-	        logP += dist.calcLogP(dMig);
+	        logP += sumLogDensity(mig);
     	}else{
-	        logP += dist.calcLogP(dCoal);
-	        logP += dist.calcLogP(dMig);
+	        logP += sumLogDensity(coal);
+	        logP += sumLogDensity(mig);
     	}
         if (logP == Double.POSITIVE_INFINITY) {
             logP = Double.NEGATIVE_INFINITY;
@@ -59,12 +54,14 @@ public class MaxRate extends Distribution {
         return logP;
     }
 
-    private static double[] unbox(Double[] values) {
-        double[] result = new double[values.length];
-        for (int i = 0; i < values.length; i++) {
-            result[i] = values[i];
-        }
-        return result;
+    private double sumLogDensity(Double[] values) {
+        // Each entry is treated as an iid draw from `dist` (matches what
+        // legacy ParametricDistribution.calcLogP(Function) did over a
+        // multidimensional sample). Spec ScalarDistribution exposes
+        // logDensity per scalar; sum manually.
+        double sum = 0;
+        for (Double v : values) sum += dist.logDensity(v);
+        return sum;
     }
 
     /**

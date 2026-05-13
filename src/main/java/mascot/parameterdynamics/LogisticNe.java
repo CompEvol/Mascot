@@ -3,23 +3,23 @@ package mascot.parameterdynamics;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.spec.domain.Real;
-import beast.base.spec.inference.parameter.RealScalarParam;
+import beast.base.spec.type.RealScalar;
 
 public class LogisticNe extends NeDynamics {
 
-    public Input<RealScalarParam<Real>> carryingProportionInput = new Input<>(
+    public Input<RealScalar<Real>> carryingProportionInput = new Input<>(
     		"carryingProportion", "the proportion of the current Ne of the maximial Ne (capactity)", Validate.REQUIRED);
-    public Input<RealScalarParam<Real>> capacityInput = new Input<>(
+    public Input<RealScalar<Real>> capacityInput = new Input<>(
     		"capacity", "input of the maximal Ne", Validate.REQUIRED);
-    public Input<RealScalarParam<Real>> growthRateInput = new Input<>(
+    public Input<RealScalar<Real>> growthRateInput = new Input<>(
     		"growthRate", "input of the growth rate", Validate.REQUIRED);
 
     public Input<Double> minNeInput = new Input<>(
     		"minNe", "input of the minimal Ne", 0.0);
 
-    RealScalarParam<Real> cP;
-    RealScalarParam<Real> capacity;
-    RealScalarParam<Real> growthRate;
+    RealScalar<Real> cP;
+    RealScalar<Real> capacity;
+    RealScalar<Real> growthRate;
 
 	@Override
 	public void initAndValidate() {
@@ -43,16 +43,7 @@ public class LogisticNe extends NeDynamics {
 
 	@Override
 	public boolean isDirty() {
-		if (cP.somethingIsDirty())
-			return true;
-
-		if (capacity.somethingIsDirty())
-			return true;
-
-		if (growthRate.somethingIsDirty())
-			return true;
-
-		return false;
+		return isDirtyInput(cP) || isDirtyInput(capacity) || isDirtyInput(growthRate);
 	}
 
 }

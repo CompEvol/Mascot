@@ -6,9 +6,11 @@ import beast.base.core.Input.Validate;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
 import beast.base.inference.StateNode;
-import beast.base.inference.distribution.ParametricDistribution;
+import beast.base.spec.domain.Real;
+import beast.base.spec.inference.distribution.ScalarDistribution;
 import beast.base.spec.inference.parameter.IntVectorParam;
 import beast.base.spec.inference.parameter.RealVectorParam;
+import beast.base.spec.type.RealVector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +21,14 @@ import java.util.Random;
         "If x is multidimensional, the components of x are assumed to be independent, " +
         "so the sum of log probabilities of all elements of x is returned as the prior.")
 public class ErrorSmoothing extends Distribution {
-    final public Input<Function> m_x = new Input<>("x", "point at which the density is calculated", Validate.REQUIRED);
+    final public Input<RealVector<? extends Real>> m_x = new Input<>("x", "point at which the density is calculated", Validate.REQUIRED);
 
-    final public Input<ParametricDistribution> distInput = new Input<>("distr", "distribution used to calculate prior, e.g. normal, beta, gamma.", Validate.REQUIRED);
+    final public Input<ScalarDistribution<?, Double>> distInput = new Input<>("distr", "distribution used to calculate prior, e.g. normal, beta, gamma.", Validate.REQUIRED);
 
     /**
      * shadows distInput *
      */
-    protected ParametricDistribution dist;
+    protected ScalarDistribution<?, Double> dist;
 
     @Override
     public void initAndValidate() {
@@ -36,9 +38,14 @@ public class ErrorSmoothing extends Distribution {
 
     @Override
     public double calculateLogP() {
-        Function x = m_x.get();
-        // spec types enforce bounds via domain, so no explicit check needed
-        logP = dist.calcLogP(x);
+        RealVector<? extends Real> x = m_x.get();
+        // Components of x are treated as iid draws from `dist` — sum the
+        // scalar log-densities. The spec ScalarDistribution doesn't have a
+        // single-shot logP-over-a-vector method; loop manually.
+        logP = 0;
+        for (int i = 0; i < x.size(); i++) {
+            logP += dist.logDensity(x.get(i));
+        }
         if (logP == Double.POSITIVE_INFINITY) {
             logP = Double.NEGATIVE_INFINITY;
         }
@@ -67,19 +74,17 @@ public class ErrorSmoothing extends Distribution {
         sampleConditions(state, random);
 
         // sample distribution parameters
-        Function x = m_x.get();
+        RealVector<? extends Real> x = m_x.get();
 
-        Double[] newx;
         try {
-            newx = dist.sample(1)[0];
-
+            // Spec ScalarDistribution.sample() returns one value per call;
+            // for a vector x we draw size(x) iid samples. m_x is now typed
+            // RealVector<? extends Real>, so only the real-vector branch
+            // applies (the legacy code had an IntVectorParam branch that's
+            // unreachable under the new Input type).
             if (x instanceof RealVectorParam<?> rvp) {
-                for (int i = 0; i < newx.length; i++) {
-                    rvp.set(i, newx[i]);
-                }
-            } else if (x instanceof IntVectorParam<?> ivp) {
-                for (int i = 0; i < newx.length; i++) {
-                    ivp.set(i, (int)Math.round(newx[i]));
+                for (int i = 0; i < rvp.size(); i++) {
+                    rvp.set(i, dist.sample().get(0));
                 }
             }
 
