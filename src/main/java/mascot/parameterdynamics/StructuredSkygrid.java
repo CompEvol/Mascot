@@ -3,12 +3,16 @@ package mascot.parameterdynamics;
 import beast.base.core.Description;
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
+import beast.base.inference.StateNode;
+import beast.base.inference.StateNodeInitialiser;
 import beast.base.spec.domain.Real;
 import beast.base.spec.inference.parameter.RealVectorParam;
 
+import java.util.List;
+
 @Description("Skygrid style dynamics for MASCOT. These assume constant effective population sizes within one state "+
 				"and that these effective population sizes only change within one interval")
-public class StructuredSkygrid extends NeDynamics {
+public class StructuredSkygrid extends NeDynamics implements StateNodeInitialiser {
 	
     public Input<RealVectorParam<? extends Real>> NeLogInput = new Input<>(
     		"NeLog", "input of the log effective population sizes", Validate.REQUIRED);
@@ -44,7 +48,16 @@ public class StructuredSkygrid extends NeDynamics {
 			if(NeLogInput.get().isDirty(i))
 				return true;
 
-		return false;	
+		return false;
+	}
+
+	@Override
+	public void initStateNodes() {
+	}
+
+	@Override
+	public void getInitialisedStateNodes(List<StateNode> stateNodes) {
+		stateNodes.add(NeLogInput.get());
 	}
 
 }

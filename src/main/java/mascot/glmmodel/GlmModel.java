@@ -4,12 +4,16 @@ import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.core.Loggable;
 import beast.base.inference.CalculationNode;
+import beast.base.inference.StateNode;
+import beast.base.inference.StateNodeInitialiser;
 import beast.base.spec.inference.parameter.BoolVectorParam;
 import beast.base.spec.domain.Real;
 import beast.base.spec.inference.parameter.RealScalarParam;
 import beast.base.spec.inference.parameter.RealVectorParam;
 
-public abstract class GlmModel extends CalculationNode implements Loggable {
+import java.util.List;
+
+public abstract class GlmModel extends CalculationNode implements Loggable, StateNodeInitialiser {
 
     public Input<CovariateList> covariateListInput = new Input<>("covariateList", "input of covariates", Validate.REQUIRED);
     public Input<RealVectorParam<? extends Real>> scalerInput = new Input<>("scaler", "input of covariates scaler", Validate.REQUIRED);
@@ -84,6 +88,21 @@ public abstract class GlmModel extends CalculationNode implements Loggable {
 		verticalEntries = 0;
 	}
 
+	// Subclasses (LogLinear, etc.) fix up the dimensions of scaler /
+	// indicator / error parameters during their own initAndValidate. The
+	// default initStateNodes is a no-op; getInitialisedStateNodes reports
+	// the parameters this class takes responsibility for so the framework
+	// can dedupe.
+	@Override
+	public void initStateNodes() {
+	}
 
+	@Override
+	public void getInitialisedStateNodes(List<StateNode> stateNodes) {
+		stateNodes.add(scalerInput.get());
+		stateNodes.add(indicatorInput.get());
+		if (errorInput.get() != null) stateNodes.add(errorInput.get());
+		if (constantErrorInput.get() != null) stateNodes.add(constantErrorInput.get());
+	}
 
 }

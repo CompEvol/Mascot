@@ -2,16 +2,20 @@ package mascot.parameterdynamics;
 
 import beast.base.core.Description;
 import beast.base.core.Input;
+import beast.base.inference.StateNode;
+import beast.base.inference.StateNodeInitialiser;
 import beast.base.spec.domain.Real;
 import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.dynamics.RateShifts;
+
+import java.util.List;
 
 
 /**
  * @author Nicola F. Mueller
  */
 @Description("Populaiton function with values at certain time points that are interpolated in between. Parameter has to be in log space")
-public class Skygrowth extends NeDynamics {
+public class Skygrowth extends NeDynamics implements StateNodeInitialiser {
 	
     final public Input<RealVectorParam<? extends Real>> NeInput = new Input<>("logNe",
             "Nes over time in log space", Input.Validate.REQUIRED);
@@ -112,10 +116,20 @@ public class Skygrowth extends NeDynamics {
 	public boolean isDirty() {
 		if (Ne.isDirty(0))
 			return true;
-		
+
 		return false;
 	}
 
+	// Dimension fixing is already done in initAndValidate; nothing further
+	// needed here. The interface is implemented so the framework knows this
+	// class owns the dimension of NeInput.
+	@Override
+	public void initStateNodes() {
+	}
 
-	
+	@Override
+	public void getInitialisedStateNodes(List<StateNode> stateNodes) {
+		stateNodes.add(NeInput.get());
+	}
+
 }

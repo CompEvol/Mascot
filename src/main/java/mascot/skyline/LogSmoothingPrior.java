@@ -5,9 +5,9 @@ import beast.base.core.Input;
 import beast.base.core.Input.Validate;
 import beast.base.inference.Distribution;
 import beast.base.inference.State;
-import beast.base.inference.distribution.ParametricDistribution;
 import beast.base.spec.domain.Real;
-import beast.base.spec.inference.parameter.RealVectorParam;
+import beast.base.spec.inference.distribution.ScalarDistribution;
+import beast.base.spec.type.RealVector;
 
 import java.util.List;
 import java.util.Random;
@@ -18,39 +18,39 @@ import java.util.Random;
 			"  PLOS Computational Biology 21(9):e1013421,\n"+
 			"  https://doi.org/10.1371/journal.pcbi.1013421")
 public class LogSmoothingPrior extends Distribution {
-	
-    public Input<RealVectorParam<? extends Real>> NeLogInput = new Input<>(
-    		"NeLog", "input of effective population sizes");        
-    
-    final public Input<ParametricDistribution> distInput = new Input<>("distr", 
-    		"distribution used to calculate prior on the difference between intervals, e.g. normal, beta, gamma.", 
+
+    public Input<RealVector<? extends Real>> NeLogInput = new Input<>(
+    		"NeLog", "input of effective population sizes");
+
+    final public Input<ScalarDistribution<?, Double>> distInput = new Input<>("distr",
+    		"distribution used to calculate prior on the difference between intervals, e.g. normal, beta, gamma.",
     		Validate.REQUIRED);
-    
-    final public Input<ParametricDistribution> initDistrInput = new Input<>("initialDistr", 
+
+    final public Input<ScalarDistribution<?, Double>> initDistrInput = new Input<>("initialDistr",
     		"distribution used to calculate prior on the difference between intervals, e.g. normal, beta, gamma.",
     		Input.Validate.OPTIONAL);
-        
-    final public Input<ParametricDistribution> finalDistrInput = new Input<>("finalDistr", 
-    		"distribution used to calculate prior on the difference between intervals, e.g. normal, beta, gamma.", 
+
+    final public Input<ScalarDistribution<?, Double>> finalDistrInput = new Input<>("finalDistr",
+    		"distribution used to calculate prior on the difference between intervals, e.g. normal, beta, gamma.",
     		Input.Validate.OPTIONAL);
-    
-    final public Input<ParametricDistribution> meanDistrInput = new Input<>("meanDistr", 
-    		"distribution used to calculate prior on the difference between intervals, e.g. normal, beta, gamma.", 
-    		Input.Validate.OPTIONAL);   
-    
-    private RealVectorParam<? extends Real> NeLog;
-    
-    protected ParametricDistribution dist;
-    protected ParametricDistribution initDistr;
-    protected ParametricDistribution finalDistr;
-    protected ParametricDistribution meanDistr;
-    
+
+    final public Input<ScalarDistribution<?, Double>> meanDistrInput = new Input<>("meanDistr",
+    		"distribution used to calculate prior on the difference between intervals, e.g. normal, beta, gamma.",
+    		Input.Validate.OPTIONAL);
+
+    private RealVector<? extends Real> NeLog;
+
+    protected ScalarDistribution<?, Double> dist;
+    protected ScalarDistribution<?, Double> initDistr;
+    protected ScalarDistribution<?, Double> finalDistr;
+    protected ScalarDistribution<?, Double> meanDistr;
+
     @Override
     public void initAndValidate() {
-    	NeLog = NeLogInput.get();    	
+    	NeLog = NeLogInput.get();
         dist = distInput.get();
-        
-        
+
+
         if (initDistrInput.get()!=null)
         	initDistr = initDistrInput.get();
         if (finalDistrInput.get()!=null)
@@ -77,14 +77,14 @@ public class LogSmoothingPrior extends Distribution {
 	@Override
 	public void sample(State state, Random random) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
     public double calculateLogP() {
         logP = 0;
-        
-               
-        
+
+
+
         //loop over all time points
     	for (int j = 1; j < NeLog.size(); j++){
     		double diff = NeLog.get(j) - NeLog.get(j-1);
@@ -106,7 +106,7 @@ public class LogSmoothingPrior extends Distribution {
         	mean /= NeLog.size();
     		logP += meanDistr.logDensity(mean);
         }
-        
+
         return logP;
     }
 }

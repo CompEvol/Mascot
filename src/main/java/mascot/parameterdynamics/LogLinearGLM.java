@@ -2,13 +2,17 @@ package mascot.parameterdynamics;
 
 import beast.base.core.Input;
 import beast.base.core.Input.Validate;
+import beast.base.inference.StateNode;
+import beast.base.inference.StateNodeInitialiser;
 import beast.base.spec.inference.parameter.BoolVectorParam;
 import beast.base.spec.domain.Real;
 import beast.base.spec.inference.parameter.RealScalarParam;
 import beast.base.spec.inference.parameter.RealVectorParam;
 import mascot.glmmodel.CovariateList;
 
-public class LogLinearGLM extends NeDynamics {
+import java.util.List;
+
+public class LogLinearGLM extends NeDynamics implements StateNodeInitialiser {
     public Input<CovariateList> covariateListInput = new Input<>("covariateList", "input of covariates", Validate.REQUIRED);
     public Input<RealVectorParam<? extends Real>> scalerInput = new Input<>("scaler", "input of covariates scaler", Validate.REQUIRED);
     public Input<BoolVectorParam> indicatorInput = new Input<>("indicator", "input of covariates scaler", Validate.REQUIRED);
@@ -131,5 +135,15 @@ public class LogLinearGLM extends NeDynamics {
 		valuesKnown = false;
 	}
 
+	@Override
+	public void initStateNodes() {
+	}
+
+	@Override
+	public void getInitialisedStateNodes(List<StateNode> stateNodes) {
+		stateNodes.add(scalerInput.get());
+		stateNodes.add(indicatorInput.get());
+		if (errorInput.get() != null) stateNodes.add(errorInput.get());
+	}
 
 }
