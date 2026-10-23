@@ -93,12 +93,12 @@ public class Euler2ndOrderVec5F extends Euler2ndOrderFused {
 			final FloatVector d4 = p4.mul(sc.sub(t4)).add(p0.mul(rt[3])).add(p1.mul(rt[7])).add(p2.mul(rt[11])).add(p3.mul(rt[15])).sub(p4.mul(out[4]));
 			d4.intoArray(D4, i); aD4 = aD4.add(d4);
 		}
-		dLast = -accCoal.reduceLanes(VectorOperators.ADD) / 2;
-		sD[0] = aD0.reduceLanes(VectorOperators.ADD);
-		sD[1] = aD1.reduceLanes(VectorOperators.ADD);
-		sD[2] = aD2.reduceLanes(VectorOperators.ADD);
-		sD[3] = aD3.reduceLanes(VectorOperators.ADD);
-		sD[4] = aD4.reduceLanes(VectorOperators.ADD);
+		dLast = -LaneSums.sum(accCoal) / 2;
+		sD[0] = LaneSums.sum(aD0);
+		sD[1] = LaneSums.sum(aD1);
+		sD[2] = LaneSums.sum(aD2);
+		sD[3] = LaneSums.sum(aD3);
+		sD[4] = LaneSums.sum(aD4);
 	}
 
 	/** second derivative and the max of the approximate third derivative */
@@ -141,7 +141,7 @@ public class Euler2ndOrderVec5F extends Euler2ndOrderFused {
 			final FloatVector dd4 = sc.sub(t4).mul(d4).add(p4.mul(pc.sub(d4.neg().add(q4).mul(c4)))).add(d0.mul(rt[3])).add(d1.mul(rt[7])).add(d2.mul(rt[11])).add(d3.mul(rt[15])).sub(d4.mul(out[4]));
 			dd4.intoArray(DD4, i);
 		}
-		ddLast = -accPc.reduceLanes(VectorOperators.ADD) / 2;
+		ddLast = -LaneSums.sum(accPc) / 2;
 	}
 
 	/** max of the approximate third derivative */
@@ -261,11 +261,11 @@ public class Euler2ndOrderVec5F extends Euler2ndOrderFused {
 			y3.intoArray(P3, i); aS3 = aS3.add(y3);
 			y4.intoArray(P4, i); aS4 = aS4.add(y4);
 		}
-		sS[0] = aS0.reduceLanes(VectorOperators.ADD);
-		sS[1] = aS1.reduceLanes(VectorOperators.ADD);
-		sS[2] = aS2.reduceLanes(VectorOperators.ADD);
-		sS[3] = aS3.reduceLanes(VectorOperators.ADD);
-		sS[4] = aS4.reduceLanes(VectorOperators.ADD);
+		sS[0] = LaneSums.sum(aS0);
+		sS[1] = LaneSums.sum(aS1);
+		sS[2] = LaneSums.sum(aS2);
+		sS[3] = LaneSums.sum(aS3);
+		sS[4] = LaneSums.sum(aS4);
 		return failed;
 	}
 

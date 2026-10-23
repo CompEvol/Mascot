@@ -98,13 +98,13 @@ public class Euler2ndOrderVec6F extends Euler2ndOrderFused {
 			final FloatVector d5 = p5.mul(sc.sub(t5)).add(p0.mul(rt[4])).add(p1.mul(rt[9])).add(p2.mul(rt[14])).add(p3.mul(rt[19])).add(p4.mul(rt[24])).sub(p5.mul(out[5]));
 			d5.intoArray(D5, i); aD5 = aD5.add(d5);
 		}
-		dLast = -accCoal.reduceLanes(VectorOperators.ADD) / 2;
-		sD[0] = aD0.reduceLanes(VectorOperators.ADD);
-		sD[1] = aD1.reduceLanes(VectorOperators.ADD);
-		sD[2] = aD2.reduceLanes(VectorOperators.ADD);
-		sD[3] = aD3.reduceLanes(VectorOperators.ADD);
-		sD[4] = aD4.reduceLanes(VectorOperators.ADD);
-		sD[5] = aD5.reduceLanes(VectorOperators.ADD);
+		dLast = -LaneSums.sum(accCoal) / 2;
+		sD[0] = LaneSums.sum(aD0);
+		sD[1] = LaneSums.sum(aD1);
+		sD[2] = LaneSums.sum(aD2);
+		sD[3] = LaneSums.sum(aD3);
+		sD[4] = LaneSums.sum(aD4);
+		sD[5] = LaneSums.sum(aD5);
 	}
 
 	/** second derivative and the max of the approximate third derivative */
@@ -152,7 +152,7 @@ public class Euler2ndOrderVec6F extends Euler2ndOrderFused {
 			final FloatVector dd5 = sc.sub(t5).mul(d5).add(p5.mul(pc.sub(d5.neg().add(q5).mul(c5)))).add(d0.mul(rt[4])).add(d1.mul(rt[9])).add(d2.mul(rt[14])).add(d3.mul(rt[19])).add(d4.mul(rt[24])).sub(d5.mul(out[5]));
 			dd5.intoArray(DD5, i);
 		}
-		ddLast = -accPc.reduceLanes(VectorOperators.ADD) / 2;
+		ddLast = -LaneSums.sum(accPc) / 2;
 	}
 
 	/** max of the approximate third derivative */
@@ -286,12 +286,12 @@ public class Euler2ndOrderVec6F extends Euler2ndOrderFused {
 			y4.intoArray(P4, i); aS4 = aS4.add(y4);
 			y5.intoArray(P5, i); aS5 = aS5.add(y5);
 		}
-		sS[0] = aS0.reduceLanes(VectorOperators.ADD);
-		sS[1] = aS1.reduceLanes(VectorOperators.ADD);
-		sS[2] = aS2.reduceLanes(VectorOperators.ADD);
-		sS[3] = aS3.reduceLanes(VectorOperators.ADD);
-		sS[4] = aS4.reduceLanes(VectorOperators.ADD);
-		sS[5] = aS5.reduceLanes(VectorOperators.ADD);
+		sS[0] = LaneSums.sum(aS0);
+		sS[1] = LaneSums.sum(aS1);
+		sS[2] = LaneSums.sum(aS2);
+		sS[3] = LaneSums.sum(aS3);
+		sS[4] = LaneSums.sum(aS4);
+		sS[5] = LaneSums.sum(aS5);
 		return failed;
 	}
 

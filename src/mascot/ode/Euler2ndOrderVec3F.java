@@ -91,8 +91,8 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 				d0.intoArray(D0, i); d1.intoArray(D1, i); d2.intoArray(D2, i);
 				accD0 = accD0.add(d0); accD1 = accD1.add(d1); accD2 = accD2.add(d2);
 			}
-			final double dLast = -accCoal.reduceLanes(VectorOperators.ADD) / 2;
-			final double sD0 = accD0.reduceLanes(VectorOperators.ADD), sD1 = accD1.reduceLanes(VectorOperators.ADD), sD2 = accD2.reduceLanes(VectorOperators.ADD);
+			final double dLast = -LaneSums.sum(accCoal) / 2;
+			final double sD0 = LaneSums.sum(accD0), sD1 = LaneSums.sum(accD1), sD2 = LaneSums.sum(accD2);
 			final FloatVector vsD0 = FloatVector.broadcast(SP, (float) (sD0)), vsD1 = FloatVector.broadcast(SP, (float) (sD1)), vsD2 = FloatVector.broadcast(SP, (float) (sD2));
 
 			// pass 2: second and approximate third derivative, max of the third derivative
@@ -125,7 +125,7 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 				FloatVector e2 = c2.mul(dd2).add(dd0.mul(vr02)).add(dd1.mul(vr12)).sub(dd2.mul(vout2));
 				accMax = accMax.max(e0.abs()).max(e1.abs()).max(e2.abs());
 			}
-			final double ddLast = -accPc.reduceLanes(VectorOperators.ADD) / 2;
+			final double ddLast = -LaneSums.sum(accPc) / 2;
 			final double maxDDD = accMax.reduceLanes(VectorOperators.MAX);
 
 			// pass 3: time step; check all elements at once, and only search a smaller step if needed
@@ -191,9 +191,9 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 					y0.intoArray(P0, i); y1.intoArray(P1, i); y2.intoArray(P2, i);
 					accS0 = accS0.add(y0); accS1 = accS1.add(y1); accS2 = accS2.add(y2);
 				}
-				sS0 = accS0.reduceLanes(VectorOperators.ADD);
-				sS1 = accS1.reduceLanes(VectorOperators.ADD);
-				sS2 = accS2.reduceLanes(VectorOperators.ADD);
+				sS0 = LaneSums.sum(accS0);
+				sS1 = LaneSums.sum(accS1);
+				sS2 = LaneSums.sum(accS2);
 				duration -= timeStep;
 			}
 

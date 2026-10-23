@@ -113,16 +113,16 @@ public class Euler2ndOrderVec9F extends Euler2ndOrderFused {
 			final FloatVector d8 = p8.mul(sc.sub(t8)).add(p0.mul(rt[7])).add(p1.mul(rt[15])).add(p2.mul(rt[23])).add(p3.mul(rt[31])).add(p4.mul(rt[39])).add(p5.mul(rt[47])).add(p6.mul(rt[55])).add(p7.mul(rt[63])).sub(p8.mul(out[8]));
 			d8.intoArray(D8, i); aD8 = aD8.add(d8);
 		}
-		dLast = -accCoal.reduceLanes(VectorOperators.ADD) / 2;
-		sD[0] = aD0.reduceLanes(VectorOperators.ADD);
-		sD[1] = aD1.reduceLanes(VectorOperators.ADD);
-		sD[2] = aD2.reduceLanes(VectorOperators.ADD);
-		sD[3] = aD3.reduceLanes(VectorOperators.ADD);
-		sD[4] = aD4.reduceLanes(VectorOperators.ADD);
-		sD[5] = aD5.reduceLanes(VectorOperators.ADD);
-		sD[6] = aD6.reduceLanes(VectorOperators.ADD);
-		sD[7] = aD7.reduceLanes(VectorOperators.ADD);
-		sD[8] = aD8.reduceLanes(VectorOperators.ADD);
+		dLast = -LaneSums.sum(accCoal) / 2;
+		sD[0] = LaneSums.sum(aD0);
+		sD[1] = LaneSums.sum(aD1);
+		sD[2] = LaneSums.sum(aD2);
+		sD[3] = LaneSums.sum(aD3);
+		sD[4] = LaneSums.sum(aD4);
+		sD[5] = LaneSums.sum(aD5);
+		sD[6] = LaneSums.sum(aD6);
+		sD[7] = LaneSums.sum(aD7);
+		sD[8] = LaneSums.sum(aD8);
 	}
 
 	/** second derivative and the max of the approximate third derivative */
@@ -185,7 +185,7 @@ public class Euler2ndOrderVec9F extends Euler2ndOrderFused {
 			final FloatVector dd8 = sc.sub(t8).mul(d8).add(p8.mul(pc.sub(d8.neg().add(q8).mul(c8)))).add(d0.mul(rt[7])).add(d1.mul(rt[15])).add(d2.mul(rt[23])).add(d3.mul(rt[31])).add(d4.mul(rt[39])).add(d5.mul(rt[47])).add(d6.mul(rt[55])).add(d7.mul(rt[63])).sub(d8.mul(out[8]));
 			dd8.intoArray(DD8, i);
 		}
-		ddLast = -accPc.reduceLanes(VectorOperators.ADD) / 2;
+		ddLast = -LaneSums.sum(accPc) / 2;
 	}
 
 	/** max of the approximate third derivative */
@@ -361,15 +361,15 @@ public class Euler2ndOrderVec9F extends Euler2ndOrderFused {
 			y7.intoArray(P7, i); aS7 = aS7.add(y7);
 			y8.intoArray(P8, i); aS8 = aS8.add(y8);
 		}
-		sS[0] = aS0.reduceLanes(VectorOperators.ADD);
-		sS[1] = aS1.reduceLanes(VectorOperators.ADD);
-		sS[2] = aS2.reduceLanes(VectorOperators.ADD);
-		sS[3] = aS3.reduceLanes(VectorOperators.ADD);
-		sS[4] = aS4.reduceLanes(VectorOperators.ADD);
-		sS[5] = aS5.reduceLanes(VectorOperators.ADD);
-		sS[6] = aS6.reduceLanes(VectorOperators.ADD);
-		sS[7] = aS7.reduceLanes(VectorOperators.ADD);
-		sS[8] = aS8.reduceLanes(VectorOperators.ADD);
+		sS[0] = LaneSums.sum(aS0);
+		sS[1] = LaneSums.sum(aS1);
+		sS[2] = LaneSums.sum(aS2);
+		sS[3] = LaneSums.sum(aS3);
+		sS[4] = LaneSums.sum(aS4);
+		sS[5] = LaneSums.sum(aS5);
+		sS[6] = LaneSums.sum(aS6);
+		sS[7] = LaneSums.sum(aS7);
+		sS[8] = LaneSums.sum(aS8);
 		return failed;
 	}
 

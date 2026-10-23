@@ -133,20 +133,20 @@ public class Euler2ndOrderVec13F extends Euler2ndOrderFused {
 			final FloatVector d12 = p12.mul(sc.sub(t12)).add(p0.mul(rt[11])).add(p1.mul(rt[23])).add(p2.mul(rt[35])).add(p3.mul(rt[47])).add(p4.mul(rt[59])).add(p5.mul(rt[71])).add(p6.mul(rt[83])).add(p7.mul(rt[95])).add(p8.mul(rt[107])).add(p9.mul(rt[119])).add(p10.mul(rt[131])).add(p11.mul(rt[143])).sub(p12.mul(out[12]));
 			d12.intoArray(D12, i); aD12 = aD12.add(d12);
 		}
-		dLast = -accCoal.reduceLanes(VectorOperators.ADD) / 2;
-		sD[0] = aD0.reduceLanes(VectorOperators.ADD);
-		sD[1] = aD1.reduceLanes(VectorOperators.ADD);
-		sD[2] = aD2.reduceLanes(VectorOperators.ADD);
-		sD[3] = aD3.reduceLanes(VectorOperators.ADD);
-		sD[4] = aD4.reduceLanes(VectorOperators.ADD);
-		sD[5] = aD5.reduceLanes(VectorOperators.ADD);
-		sD[6] = aD6.reduceLanes(VectorOperators.ADD);
-		sD[7] = aD7.reduceLanes(VectorOperators.ADD);
-		sD[8] = aD8.reduceLanes(VectorOperators.ADD);
-		sD[9] = aD9.reduceLanes(VectorOperators.ADD);
-		sD[10] = aD10.reduceLanes(VectorOperators.ADD);
-		sD[11] = aD11.reduceLanes(VectorOperators.ADD);
-		sD[12] = aD12.reduceLanes(VectorOperators.ADD);
+		dLast = -LaneSums.sum(accCoal) / 2;
+		sD[0] = LaneSums.sum(aD0);
+		sD[1] = LaneSums.sum(aD1);
+		sD[2] = LaneSums.sum(aD2);
+		sD[3] = LaneSums.sum(aD3);
+		sD[4] = LaneSums.sum(aD4);
+		sD[5] = LaneSums.sum(aD5);
+		sD[6] = LaneSums.sum(aD6);
+		sD[7] = LaneSums.sum(aD7);
+		sD[8] = LaneSums.sum(aD8);
+		sD[9] = LaneSums.sum(aD9);
+		sD[10] = LaneSums.sum(aD10);
+		sD[11] = LaneSums.sum(aD11);
+		sD[12] = LaneSums.sum(aD12);
 	}
 
 	/** second derivative and the max of the approximate third derivative */
@@ -229,7 +229,7 @@ public class Euler2ndOrderVec13F extends Euler2ndOrderFused {
 			final FloatVector dd12 = sc.sub(t12).mul(d12).add(p12.mul(pc.sub(d12.neg().add(q12).mul(c12)))).add(d0.mul(rt[11])).add(d1.mul(rt[23])).add(d2.mul(rt[35])).add(d3.mul(rt[47])).add(d4.mul(rt[59])).add(d5.mul(rt[71])).add(d6.mul(rt[83])).add(d7.mul(rt[95])).add(d8.mul(rt[107])).add(d9.mul(rt[119])).add(d10.mul(rt[131])).add(d11.mul(rt[143])).sub(d12.mul(out[12]));
 			dd12.intoArray(DD12, i);
 		}
-		ddLast = -accPc.reduceLanes(VectorOperators.ADD) / 2;
+		ddLast = -LaneSums.sum(accPc) / 2;
 	}
 
 	/** max of the approximate third derivative */
@@ -461,19 +461,19 @@ public class Euler2ndOrderVec13F extends Euler2ndOrderFused {
 			y11.intoArray(P11, i); aS11 = aS11.add(y11);
 			y12.intoArray(P12, i); aS12 = aS12.add(y12);
 		}
-		sS[0] = aS0.reduceLanes(VectorOperators.ADD);
-		sS[1] = aS1.reduceLanes(VectorOperators.ADD);
-		sS[2] = aS2.reduceLanes(VectorOperators.ADD);
-		sS[3] = aS3.reduceLanes(VectorOperators.ADD);
-		sS[4] = aS4.reduceLanes(VectorOperators.ADD);
-		sS[5] = aS5.reduceLanes(VectorOperators.ADD);
-		sS[6] = aS6.reduceLanes(VectorOperators.ADD);
-		sS[7] = aS7.reduceLanes(VectorOperators.ADD);
-		sS[8] = aS8.reduceLanes(VectorOperators.ADD);
-		sS[9] = aS9.reduceLanes(VectorOperators.ADD);
-		sS[10] = aS10.reduceLanes(VectorOperators.ADD);
-		sS[11] = aS11.reduceLanes(VectorOperators.ADD);
-		sS[12] = aS12.reduceLanes(VectorOperators.ADD);
+		sS[0] = LaneSums.sum(aS0);
+		sS[1] = LaneSums.sum(aS1);
+		sS[2] = LaneSums.sum(aS2);
+		sS[3] = LaneSums.sum(aS3);
+		sS[4] = LaneSums.sum(aS4);
+		sS[5] = LaneSums.sum(aS5);
+		sS[6] = LaneSums.sum(aS6);
+		sS[7] = LaneSums.sum(aS7);
+		sS[8] = LaneSums.sum(aS8);
+		sS[9] = LaneSums.sum(aS9);
+		sS[10] = LaneSums.sum(aS10);
+		sS[11] = LaneSums.sum(aS11);
+		sS[12] = LaneSums.sum(aS12);
 		return failed;
 	}
 
