@@ -277,57 +277,57 @@ public class Euler2ndOrderVec11F extends Euler2ndOrderFused {
 			VectorMask<Float> m = SP.maskAll(false);
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P0, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D0, i).mul(ts)).add(FloatVector.fromArray(SP, DD0, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D0, i).mul(ts).add(FloatVector.fromArray(SP, DD0, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P1, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D1, i).mul(ts)).add(FloatVector.fromArray(SP, DD1, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D1, i).mul(ts).add(FloatVector.fromArray(SP, DD1, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P2, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D2, i).mul(ts)).add(FloatVector.fromArray(SP, DD2, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D2, i).mul(ts).add(FloatVector.fromArray(SP, DD2, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P3, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D3, i).mul(ts)).add(FloatVector.fromArray(SP, DD3, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D3, i).mul(ts).add(FloatVector.fromArray(SP, DD3, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P4, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D4, i).mul(ts)).add(FloatVector.fromArray(SP, DD4, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D4, i).mul(ts).add(FloatVector.fromArray(SP, DD4, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P5, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D5, i).mul(ts)).add(FloatVector.fromArray(SP, DD5, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D5, i).mul(ts).add(FloatVector.fromArray(SP, DD5, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P6, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D6, i).mul(ts)).add(FloatVector.fromArray(SP, DD6, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D6, i).mul(ts).add(FloatVector.fromArray(SP, DD6, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P7, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D7, i).mul(ts)).add(FloatVector.fromArray(SP, DD7, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D7, i).mul(ts).add(FloatVector.fromArray(SP, DD7, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P8, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D8, i).mul(ts)).add(FloatVector.fromArray(SP, DD8, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D8, i).mul(ts).add(FloatVector.fromArray(SP, DD8, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P9, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D9, i).mul(ts)).add(FloatVector.fromArray(SP, DD9, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D9, i).mul(ts).add(FloatVector.fromArray(SP, DD9, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P10, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D10, i).mul(ts)).add(FloatVector.fromArray(SP, DD10, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D10, i).mul(ts).add(FloatVector.fromArray(SP, DD10, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			if (m.anyTrue()) return true;
@@ -474,18 +474,20 @@ public class Euler2ndOrderVec11F extends Euler2ndOrderFused {
 			double timeStep = FastMath.min(FastMath.cbrt(epsilon * 6 / maxDDD), FastMath.min(duration, max_step));
 			double timeStepSquare = timeStep * timeStep * 0.5;
 			if (needsSearch(Lpad, (float) timeStep, (float) timeStepSquare)) {
-				// same sequential search as Euler2ndOrder.updateP, in the original element order
+				// same sequential search as Euler2ndOrder.updateP, in the original element order, but on the
+				// float values the update stores: in double, float rounding errors in D can push a probability
+				// of exactly 1 (or 0) out of range for any step, and the step would shrink without end
 				final float[][] PA = {P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10}, DA = {D0, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10}, DDA = {DD0, DD1, DD2, DD3, DD4, DD5, DD6, DD7, DD8, DD9, DD10};
 				search:
 				for (int i = 0; i < L; i++) {
 					for (int j = 0; j < N; j++) {
-						double new_val = PA[j][i] + DA[j][i] * timeStep + DDA[j][i] * timeStepSquare;
-						double diff = FastMath.abs(new_val - PA[j][i]);
+						float new_val = PA[j][i] + (DA[j][i] * (float) timeStep + DDA[j][i] * (float) timeStepSquare);
+						float diff = FastMath.abs(new_val - PA[j][i]);
 						int its = 0;
 						while (new_val > 1 || new_val < 0 || diff > 0.2) {
 							timeStep *= 0.9;
 							timeStepSquare = timeStep * timeStep * 0.5;
-							new_val = PA[j][i] + DA[j][i] * timeStep + DDA[j][i] * timeStepSquare;
+							new_val = PA[j][i] + (DA[j][i] * (float) timeStep + DDA[j][i] * (float) timeStepSquare);
 							diff = FastMath.abs(new_val - PA[j][i]);
 							its++;
 							if (its > 10000) {

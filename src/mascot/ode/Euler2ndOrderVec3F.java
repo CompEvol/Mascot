@@ -139,20 +139,22 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 				}
 			}
 			if (needsSearch) {
-				// same sequential search as Euler2ndOrder3.updateP, in the original element order
+				// same sequential search as Euler2ndOrder3.updateP, in the original element order, but on the
+				// float values the update stores: in double, float rounding errors in D can push a probability
+				// of exactly 1 (or 0) out of range for any step, and the step would shrink without end
 				search:
 				for (int i = 0; i < L; i++) {
 					for (int j = 0; j < 3; j++) {
 						final float[] PJ = j == 0 ? P0 : (j == 1 ? P1 : P2);
 						final float[] DJ = j == 0 ? D0 : (j == 1 ? D1 : D2);
 						final float[] DDJ = j == 0 ? DD0 : (j == 1 ? DD1 : DD2);
-						double new_val = PJ[i] + DJ[i] * timeStep + DDJ[i] * timeStepSquare;
-						double diff = FastMath.abs(new_val - PJ[i]);
+						float new_val = PJ[i] + (DJ[i] * (float) timeStep + DDJ[i] * (float) timeStepSquare);
+						float diff = FastMath.abs(new_val - PJ[i]);
 						int its = 0;
 						while (new_val > 1 || new_val < 0 || diff > 0.2) {
 							timeStep *= 0.9;
 							timeStepSquare = timeStep * timeStep * 0.5;
-							new_val = PJ[i] + DJ[i] * timeStep + DDJ[i] * timeStepSquare;
+							new_val = PJ[i] + (DJ[i] * (float) timeStep + DDJ[i] * (float) timeStepSquare);
 							diff = FastMath.abs(new_val - PJ[i]);
 							its++;
 							if (its > 10000) {
@@ -212,7 +214,7 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 
 	private static boolean outOfRange(float[] P, float[] D, float[] DD, int i, FloatVector vts, FloatVector vtss) {
 		FloatVector p = FloatVector.fromArray(SP, P, i);
-		FloatVector n = p.add(FloatVector.fromArray(SP, D, i).mul(vts)).add(FloatVector.fromArray(SP, DD, i).mul(vtss));
+		FloatVector n = p.add(FloatVector.fromArray(SP, D, i).mul(vts).add(FloatVector.fromArray(SP, DD, i).mul(vtss)));
 		return n.compare(VectorOperators.GT, 1f)
 				.or(n.compare(VectorOperators.LT, 0f))
 				.or(n.sub(p).abs().compare(VectorOperators.GT, 0.2f))
