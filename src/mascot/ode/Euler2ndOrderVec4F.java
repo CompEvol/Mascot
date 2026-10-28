@@ -88,11 +88,11 @@ public class Euler2ndOrderVec4F extends Euler2ndOrderFused {
 			final FloatVector d3 = p3.mul(sc.sub(t3)).add(p0.mul(rt[2])).add(p1.mul(rt[5])).add(p2.mul(rt[8])).sub(p3.mul(out[3]));
 			d3.intoArray(D3, i); aD3 = aD3.add(d3);
 		}
-		dLast = -accCoal.reduceLanes(VectorOperators.ADD) / 2;
-		sD[0] = aD0.reduceLanes(VectorOperators.ADD);
-		sD[1] = aD1.reduceLanes(VectorOperators.ADD);
-		sD[2] = aD2.reduceLanes(VectorOperators.ADD);
-		sD[3] = aD3.reduceLanes(VectorOperators.ADD);
+		dLast = -LaneSums.sum(accCoal) / 2;
+		sD[0] = LaneSums.sum(aD0);
+		sD[1] = LaneSums.sum(aD1);
+		sD[2] = LaneSums.sum(aD2);
+		sD[3] = LaneSums.sum(aD3);
 	}
 
 	/** second derivative and the max of the approximate third derivative */
@@ -130,7 +130,7 @@ public class Euler2ndOrderVec4F extends Euler2ndOrderFused {
 			final FloatVector dd3 = sc.sub(t3).mul(d3).add(p3.mul(pc.sub(d3.neg().add(q3).mul(c3)))).add(d0.mul(rt[2])).add(d1.mul(rt[5])).add(d2.mul(rt[8])).sub(d3.mul(out[3]));
 			dd3.intoArray(DD3, i);
 		}
-		ddLast = -accPc.reduceLanes(VectorOperators.ADD) / 2;
+		ddLast = -LaneSums.sum(accPc) / 2;
 	}
 
 	/** max of the approximate third derivative */
@@ -172,22 +172,22 @@ public class Euler2ndOrderVec4F extends Euler2ndOrderFused {
 			VectorMask<Float> m = SP.maskAll(false);
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P0, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D0, i).mul(ts)).add(FloatVector.fromArray(SP, DD0, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D0, i).mul(ts).add(FloatVector.fromArray(SP, DD0, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P1, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D1, i).mul(ts)).add(FloatVector.fromArray(SP, DD1, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D1, i).mul(ts).add(FloatVector.fromArray(SP, DD1, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P2, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D2, i).mul(ts)).add(FloatVector.fromArray(SP, DD2, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D2, i).mul(ts).add(FloatVector.fromArray(SP, DD2, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			{
 				final FloatVector p = FloatVector.fromArray(SP, P3, i);
-				final FloatVector nv = p.add(FloatVector.fromArray(SP, D3, i).mul(ts)).add(FloatVector.fromArray(SP, DD3, i).mul(tss));
+				final FloatVector nv = p.add(FloatVector.fromArray(SP, D3, i).mul(ts).add(FloatVector.fromArray(SP, DD3, i).mul(tss)));
 				m = m.or(nv.compare(VectorOperators.GT, 1.0f)).or(nv.compare(VectorOperators.LT, 0.0f)).or(nv.sub(p).abs().compare(VectorOperators.GT, 0.2f));
 			}
 			if (m.anyTrue()) return true;
@@ -236,10 +236,10 @@ public class Euler2ndOrderVec4F extends Euler2ndOrderFused {
 			y2.intoArray(P2, i); aS2 = aS2.add(y2);
 			y3.intoArray(P3, i); aS3 = aS3.add(y3);
 		}
-		sS[0] = aS0.reduceLanes(VectorOperators.ADD);
-		sS[1] = aS1.reduceLanes(VectorOperators.ADD);
-		sS[2] = aS2.reduceLanes(VectorOperators.ADD);
-		sS[3] = aS3.reduceLanes(VectorOperators.ADD);
+		sS[0] = LaneSums.sum(aS0);
+		sS[1] = LaneSums.sum(aS1);
+		sS[2] = LaneSums.sum(aS2);
+		sS[3] = LaneSums.sum(aS3);
 		return failed;
 	}
 
@@ -278,18 +278,20 @@ public class Euler2ndOrderVec4F extends Euler2ndOrderFused {
 			double timeStep = FastMath.min(FastMath.cbrt(epsilon * 6 / maxDDD), FastMath.min(duration, max_step));
 			double timeStepSquare = timeStep * timeStep * 0.5;
 			if (needsSearch(Lpad, (float) timeStep, (float) timeStepSquare)) {
-				// same sequential search as Euler2ndOrder.updateP, in the original element order
+				// same sequential search as Euler2ndOrder.updateP, in the original element order, but on the
+				// float values the update stores: in double, float rounding errors in D can push a probability
+				// of exactly 1 (or 0) out of range for any step, and the step would shrink without end
 				final float[][] PA = {P0, P1, P2, P3}, DA = {D0, D1, D2, D3}, DDA = {DD0, DD1, DD2, DD3};
 				search:
 				for (int i = 0; i < L; i++) {
 					for (int j = 0; j < N; j++) {
-						double new_val = PA[j][i] + DA[j][i] * timeStep + DDA[j][i] * timeStepSquare;
-						double diff = FastMath.abs(new_val - PA[j][i]);
+						float new_val = PA[j][i] + (DA[j][i] * (float) timeStep + DDA[j][i] * (float) timeStepSquare);
+						float diff = FastMath.abs(new_val - PA[j][i]);
 						int its = 0;
 						while (new_val > 1 || new_val < 0 || diff > 0.2) {
 							timeStep *= 0.9;
 							timeStepSquare = timeStep * timeStep * 0.5;
-							new_val = PA[j][i] + DA[j][i] * timeStep + DDA[j][i] * timeStepSquare;
+							new_val = PA[j][i] + (DA[j][i] * (float) timeStep + DDA[j][i] * (float) timeStepSquare);
 							diff = FastMath.abs(new_val - PA[j][i]);
 							its++;
 							if (its > 10000) {

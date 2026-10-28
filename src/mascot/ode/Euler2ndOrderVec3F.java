@@ -91,8 +91,8 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 				d0.intoArray(D0, i); d1.intoArray(D1, i); d2.intoArray(D2, i);
 				accD0 = accD0.add(d0); accD1 = accD1.add(d1); accD2 = accD2.add(d2);
 			}
-			final double dLast = -accCoal.reduceLanes(VectorOperators.ADD) / 2;
-			final double sD0 = accD0.reduceLanes(VectorOperators.ADD), sD1 = accD1.reduceLanes(VectorOperators.ADD), sD2 = accD2.reduceLanes(VectorOperators.ADD);
+			final double dLast = -LaneSums.sum(accCoal) / 2;
+			final double sD0 = LaneSums.sum(accD0), sD1 = LaneSums.sum(accD1), sD2 = LaneSums.sum(accD2);
 			final FloatVector vsD0 = FloatVector.broadcast(SP, (float) (sD0)), vsD1 = FloatVector.broadcast(SP, (float) (sD1)), vsD2 = FloatVector.broadcast(SP, (float) (sD2));
 
 			// pass 2: second and approximate third derivative, max of the third derivative
@@ -125,7 +125,7 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 				FloatVector e2 = c2.mul(dd2).add(dd0.mul(vr02)).add(dd1.mul(vr12)).sub(dd2.mul(vout2));
 				accMax = accMax.max(e0.abs()).max(e1.abs()).max(e2.abs());
 			}
-			final double ddLast = -accPc.reduceLanes(VectorOperators.ADD) / 2;
+			final double ddLast = -LaneSums.sum(accPc) / 2;
 			final double maxDDD = accMax.reduceLanes(VectorOperators.MAX);
 
 			// pass 3: time step; check all elements at once, and only search a smaller step if needed
@@ -139,20 +139,22 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 				}
 			}
 			if (needsSearch) {
-				// same sequential search as Euler2ndOrder3.updateP, in the original element order
+				// same sequential search as Euler2ndOrder3.updateP, in the original element order, but on the
+				// float values the update stores: in double, float rounding errors in D can push a probability
+				// of exactly 1 (or 0) out of range for any step, and the step would shrink without end
 				search:
 				for (int i = 0; i < L; i++) {
 					for (int j = 0; j < 3; j++) {
 						final float[] PJ = j == 0 ? P0 : (j == 1 ? P1 : P2);
 						final float[] DJ = j == 0 ? D0 : (j == 1 ? D1 : D2);
 						final float[] DDJ = j == 0 ? DD0 : (j == 1 ? DD1 : DD2);
-						double new_val = PJ[i] + DJ[i] * timeStep + DDJ[i] * timeStepSquare;
-						double diff = FastMath.abs(new_val - PJ[i]);
+						float new_val = PJ[i] + (DJ[i] * (float) timeStep + DDJ[i] * (float) timeStepSquare);
+						float diff = FastMath.abs(new_val - PJ[i]);
 						int its = 0;
 						while (new_val > 1 || new_val < 0 || diff > 0.2) {
 							timeStep *= 0.9;
 							timeStepSquare = timeStep * timeStep * 0.5;
-							new_val = PJ[i] + DJ[i] * timeStep + DDJ[i] * timeStepSquare;
+							new_val = PJ[i] + (DJ[i] * (float) timeStep + DDJ[i] * (float) timeStepSquare);
 							diff = FastMath.abs(new_val - PJ[i]);
 							its++;
 							if (its > 10000) {
@@ -191,9 +193,9 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 					y0.intoArray(P0, i); y1.intoArray(P1, i); y2.intoArray(P2, i);
 					accS0 = accS0.add(y0); accS1 = accS1.add(y1); accS2 = accS2.add(y2);
 				}
-				sS0 = accS0.reduceLanes(VectorOperators.ADD);
-				sS1 = accS1.reduceLanes(VectorOperators.ADD);
-				sS2 = accS2.reduceLanes(VectorOperators.ADD);
+				sS0 = LaneSums.sum(accS0);
+				sS1 = LaneSums.sum(accS1);
+				sS2 = LaneSums.sum(accS2);
 				duration -= timeStep;
 			}
 
@@ -212,7 +214,7 @@ public class Euler2ndOrderVec3F extends Euler2ndOrderFused3 {
 
 	private static boolean outOfRange(float[] P, float[] D, float[] DD, int i, FloatVector vts, FloatVector vtss) {
 		FloatVector p = FloatVector.fromArray(SP, P, i);
-		FloatVector n = p.add(FloatVector.fromArray(SP, D, i).mul(vts)).add(FloatVector.fromArray(SP, DD, i).mul(vtss));
+		FloatVector n = p.add(FloatVector.fromArray(SP, D, i).mul(vts).add(FloatVector.fromArray(SP, DD, i).mul(vtss)));
 		return n.compare(VectorOperators.GT, 1f)
 				.or(n.compare(VectorOperators.LT, 0f))
 				.or(n.sub(p).abs().compare(VectorOperators.GT, 0.2f))

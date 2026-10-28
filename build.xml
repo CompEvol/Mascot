@@ -239,6 +239,8 @@
     <target name="test" depends="compile-test">
       <junit printsummary="yes" failureproperty="testFailed" showoutput="true"
              maxmemory="4G">
+            <!-- needed for the SIMD ODE solver tests, which are skipped without it -->
+            <jvmarg line="--add-modules jdk.incubator.vector"/>
             <classpath>
                 <pathelement path="${classpath}"/>
                 <pathelement path="${build}" />
